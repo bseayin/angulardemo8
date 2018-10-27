@@ -12,7 +12,10 @@ import { catchError, map, tap } from 'rxjs/operators';
 export class HeroService {
   private heroesUrl = 'api/heroes';  // URL to web api
   private heroesUrl2 = 'tz/getheros';  // URL to web api
- 
+  private heroesUrl3 = 'tz/sreachname';  // URL to web api
+  private heroesUrl4 = 'tz/addhero';  // URL to web api
+  private heroesUrl5 = 'tz/deletehero';  // URL to web api
+  private heroesUrl6 = 'tz/updatehero';  // URL to web api
   getHeroes (): Observable<Hero[]> {
     return this.http.get<Hero[]>(this.heroesUrl2)
       .pipe(
@@ -22,7 +25,7 @@ export class HeroService {
 
   /** GET hero by id. Will 404 if id not found */
 getHero(id: number): Observable<Hero> {
-  const url = `${this.heroesUrl}/${id}`;
+  const url = `${this.heroesUrl2}/${id}`;
   return this.http.get<Hero>(url).pipe(
     tap(_ => this.log(`fetched hero id=${id}`)),
     catchError(this.handleError<Hero>(`getHero id=${id}`))
@@ -34,7 +37,7 @@ updateHero (hero: Hero): Observable<any> {
   const httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
-  return this.http.put(this.heroesUrl, hero, httpOptions).pipe(
+  return this.http.put(this.heroesUrl6, hero, httpOptions).pipe(
     tap(_ => this.log(`updated hero id=${hero.id}`)),
     catchError(this.handleError<any>('updateHero'))
   );
@@ -45,7 +48,7 @@ addHero (hero: Hero): Observable<Hero> {
   const httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
-  return this.http.post<Hero>(this.heroesUrl, hero, httpOptions).pipe(
+  return this.http.post<Hero>(this.heroesUrl4, hero, httpOptions).pipe(
     tap((hero: Hero) => this.log(`added hero w/ id=${hero.id}`)),
     catchError(this.handleError<Hero>('addHero'))
   );
@@ -54,7 +57,7 @@ addHero (hero: Hero): Observable<Hero> {
 /** DELETE: delete the hero from the server */
 deleteHero (hero: Hero | number): Observable<Hero> {
   const id = typeof hero === 'number' ? hero : hero.id;
-  const url = `${this.heroesUrl}/${id}`;
+  const url = `${this.heroesUrl5}/${id}`;
   const httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
@@ -70,7 +73,7 @@ searchHeroes(term: string): Observable<Hero[]> {
     // if not search term, return empty hero array.
     return of([]);
   }
-  return this.http.get<Hero[]>(`${this.heroesUrl}/?name=${term}`).pipe(
+  return this.http.get<Hero[]>(`${this.heroesUrl3}/?name=${term}`).pipe(
     tap(_ => this.log(`found heroes matching "${term}"`)),
     catchError(this.handleError<Hero[]>('searchHeroes', []))
   );
