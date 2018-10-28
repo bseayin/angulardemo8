@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { HeroesComponent } from './heroes/heroes.component';
 
-import { FormsModule } from '@angular/forms';
+import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { HeroDetailComponent } from './hero-detail/hero-detail.component';
 import { MessagesComponent } from './messages/messages.component';
 import { AppRoutingModule } from './/app-routing.module';
@@ -12,7 +12,16 @@ import { DashboardComponent } from './dashboard/dashboard.component'; // <-- NgM
 import { HttpClientModule }    from '@angular/common/http';
 import { HeroSearchComponent } from './hero-search/hero-search.component';
 import { ConfigComponent } from './config/config.component';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { MaterialdemoComponent } from './materialdemo/materialdemo.component';
+import {MatButtonModule, MatCheckboxModule} from '@angular/material';
+import { NgZorroAntdModule, NZ_I18N, zh_CN } from 'ng-zorro-antd';
+import { registerLocaleData } from '@angular/common';
+import zh from '@angular/common/locales/zh';
+import { LoginComponent } from './login/login.component';
+import { Index1Component } from './index1/index1.component';
 
+registerLocaleData(zh);
 @NgModule({
   declarations: [
     AppComponent,
@@ -21,15 +30,25 @@ import { ConfigComponent } from './config/config.component';
     MessagesComponent,
     DashboardComponent,
     HeroSearchComponent,
-    ConfigComponent
+    ConfigComponent,
+    MaterialdemoComponent,
+    LoginComponent,
+    Index1Component
   ],
   imports: [
     BrowserModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpClientModule,
-    AppRoutingModule
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    MatCheckboxModule,
+    MatButtonModule,
+    NgZorroAntdModule,
   ],
-  providers: [],
+
+  providers: [{ provide: NZ_I18N, useValue: zh_CN }],
   bootstrap: [AppComponent]
 })
+
 export class AppModule { }
