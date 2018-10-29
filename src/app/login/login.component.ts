@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { LoginService } from './login.service';
+import { User } from '../user';
+import { Router } from '@angular/router';
 import {
   AbstractControl,
   FormBuilder,
@@ -13,10 +16,12 @@ import {
 })
 export class LoginComponent implements OnInit {
   validateForm: FormGroup;
-  password;
-  userName;
-
+  password:string;
+  userName:string;
+  result:any={};
+  user:User={id:0,name:"",password:""};
   submitForm(): void {
+    var id=0;
     for (const i in this.validateForm.controls) {
       this.validateForm.controls[ i ].markAsDirty();
       this.validateForm.controls[ i ].updateValueAndValidity();
@@ -26,10 +31,16 @@ export class LoginComponent implements OnInit {
     console.log("userName----"+this.userName);
     if(this.validateForm.valid){
       //执行后台操作
+      this.loginservice.loginAction(this.user).subscribe(
+        res=>{
+          this.result=res;
+          this.router.navigateByUrl("index1");
+        }
+      );
     }
   }
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder,private loginservice:LoginService,private router:Router) {
   }
 
   ngOnInit(): void {
