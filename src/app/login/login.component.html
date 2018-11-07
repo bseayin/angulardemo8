@@ -1,5 +1,6 @@
 
-    <h1>登录</h1>
+        <h1 style="text-align:center">登录</h1>
+
     <form nz-form [formGroup]="validateForm" class="login-form" (ngSubmit)="submitForm()">
       <nz-form-item>
         <nz-form-control>
@@ -21,12 +22,12 @@
       <nz-form-item>
         <nz-form-control>
           <label nz-checkbox formControlName="remember">
-            <span>Remember me</span>
+            <span>记住我</span>
           </label>
-          <a class="login-form-forgot" class="login-form-forgot">Forgot password</a>
-          <button nz-button class="login-form-button" [nzType]="'primary'">Log in</button>
+          <a class="login-form-forgot" class="login-form-forgot">忘记密码</a>
+          <button nz-button class="login-form-button" [nzType]="'primary'">登录</button>
           Or
-          <a href="">register now!</a>
+          <a href="">注册!</a>
         </nz-form-control>
       </nz-form-item>
     </form>
