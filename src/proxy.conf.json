@@ -1,5 +1,14 @@
-{"/tz":{
-"target":"http://localhost",
-"secure":false
-}
-}
+{
+    "/tz":{
+    "target":"http://localhost",
+    "secure":false
+    },
+    "/shiro":{
+        "target":"http://localhost:8080",
+        "secure":false
+        },
+     "/hero":{
+            "target":"http://localhost:8080",
+            "secure":false
+     }
+    }
