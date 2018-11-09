@@ -1,0 +1,11 @@
+<p>
+  parent works!
+</p>
+
+<h4>我是父组件</h4>
+<input type="text" [(ngModel)]="tellchild">
+
+
+<div>子组件传来的数据是：{{fromchildmessage}}</div>
+<!-- 事件绑定获取数据 -->
+<app-child [message]="tellchild" (childtellEvent)="tellResult($event)"></app-child>

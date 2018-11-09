@@ -1,0 +1,59 @@
+<p>
+  basicdemo works!
+</p>
+<!-- 模板代码 -->
+<h4>插值表达式</h4>
+<img src="{{imgUrl}}" alt="">
+
+<h4>DOM属性绑定</h4>
+<img [src]="imgUrl" alt="">
+
+
+<h4>class属性全绑定</h4>
+<div [class]="allClass">黑玛鱼</div>
+
+<h4>class属性部分绑定</h4>
+<div class="aa" [class.bb]="bbValue">黑玛鱼</div>
+
+
+<h4>ngFor</h4>
+<ul>
+  <li *ngFor="let item of list;let i = index">
+    第{{i+1}}条：{{item}}
+  </li>
+</ul>
+
+
+<h4>ngIf</h4>
+<div>
+  <span *ngIf="show">我是显式的</span>
+  <span *ngIf="!show">我是隐式的</span>
+</div>
+
+
+<h4>事件绑定</h4>
+<button (click)="todoClick()">点我</button>
+
+
+<h4>双向绑定</h4>
+<input type="text" [(ngModel)]="name">
+<span>{{name}}</span>
+
+
+<h4>管道</h4>
+<span>今天是：{{today | date:"yyyy-MM-dd"}}</span>
+
+<app-basicdemo2>
+  下次见到她，你会怎么做？
+  <button>ok</button>
+
+  <div class="demo2">
+    我是外部嵌入的内容，我所在div的class为"demo2"
+</div>
+<div name="demo3">
+    我是外部嵌入的内容demo，我所在div的属性name为"demo3"
+</div>
+</app-basicdemo2>
+
+<h2>父子1</h2>
+<app-parent></app-parent>
