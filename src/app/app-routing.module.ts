@@ -6,10 +6,18 @@ import { HeroDetailComponent }  from './hero-detail/hero-detail.component';
 import { MaterialdemoComponent }  from './materialdemo/materialdemo.component';
 import { LoginComponent }  from './login/login.component';
 import { Index1Component }  from './index1/index1.component';
+import { TaskComponent }  from './task/task.component';
+import { DocumentComponent }  from './document/document.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/index1', pathMatch: 'full' },
-  { path: 'index1', component: Index1Component },
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: 'index1', component: Index1Component,
+    children:[
+      { path: '', component: DashboardComponent },
+      { path: 'task', component: TaskComponent },
+      { path: 'document', component: DocumentComponent }
+    ]
+},
   { path: 'dashboard', component: DashboardComponent },
   { path: 'login', component: LoginComponent },
   { path: 'material', component: MaterialdemoComponent },

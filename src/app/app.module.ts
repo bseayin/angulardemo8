@@ -20,6 +20,8 @@ import { registerLocaleData } from '@angular/common';
 import zh from '@angular/common/locales/zh';
 import { LoginComponent } from './login/login.component';
 import { Index1Component } from './index1/index1.component';
+import { TaskComponent } from './task/task.component';
+import { DocumentComponent } from './document/document.component';
 
 registerLocaleData(zh);
 @NgModule({
@@ -33,7 +35,9 @@ registerLocaleData(zh);
     ConfigComponent,
     MaterialdemoComponent,
     LoginComponent,
-    Index1Component
+    Index1Component,
+    TaskComponent,
+    DocumentComponent
   ],
   imports: [
     BrowserModule,
