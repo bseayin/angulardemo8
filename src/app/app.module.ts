@@ -22,6 +22,10 @@ import { LoginComponent } from './login/login.component';
 import { Index1Component } from './index1/index1.component';
 import { TaskComponent } from './task/task.component';
 import { DocumentComponent } from './document/document.component';
+import { BasicdemoComponent } from './basicdemo/basicdemo.component';
+import { Basicdemo2Component } from './basicdemo2/basicdemo2.component';
+import { ParentComponent } from './parent/parent.component';
+import { ChildComponent } from './parent/child/child.component';
 
 registerLocaleData(zh);
 @NgModule({
@@ -37,7 +41,14 @@ registerLocaleData(zh);
     LoginComponent,
     Index1Component,
     TaskComponent,
-    DocumentComponent
+    DocumentComponent,
+    BasicdemoComponent,
+  
+    Basicdemo2Component,
+  
+    ParentComponent,
+  
+    ChildComponent
   ],
   imports: [
     BrowserModule,

@@ -8,6 +8,7 @@ import { LoginComponent }  from './login/login.component';
 import { Index1Component }  from './index1/index1.component';
 import { TaskComponent }  from './task/task.component';
 import { DocumentComponent }  from './document/document.component';
+import { BasicdemoComponent }  from './basicdemo/basicdemo.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -20,6 +21,7 @@ const routes: Routes = [
 },
   { path: 'dashboard', component: DashboardComponent },
   { path: 'login', component: LoginComponent },
+  { path: 'basicdemo', component: BasicdemoComponent },
   { path: 'material', component: MaterialdemoComponent },
   { path: 'detail/:id', component: HeroDetailComponent },
   { path: 'heroes', component: HeroesComponent }
