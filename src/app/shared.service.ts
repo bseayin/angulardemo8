@@ -1,13 +1,12 @@
-import { Injectable } from '@angular/core';
+import { Injectable,EventEmitter } from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SharedService {
-  path:String='人物';
-  update(str:String){
-    this.path=str;
-  }
+  public eventEmit: any;
   
-  constructor() { }
+  constructor() { 
+    this.eventEmit = new EventEmitter();
+  }
 }

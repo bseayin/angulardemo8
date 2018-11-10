@@ -10,10 +10,16 @@ import { Hero } from '../hero';
 export class Index1Component implements OnInit {
   result:any ;
   path:String;
+  path2:String="首页";
   constructor(private index1Service:Index1Service,private sharedService:SharedService) { }
 
   ngOnInit() {
-    this.path=this.sharedService.path;
+     // 接收发射过来的数据
+     this.sharedService.eventEmit.subscribe((value: any) => {
+       this.path2=value;
+     
+   });
+    
     
     var name='ttt';
     var id=7;

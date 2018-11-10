@@ -13,6 +13,7 @@ import { LogComponent }  from './log/log.component';
 import { TalkComponent }  from './talk/talk.component';
 import { SetComponent }  from './set/set.component';
 import { HallComponent }  from './hall/hall.component';
+import { UserComponent }  from './user/user.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -24,6 +25,7 @@ const routes: Routes = [
       { path: 'talk', component: TalkComponent },
       { path: 'log', component: LogComponent },
       { path: 'set', component: SetComponent },
+      { path: 'user', component: UserComponent },
       { path: 'document', component: DocumentComponent }
     ]
 },

@@ -30,6 +30,8 @@ import { LogComponent } from './log/log.component';
 import { TalkComponent } from './talk/talk.component';
 import { SetComponent } from './set/set.component';
 import { HallComponent } from './hall/hall.component';
+import { UserComponent } from './user/user.component';
+import {SharedService} from './shared.service';
 
 registerLocaleData(zh);
 @NgModule({
@@ -60,7 +62,9 @@ registerLocaleData(zh);
   
     SetComponent,
   
-    HallComponent
+    HallComponent,
+  
+    UserComponent
   ],
   imports: [
     BrowserModule,
@@ -74,7 +78,7 @@ registerLocaleData(zh);
     NgZorroAntdModule,
   ],
 
-  providers: [{ provide: NZ_I18N, useValue: zh_CN }],
+  providers: [{ provide: NZ_I18N, useValue: zh_CN },SharedService],
   bootstrap: [AppComponent]
 })
 

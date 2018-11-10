@@ -11,7 +11,7 @@ export class TaskComponent implements OnInit {
   constructor(private sharedService:SharedService) { }
 
   ngOnInit() {
-    this.sharedService.update('任务');
+    this.sharedService.eventEmit.emit("任务");
   }
 
 }
