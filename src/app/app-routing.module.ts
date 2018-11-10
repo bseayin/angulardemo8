@@ -9,6 +9,8 @@ import { Index1Component }  from './index1/index1.component';
 import { TaskComponent }  from './task/task.component';
 import { DocumentComponent }  from './document/document.component';
 import { BasicdemoComponent }  from './basicdemo/basicdemo.component';
+import { LogComponent }  from './log/log.component';
+import { TalkComponent }  from './talk/talk.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -16,6 +18,8 @@ const routes: Routes = [
     children:[
       { path: '', component: DashboardComponent },
       { path: 'task', component: TaskComponent },
+      { path: 'talk', component: TalkComponent },
+      { path: 'log', component: LogComponent },
       { path: 'document', component: DocumentComponent }
     ]
 },
