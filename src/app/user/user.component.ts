@@ -10,21 +10,22 @@ import { SharedService } from '../shared.service';
 export class UserComponent implements OnInit {
   i = 1;
   editCache = {};
-  dataSet = [];
+  dataSet :User[];
   userlist:User[];
 
    // 输出属性，需要定义成事件
    @Output() childtellEvent: EventEmitter<any> = new EventEmitter();
 
-  startEdit(id: string): void {
+  startEdit(id: number): void {
     this.editCache[ id ].edit = true;
   }
 
-  cancelEdit(id: string): void {
+  cancelEdit(id: number): void {
     this.editCache[ id ].edit = false;
   }
 
-  saveEdit(id: string): void {
+  saveEdit(id: number): void {
+    console.log("saveEdit----"+id);
     const index = this.dataSet.findIndex(item => item.id === id);
     Object.assign(this.dataSet[ index ], this.editCache[ id ].data);
     // this.dataSet[ index ] = this.editCache[ id ].data;
@@ -33,6 +34,8 @@ export class UserComponent implements OnInit {
 
   updateEditCache(): void {
     this.dataSet.forEach(item => {
+      console.log("updateEditCache---id"+item.id);
+      console.log("updateEditCache---id"+this.editCache[ item.id ]);
       if (!this.editCache[ item.id ]) {
         this.editCache[ item.id ] = {
           edit: false,
@@ -45,21 +48,21 @@ export class UserComponent implements OnInit {
 
   ngOnInit() {
     this.sharedService.eventEmit.emit("用户管理");
-    this.getUser;
-    this.updateEditCache();
+    this.getUser();
+   
   }
 
 
   getUser(): void {
     this.userservice.getUsers()
-      .subscribe(userservice => this.dataSet = userservice);
+      .subscribe(
+        userservice => {
+          this.dataSet = userservice;
+          this.updateEditCache();
 
-
+        });
   }
 
-  emitFun() {
-    // 如果组件中，修改了某些数据，需要刷新用用户列表，用户列表在其他组件中，那么就可以发射一个字符串过去，那边接收到这个字符串比对一下，刷新列表。
-    this.userservice.eventEmit.emit("用户管理");
-}
+  
 
 }

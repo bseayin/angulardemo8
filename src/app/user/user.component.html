@@ -26,7 +26,7 @@
           </td>
           <td>
             <ng-container *ngIf="!editCache[data.id].edit">
-              {{data.age}}
+              {{data.password}}
             </ng-container>
             <ng-container *ngIf="editCache[data.id].edit">
               <input type="text" nz-input [(ngModel)]="editCache[data.id].data.password">
@@ -34,7 +34,7 @@
           </td>
           <td>
             <ng-container *ngIf="!editCache[data.id].edit">
-              {{data.address}}
+              {{data.id}}
             </ng-container>
             <ng-container *ngIf="editCache[data.id].edit">
               <input type="text" nz-input [(ngModel)]="editCache[data.id].data.id">
