@@ -12,12 +12,14 @@ import { BasicdemoComponent }  from './basicdemo/basicdemo.component';
 import { LogComponent }  from './log/log.component';
 import { TalkComponent }  from './talk/talk.component';
 import { SetComponent }  from './set/set.component';
+import { HallComponent }  from './hall/hall.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'index1', component: Index1Component,
     children:[
-      { path: '', component: DashboardComponent },
+      { path: '', component: HallComponent },
+      { path: 'hall', component: HallComponent },
       { path: 'task', component: TaskComponent },
       { path: 'talk', component: TalkComponent },
       { path: 'log', component: LogComponent },
