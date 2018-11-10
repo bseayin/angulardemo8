@@ -11,6 +11,7 @@ import { DocumentComponent }  from './document/document.component';
 import { BasicdemoComponent }  from './basicdemo/basicdemo.component';
 import { LogComponent }  from './log/log.component';
 import { TalkComponent }  from './talk/talk.component';
+import { SetComponent }  from './set/set.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -20,6 +21,7 @@ const routes: Routes = [
       { path: 'task', component: TaskComponent },
       { path: 'talk', component: TalkComponent },
       { path: 'log', component: LogComponent },
+      { path: 'set', component: SetComponent },
       { path: 'document', component: DocumentComponent }
     ]
 },

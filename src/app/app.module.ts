@@ -28,6 +28,7 @@ import { ParentComponent } from './parent/parent.component';
 import { ChildComponent } from './parent/child/child.component';
 import { LogComponent } from './log/log.component';
 import { TalkComponent } from './talk/talk.component';
+import { SetComponent } from './set/set.component';
 
 registerLocaleData(zh);
 @NgModule({
@@ -54,7 +55,9 @@ registerLocaleData(zh);
   
     LogComponent,
   
-    TalkComponent
+    TalkComponent,
+  
+    SetComponent
   ],
   imports: [
     BrowserModule,
