@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./hall.component.css']
 })
 export class HallComponent implements OnInit {
-
+  imgUrl: string = "http://via.placeholder.com/300x100"
   constructor() { }
 
   ngOnInit() {
