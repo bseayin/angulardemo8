@@ -5,7 +5,7 @@
       <nz-form-item>
         <nz-form-control>
           <nz-input-group [nzPrefix]="prefixUser">
-            <input type="text" nz-input formControlName="userName" placeholder="Username"  [(ngModel)]="user.name">
+            <input type="text" nz-input formControlName="userName" placeholder="用户名"  [(ngModel)]="user.name">
  
           </nz-input-group>
           <nz-form-explain *ngIf="validateForm.get('userName').dirty && validateForm.get('userName').errors">Please input your username!</nz-form-explain>
@@ -14,7 +14,7 @@
       <nz-form-item>
         <nz-form-control>
           <nz-input-group [nzPrefix]="prefixLock">
-            <input type="password" nz-input formControlName="password" placeholder="Password" [(ngModel)]="user.password">
+            <input type="password" nz-input formControlName="password" placeholder="密码" [(ngModel)]="user.password">
           </nz-input-group>
           <nz-form-explain *ngIf="validateForm.get('password').dirty && validateForm.get('password').errors">Please input your Password!</nz-form-explain>
         </nz-form-control>
@@ -27,10 +27,15 @@
           <a class="login-form-forgot" class="login-form-forgot">忘记密码</a>
           <button nz-button class="login-form-button" [nzType]="'primary'">登录</button>
           Or
-          <a href="">注册!</a>
+          <a (click)="showModal()">注册!</a>
         </nz-form-control>
       </nz-form-item>
     </form>
+
+    <nz-modal [(nzVisible)]="isVisible" nzTitle="Modal Title" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()" [nzOkLoading]="isOkLoading">
+      <p>Modal Content</p>
+    </nz-modal>
+  
     <ng-template #prefixUser><i nz-icon type="user"></i></ng-template>
     <ng-template #prefixLock><i nz-icon type="lock"></i></ng-template>
   

@@ -12,6 +12,7 @@ import {
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
+  
   styleUrls: ['./login.component.less']
 })
 export class LoginComponent implements OnInit {
@@ -49,5 +50,23 @@ export class LoginComponent implements OnInit {
       password: [ null, [ Validators.required ] ],
       remember: [ true ]
     });
+  }
+
+//登录注册模态框
+  isVisible = false;
+  isOkLoading = false;
+  showModal(): void {
+    this.isVisible = true;
+  }
+  handleOk(): void {
+    this.isOkLoading = true;
+    window.setTimeout(() => {
+      this.isVisible = false;
+      this.isOkLoading = false;
+    }, 3000);
+  }
+
+  handleCancel(): void {
+    this.isVisible = false;
   }
 }
