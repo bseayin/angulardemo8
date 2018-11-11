@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SharedService } from '../shared.service';
 
 @Component({
   selector: 'app-talk',
@@ -7,9 +8,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TalkComponent implements OnInit {
 
-  constructor() { }
+  constructor(private sharedService:SharedService) { }
 
   ngOnInit() {
+    this.sharedService.eventEmit.emit("讨论");
   }
 
 }

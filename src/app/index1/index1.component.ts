@@ -17,7 +17,6 @@ export class Index1Component implements OnInit {
      // 接收发射过来的数据
      this.sharedService.eventEmit.subscribe((value: any) => {
        this.path2=value;
-     
    });
     
     
