@@ -7,7 +7,9 @@ import { catchError, map, tap } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class UserService {
-  private hosturl = 'core/alluser';  // URL to web api
+  private hosturl = 'core/alluser';  // URL to query
+  private hostur2 = 'core/saveuser';  // URL to update
+  private hostur3 = 'core/removeuser';  // URL to update
   public eventEmit:any;
   constructor(
     private http: HttpClient
@@ -22,6 +24,34 @@ export class UserService {
         catchError(this.handleError('getUsers', []))
       );
   }
+
+
+  /** PUT: update the hero on the server */
+updateUser (user: User): Observable<any> {
+  console.log('----updateUser---');
+  console.log(user);
+  const httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  };
+  return this.http.put(this.hostur2, user, httpOptions).pipe(
+    
+    catchError(this.handleError<any>('updateUser'))
+  );
+}
+
+
+/** DELETE: delete the hero from the server */
+deleteUser (id:number): Observable<any>{
+  console.log('----deleteUser---'+id);
+  const  hostur4 = 'core/removeuser/'+id;
+  const httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  };
+  return this.http.delete<any>(hostur4,httpOptions).pipe(
+   
+    catchError(this.handleError<User>('deleteUser'))
+  );
+}
 
   private handleError<T> (operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
