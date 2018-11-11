@@ -9,6 +9,29 @@ import { Task } from '../task';
   styleUrls: ['./task.component.css']
 })
 export class TaskComponent implements OnInit {
+  tname: string;
+  pname: string;
+  effort: number;
+  startdt: Date;
+  enddt: Date;
+  inputValue: string;
+
+
+  isVisible = false;
+  showModal(): void {
+    this.isVisible = true;
+  }
+
+  handleOk(): void {
+    console.log('Button ok clicked!');
+    this.isVisible = false;
+  }
+
+  handleCancel(): void {
+    console.log('Button cancel clicked!');
+    this.isVisible = false;
+  }
+
   i = 1;
   editCache = {};
   dataSet : Task[];
@@ -21,7 +44,6 @@ export class TaskComponent implements OnInit {
         taskservice => {
           this.dataSet = taskservice;
           this.updateEditCache();
-
         });
   }
   ngOnInit() {

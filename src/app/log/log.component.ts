@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SharedService } from '../shared.service';
 
 @Component({
   selector: 'app-log',
@@ -8,9 +9,10 @@ import { Component, OnInit } from '@angular/core';
 export class LogComponent implements OnInit {
   size = 'small';
   
-  constructor() { }
+  constructor(private sharedService:SharedService) { }
 
   ngOnInit() {
+    this.sharedService.eventEmit.emit("日志");
   }
 
 }
