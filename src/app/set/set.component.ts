@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import { SharedService } from '../shared.service';
 @Component({
   selector: 'app-set',
   templateUrl: './set.component.html',
@@ -7,9 +7,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SetComponent implements OnInit {
 
-  constructor() { }
+  constructor(private sharedService:SharedService) { }
 
   ngOnInit() {
+    this.sharedService.eventEmit.emit("设置");
   }
 
 }
