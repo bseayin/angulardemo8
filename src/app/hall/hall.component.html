@@ -172,7 +172,7 @@
 
           <div class="info">
               <h3 class="nickname">
-                  <span class="nickname_text ng-binding" ng-bind-html="chatContact.getDisplayName()">狗逼沉遗腥</span>
+                  <span class="nickname_text ng-binding" ng-bind-html="chatContact.getDisplayName()">Java实训第8班</span>
                   <!--<span class="nickname_count" ng-if="chatContact.MemberList.length">({{chatContact.MemberList.length}})</span>-->
               </h3>
 
@@ -200,7 +200,7 @@
 
           <div class="info">
               <h3 class="nickname">
-                  <span class="nickname_text ng-binding" ng-bind-html="chatContact.getDisplayName()">高大郢老家群</span>
+                  <span class="nickname_text ng-binding" ng-bind-html="chatContact.getDisplayName()">老家群</span>
                   <!--<span class="nickname_count" ng-if="chatContact.MemberList.length">({{chatContact.MemberList.length}})</span>-->
               </h3>
 
@@ -282,40 +282,9 @@
 
           </div>
 
-          <div class="info">
-              <h3 class="nickname">
-                  <span class="nickname_text ng-binding" ng-bind-html="chatContact.getDisplayName()">可爱的亲戚啊<img class="emoji emoji263a" text="_web" src="/zh_CN/htmledition/v2/images/spacer.gif"></span>
-                  <!--<span class="nickname_count" ng-if="chatContact.MemberList.length">({{chatContact.MemberList.length}})</span>-->
-              </h3>
+ 
 
-              <!-- ngIf: chatContact.MMDigest -->
-          </div>
-      </div><!-- end ngIf: !chatContact.isShieldUser() -->
-  </div><!-- end ngRepeat: chatContact in chatList track by chatContact.UserName --><div ng-repeat="chatContact in chatList track by chatContact.UserName" class="ng-scope">
-      <!-- ngIf: !chatContact.isShieldUser() --><div class="chat_item slide-left ng-scope" ng-if="!chatContact.isShieldUser()" data-username="@6ccaff2471abf16b5982fe81a877eda4a91628fb3242113eb1233228b347d244" ng-click="itemClick(chatContact.UserName)" ng-class="{'active': (chatContact.UserName == currentUserName),'top':chatContact.isTop()}" data-cm="{&quot;type&quot;:&quot;chat&quot;,&quot;username&quot;:&quot;@6ccaff2471abf16b5982fe81a877eda4a91628fb3242113eb1233228b347d244&quot;}">
-
-          <div class="ext">
-              <p class="attr ng-binding"></p>
-              <!-- ngIf: chatContact.isMuted() -->
-          </div>
-
-          <div class="avatar">
-              <img class="img" src="/cgi-bin/mmwebwx-bin/webwxgeticon?seq=683373066&amp;username=@6ccaff2471abf16b5982fe81a877eda4a91628fb3242113eb1233228b347d244&amp;skey=@crypt_ca98bd91_76f5ab9b4cd7528f970d11398294e5f8" mm-src="/cgi-bin/mmwebwx-bin/webwxgeticon?seq=683373066&amp;username=@6ccaff2471abf16b5982fe81a877eda4a91628fb3242113eb1233228b347d244&amp;skey=@crypt_ca98bd91_76f5ab9b4cd7528f970d11398294e5f8" alt="">
-
-              <!-- ngIf: chatContact.NoticeCount && chatContact.isMuted() -->
-
-              <!-- ngIf: chatContact.NoticeCount && !chatContact.isMuted() -->
-
-          </div>
-
-          <div class="info">
-              <h3 class="nickname">
-                  <span class="nickname_text ng-binding" ng-bind-html="chatContact.getDisplayName()">胜哥</span>
-                  <!--<span class="nickname_count" ng-if="chatContact.MemberList.length">({{chatContact.MemberList.length}})</span>-->
-              </h3>
-
-              <!-- ngIf: chatContact.MMDigest -->
-          </div>
+          
       </div><!-- end ngIf: !chatContact.isShieldUser() -->
   </div><!-- end ngRepeat: chatContact in chatList track by chatContact.UserName --><div ng-repeat="chatContact in chatList track by chatContact.UserName" class="ng-scope">
       <!-- ngIf: !chatContact.isShieldUser() --><div class="chat_item slide-left ng-scope" ng-if="!chatContact.isShieldUser()" data-username="@@32ca99e09d56d18f1acfc0a65949fdf09775e8b605b6709087b8fbca1ac264f0" ng-click="itemClick(chatContact.UserName)" ng-class="{'active': (chatContact.UserName == currentUserName),'top':chatContact.isTop()}" data-cm="{&quot;type&quot;:&quot;chat&quot;,&quot;username&quot;:&quot;@@32ca99e09d56d18f1acfc0a65949fdf09775e8b605b6709087b8fbca1ac264f0&quot;}">
@@ -513,124 +482,6 @@
 <!--END contact list-->
 </div>
   <div class="nav_view ng-scope" ng-style="{visibility:$state.current.name ==='read'?'visible':'hidden',width:$state.current.name ==='read'?'auto':'0'}" nav-read-directive="" style="visibility: hidden; width: 0px;">
-<!--BEGIN chat list-->
-<div class="scroll-wrapper read_list scrollbar-dynamic" style="position: relative;"><div jquery-scrollbar="" class="read_list scrollbar-dynamic scroll-content scroll-scrollx_visible scroll-scrolly_visible" id="J_NavReadScrollBody" style="margin-bottom: 0px; margin-right: 0px; height: 503px;">
-
-  <p class="ico_loading ng-hide" ng-show="subscribeMsgs.defaultValue"><img src="//res.wx.qq.com/a/wx_fed/webwx/res/static/img/xasUyAI.gif" alt="">加载中...</p>
-  <p class="ico_loading ng-hide" ng-show="!subscribeMsgs.defaultValue &amp;&amp; subscribeMsgs.length == 0">暂无文章...</p>
-  <div data-no-cache="true" mm-repeat="readItem in articleList" data-height-calc="heightCalc" data-buffer-height="200" mm-repeat-keyboard="" mm-repeat-keyboard-scroll-selector="#J_NavReadScrollBody" class="ng-scope"><div ng-style="{height:topHeight}" class="top-placeholder ng-scope" style="height: 0px;"></div><!-- ngRepeat: readItem in articleList --><div ng-repeat="readItem in articleList" class="ng-scope">
-      <!-- ngIf: readItem.UserName --><div class="just_for_bg ng-scope first" ng-if="readItem.UserName" ng-class="{first: readItem._index === 0}">
-          <div class="read_item_hd">
-              <p class="date ng-binding">13:13</p>
-              <div class="avatar">
-                  <img class="img" src="/cgi-bin/mmwebwx-bin/webwxgeticon?seq=0&amp;username=@d76a490a607522db6db35b0b578f1f3c&amp;skey=@crypt_ca98bd91_76f5ab9b4cd7528f970d11398294e5f8" mm-src="/cgi-bin/mmwebwx-bin/webwxgeticon?seq=0&amp;username=@d76a490a607522db6db35b0b578f1f3c&amp;skey=@crypt_ca98bd91_76f5ab9b4cd7528f970d11398294e5f8" alt="">
-              </div>
-              <p class="info">
-                  <span class="username ng-binding">王卡助手</span>
-              </p>
-          </div>
-      </div><!-- end ngIf: readItem.UserName -->
-      <!-- ngIf: !readItem.UserName -->
-  </div><!-- end ngRepeat: readItem in articleList --><div ng-repeat="readItem in articleList" class="ng-scope">
-      <!-- ngIf: readItem.UserName -->
-      <!-- ngIf: !readItem.UserName --><div ng-if="!readItem.UserName" class="read_item slide-left ng-scope active" ng-click="itemClick(readItem)" ng-class="{'active': (readItem == currentItem)}">
-          <div class="cont">
-              <h3 class="title ng-binding">【王的手机】周年庆压轴登场！双11购机全场直降，还送权益！送话费！</h3>
-          </div>
-          <div class="ext">
-              <div class="cover">
-                  <div class="img" ng-style="{'background-image': 'url('+ readItem.Cover +')'}" style="background-image: url(&quot;http://mmbiz.qpic.cn/mmbiz_jpg/YHNibt4zo8puniaHEjOrwDRVLtCFG1T3ibUvsA4sVVmYc7cCiaobYpKyvdPAz1CW6gTCNAxgOdiaibNhkTic4keOBoy8w/640?wxtype=jpeg&amp;wxfrom=0&quot;);"></div>
-              </div>
-          </div>
-      </div><!-- end ngIf: !readItem.UserName -->
-  </div><!-- end ngRepeat: readItem in articleList --><div ng-repeat="readItem in articleList" class="ng-scope">
-      <!-- ngIf: readItem.UserName -->
-      <!-- ngIf: !readItem.UserName --><div ng-if="!readItem.UserName" class="read_item slide-left ng-scope" ng-click="itemClick(readItem)" ng-class="{'active': (readItem == currentItem)}">
-          <div class="cont">
-              <h3 class="title ng-binding">腾讯王卡 x QQ浏览器 | 你的王卡全网免流了吗？内含20Q币！</h3>
-          </div>
-          <div class="ext">
-              <div class="cover">
-                  <div class="img" ng-style="{'background-image': 'url('+ readItem.Cover +')'}" style="background-image: url(&quot;http://mmbiz.qpic.cn/mmbiz_jpg/YHNibt4zo8puniaHEjOrwDRVLtCFG1T3ibUo2ymwibRP1QkbSKia3AhibzARb88yZFocknllWECgLRe4Qd98ibou51DSw/300?wxtype=jpeg&amp;wxfrom=0&quot;);"></div>
-              </div>
-          </div>
-      </div><!-- end ngIf: !readItem.UserName -->
-  </div><!-- end ngRepeat: readItem in articleList --><div ng-repeat="readItem in articleList" class="ng-scope">
-      <!-- ngIf: readItem.UserName -->
-      <!-- ngIf: !readItem.UserName --><div ng-if="!readItem.UserName" class="read_item slide-left ng-scope" ng-click="itemClick(readItem)" ng-class="{'active': (readItem == currentItem)}">
-          <div class="cont">
-              <h3 class="title ng-binding">腾讯王卡 x 华侨城 | 全国50+景点畅快游！还送话费！</h3>
-          </div>
-          <div class="ext">
-              <div class="cover">
-                  <div class="img" ng-style="{'background-image': 'url('+ readItem.Cover +')'}" style="background-image: url(&quot;http://mmbiz.qpic.cn/mmbiz_jpg/YHNibt4zo8puniaHEjOrwDRVLtCFG1T3ibUPibMDH4rQkxHXXcEIfOVbUE6ictSwADLBR9Ylo6ALFBpmTrYhwRzicESQ/300?wxtype=jpeg&amp;wxfrom=0&quot;);"></div>
-              </div>
-          </div>
-      </div><!-- end ngIf: !readItem.UserName -->
-  </div><!-- end ngRepeat: readItem in articleList --><div ng-repeat="readItem in articleList" class="ng-scope">
-      <!-- ngIf: readItem.UserName -->
-      <!-- ngIf: !readItem.UserName --><div ng-if="!readItem.UserName" class="read_item slide-left ng-scope" ng-click="itemClick(readItem)" ng-class="{'active': (readItem == currentItem)}">
-          <div class="cont">
-              <h3 class="title ng-binding">腾讯王卡 x 腾讯新闻 | 秋日暖心礼包送送送！</h3>
-          </div>
-          <div class="ext">
-              <div class="cover">
-                  <div class="img" ng-style="{'background-image': 'url('+ readItem.Cover +')'}" style="background-image: url(&quot;http://mmbiz.qpic.cn/mmbiz_jpg/YHNibt4zo8puniaHEjOrwDRVLtCFG1T3ibUcTsuVwJEXWppCrOeYhicpAAeb7O4ed1dib1QpUFib1NGLjibfVNJ9zSxsQ/300?wxtype=jpeg&amp;wxfrom=0&quot;);"></div>
-              </div>
-          </div>
-      </div><!-- end ngIf: !readItem.UserName -->
-  </div><!-- end ngRepeat: readItem in articleList --><div ng-repeat="readItem in articleList" class="ng-scope">
-      <!-- ngIf: readItem.UserName -->
-      <!-- ngIf: !readItem.UserName --><div ng-if="!readItem.UserName" class="read_item slide-left ng-scope" ng-click="itemClick(readItem)" ng-class="{'active': (readItem == currentItem)}">
-          <div class="cont">
-              <h3 class="title ng-binding">腾讯王卡 x yoo视频 | 想要Lamy笔记本套装？长得好看送！</h3>
-          </div>
-          <div class="ext">
-              <div class="cover">
-                  <div class="img" ng-style="{'background-image': 'url('+ readItem.Cover +')'}" style="background-image: url(&quot;http://mmbiz.qpic.cn/mmbiz_jpg/YHNibt4zo8puniaHEjOrwDRVLtCFG1T3ibUupRE8hQQJ4qJ1yXMNYtbToianxk24rDZpkwXAATrciaT6VgibMIRqicmcg/300?wxtype=jpeg&amp;wxfrom=0&quot;);"></div>
-              </div>
-          </div>
-      </div><!-- end ngIf: !readItem.UserName -->
-  </div><!-- end ngRepeat: readItem in articleList --><div ng-repeat="readItem in articleList" class="ng-scope">
-      <!-- ngIf: readItem.UserName -->
-      <!-- ngIf: !readItem.UserName --><div ng-if="!readItem.UserName" class="read_item slide-left ng-scope" ng-click="itemClick(readItem)" ng-class="{'active': (readItem == currentItem)}">
-          <div class="cont">
-              <h3 class="title ng-binding">腾讯王卡 x 联通手机营业厅 | 双十一脱单狂欢!TA和好礼都是你的!</h3>
-          </div>
-          <div class="ext">
-              <div class="cover">
-                  <div class="img" ng-style="{'background-image': 'url('+ readItem.Cover +')'}" style="background-image: url(&quot;http://mmbiz.qpic.cn/mmbiz_jpg/YHNibt4zo8puniaHEjOrwDRVLtCFG1T3ibUSHNXaKLBzfMt3DXib1kxCKCWkDRVrO7sn7P5508mx4ObdAUyTG6EJSg/300?wxtype=jpeg&amp;wxfrom=0&quot;);"></div>
-              </div>
-          </div>
-      </div><!-- end ngIf: !readItem.UserName -->
-  </div><!-- end ngRepeat: readItem in articleList --><div ng-repeat="readItem in articleList" class="ng-scope">
-      <!-- ngIf: readItem.UserName --><div class="just_for_bg ng-scope" ng-if="readItem.UserName" ng-class="{first: readItem._index === 0}">
-          <div class="read_item_hd">
-              <p class="date ng-binding">11:04</p>
-              <div class="avatar">
-                  <img class="img" src="/cgi-bin/mmwebwx-bin/webwxgeticon?seq=0&amp;username=@b9fead805b6c2f591b1885328bbf9db3&amp;skey=@crypt_ca98bd91_76f5ab9b4cd7528f970d11398294e5f8" mm-src="/cgi-bin/mmwebwx-bin/webwxgeticon?seq=0&amp;username=@b9fead805b6c2f591b1885328bbf9db3&amp;skey=@crypt_ca98bd91_76f5ab9b4cd7528f970d11398294e5f8" alt="">
-              </div>
-              <p class="info">
-                  <span class="username ng-binding">上海电机学院</span>
-              </p>
-          </div>
-      </div><!-- end ngIf: readItem.UserName -->
-      <!-- ngIf: !readItem.UserName -->
-  </div><!-- end ngRepeat: readItem in articleList --><div ng-repeat="readItem in articleList" class="ng-scope">
-      <!-- ngIf: readItem.UserName -->
-      <!-- ngIf: !readItem.UserName --><div ng-if="!readItem.UserName" class="read_item slide-left ng-scope" ng-click="itemClick(readItem)" ng-class="{'active': (readItem == currentItem)}">
-          <div class="cont">
-              <h3 class="title ng-binding">始终牵挂于心，学校领导为电机“小叶子”点赞！</h3>
-          </div>
-          <div class="ext">
-              <div class="cover">
-                  <div class="img" ng-style="{'background-image': 'url('+ readItem.Cover +')'}" style="background-image: url(&quot;http://mmbiz.qpic.cn/mmbiz_jpg/umOuibZpbroAqz6HV9HHcRSbhYwXTGovTvDdyiczSD7Rjwic7X10L6lmaGma7zK490nk5onKzW4Bicic15vA0DVnvow/640?wxtype=jpeg&amp;wxfrom=0&quot;);"></div>
-              </div>
-          </div>
-      </div><!-- end ngIf: !readItem.UserName -->
-  </div><!-- end ngRepeat: readItem in articleList --><div ng-style="{height:bottomHeight}" class="bottom-placeholder ng-scope" style="height: 0px;"></div></div>
-</div><div class="scroll-element scroll-x scroll-scrollx_visible scroll-scrolly_visible"><div class="scroll-element_corner"></div><div class="scroll-arrow scroll-arrow_less"></div><div class="scroll-arrow scroll-arrow_more"></div><div class="scroll-element_outer">    <div class="scroll-element_size"></div>    <div class="scroll-element_inner-wrapper">        <div class="scroll-element_inner scroll-element_track">            <div class="scroll-element_inner-bottom"></div>        </div>    </div>    <div class="scroll-bar" style="width: 0px; left: 0px;">        <div class="scroll-bar_body">            <div class="scroll-bar_body-inner"></div>        </div>        <div class="scroll-bar_bottom"></div>        <div class="scroll-bar_center"></div>    </div></div></div><div class="scroll-element scroll-y scroll-scrollx_visible scroll-scrolly_visible"><div class="scroll-element_corner"></div><div class="scroll-arrow scroll-arrow_less"></div><div class="scroll-arrow scroll-arrow_more"></div><div class="scroll-element_outer">    <div class="scroll-element_size"></div>    <div class="scroll-element_inner-wrapper">        <div class="scroll-element_inner scroll-element_track">            <div class="scroll-element_inner-bottom"></div>        </div>    </div>    <div class="scroll-bar" style="height: 369px; top: 0px;">        <div class="scroll-bar_body">            <div class="scroll-bar_body-inner"></div>        </div>        <div class="scroll-bar_bottom"></div>        <div class="scroll-bar_center"></div>    </div></div></div></div>
-<!--END chat list-->
 </div>
 
   <!--</div>-->

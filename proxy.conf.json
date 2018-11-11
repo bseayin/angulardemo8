@@ -10,5 +10,9 @@
  "/hero":{
         "target":"http://localhost:8080",
         "secure":false
- }
+ },
+ "/project1":{
+    "target":"http://localhost:8888",
+    "secure":false
+}
 }

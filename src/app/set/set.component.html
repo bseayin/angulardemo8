@@ -2,7 +2,7 @@
   <nz-tab nzTitle="项目设置">
   </nz-tab>
   <nz-tab nzTitle="功能点设置">
-      <nz-table #basicTable [nzData]="dataSet">
+      <nz-table #basicTable [nzData]="dataFunctionsSet">
           <thead>
             <tr>
               <th>功能点id</th>
@@ -13,14 +13,63 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let data of basicTable.data">
-              <td>{{data.name}}</td>
-              <td>{{data.age}}</td>
-              <td>{{data.address}}</td>
+            <tr *ngFor="let dataFunctions of editRowTable.dataFunctions">
               <td>
-                <a>Action 一 {{data.name}}</a>
-                <nz-divider nzType="vertical"></nz-divider>
-                <a>Delete</a>
+                <div class="editable-cell">
+                  <div class="editable-cell-text-wrapper">
+                    <ng-container *ngIf="!editCacheFunctions[dataFunctions.id].edit">
+                      {{dataFunctions.id}}
+                    </ng-container>
+                    <ng-container *ngIf="editCacheFunctions[dataFunctions.id].edit">
+                      <input type="text" nz-input [(ngModel)]="editCacheFunctions[dataFunctions.id].dataFunctions.id">
+                    </ng-container>
+                  </div>
+                </div>
+              </td>
+              <td>
+                    <ng-container *ngIf="!editCacheFunctions[dataFunctions.id].edit">
+                      {{dataFunctions.fname}}
+                    </ng-container>
+                    <ng-container *ngIf="editCacheFunctions[dataFunctions.id].edit">
+                      <input type="text" nz-input [(ngModel)]="editCacheFunctions[dataFunctions.id].dataFunctions.fname">
+                    </ng-container>
+              </td>
+              <td>
+                <ng-container *ngIf="!editCacheFunctions[dataFunctions.id].edit">
+                  {{dataFunctions.fcontent}}
+                </ng-container>
+                <ng-container *ngIf="editCacheFunctions[dataFunctions.id].edit">
+                  <input type="text" nz-input [(ngModel)]="editCacheFunctions[dataFunctions.id].data.fcontent">
+                </ng-container>
+              </td>
+              <td>
+                    <ng-container *ngIf="!editCacheFunctions[dataFunctions.id].edit">
+                      {{dataFunctions.workload}}
+                    </ng-container>
+                    <ng-container *ngIf="editCacheFunctions[dataFunctions.id].edit">
+                      <input type="text" nz-input [(ngModel)]="editCacheFunctions[dataFunctions.id].dataFunctions.workload">
+                    </ng-container>
+              </td>
+              <td>
+                <ng-container *ngIf="!editCacheFunctions[dataFunctions.id].edit">
+                  {{dataFunctions.priority}}
+                </ng-container>
+                <ng-container *ngIf="editCacheFunctions[dataFunctions.id].edit">
+                  <input type="text" nz-input [(ngModel)]="editCacheFunctions[dataFunctions.id].dataFunctions.priority">
+                </ng-container>
+              </td>
+              <td>
+                <div class="editable-row-operations">
+                  <ng-container *ngIf="!editCacheFunctions[dataFunctions.id].edit">
+                    <a (click)="startEditFunctions(dataFunctions.id)">Edit</a>
+                  </ng-container>
+                  <ng-container *ngIf="editCacheFunctions[dataFunctions.id].edit">
+                    <a (click)="saveEditFunctions(dataFunctions.id)">Save</a>
+                    <nz-popconfirm [nzTitle]="'Sure to cancel?'" (nzOnConfirm)="cancelEditFunctions(dataFunctions.id)">
+                      <a nz-popconfirm>Cancel</a>
+                    </nz-popconfirm>
+                  </ng-container>
+                </div>
               </td>
             </tr>
           </tbody>
