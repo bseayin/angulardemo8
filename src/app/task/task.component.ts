@@ -12,7 +12,10 @@ export class TaskComponent implements OnInit {
   tname: string;
   pname: string;
   effort: number;
+  startdt: Date;
+  enddt: Date;
   inputValue: string;
+
 
   isVisible = false;
   showModal(): void {

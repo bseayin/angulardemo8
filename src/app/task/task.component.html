@@ -1,10 +1,7 @@
 <nz-tabset>
   <nz-tab nzTitle="任务列表">
     <button nz-button [nzType]="'primary'" (click)="showModal()"><span>创建任务</span></button>
-    <nz-table
-      #editRowTable
-      nzBordered
-      [nzData]="dataSet">
+    <nz-table #editRowTable nzBordered [nzData]="dataSet">
       <thead>
         <tr>
           <th>任务名称</th>
@@ -31,7 +28,7 @@
               <input type="text" nz-input [(ngModel)]="editCache[data.id].data.tname">
             </ng-container>
           </td>
-          <td  width=150 style="word-break:break-all">
+          <td width=150 style="word-break:break-all">
             <ng-container *ngIf="!editCache[data.id].edit">
               {{data.content}}
             </ng-container>
@@ -63,7 +60,7 @@
               <input type="text" nz-input [(ngModel)]="editCache[data.id].data.priority">
             </ng-container>
           </td>
-          <td  width=100 style="word-break:break-all">
+          <td width=100 style="word-break:break-all">
             <ng-container *ngIf="!editCache[data.id].edit">
               {{data.functionname}}
             </ng-container>
@@ -127,94 +124,129 @@
         </tr>
       </tbody>
     </nz-table>
-    
+
     <nz-modal [(nzVisible)]="isVisible" nzWidth="700" nzTitle="创建任务" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
       <div nz-row>
-        <div nz-col nzSpan="4">任务名称</div>
+        <div nz-col nzSpan="4">
+          <nz-form-label>任务名称</nz-form-label>
+        </div>
         <div nz-col nzSpan="7"><input nz-input placeholder="任务名称" [(ngModel)]="tname"></div>
         <div nz-col nzSpan="2"></div>
-        <div nz-col nzSpan="4">归属项目</div>
+        <div nz-col nzSpan="4">
+          <nz-form-label>归属项目</nz-form-label>
+        </div>
         <div nz-col nzSpan="7"><input nz-input placeholder="归属项目" [(ngModel)]="pname"></div>
       </div>
       <br>
       <div nz-row>
-          <div nz-col nzSpan="4">开始时间</div>
-          <div nz-col nzSpan="7"><nz-date-picker></nz-date-picker></div>
-          <div nz-col nzSpan="2"></div>
-          <div nz-col nzSpan="4">结束时间</div>
-          <div nz-col nzSpan="7"><nz-date-picker></nz-date-picker></div>
+        <div nz-col nzSpan="4">
+          <nz-form-label>开始时间</nz-form-label>
+        </div>
+        <div nz-col nzSpan="7">
+          <nz-date-picker [(ngModel)]="startdt"></nz-date-picker>
+        </div>
+        <div nz-col nzSpan="2"></div>
+        <div nz-col nzSpan="4">
+          <nz-form-label>结束时间</nz-form-label>
+        </div>
+        <div nz-col nzSpan="7">
+          <nz-date-picker [(ngModel)]="enddt"></nz-date-picker>
+        </div>
       </div>
       <br>
       <div nz-row>
-          <div nz-col nzSpan="4">优先级</div>
-          <div nz-col nzSpan="7"><nz-select [ngModel]="'Option1-1'">
-              <nz-option [nzLabel]="'Option1-1'" [nzValue]="'Option1-1'"></nz-option>
-              <nz-option [nzLabel]="'Option1-2'" [nzValue]="'Option1-2'"></nz-option>
-            </nz-select>
-          </div>
-          <div nz-col nzSpan="2"></div>
-          <div nz-col nzSpan="4">负责人</div>
-          <div nz-col nzSpan="7"><nz-select [ngModel]="'Option1-1'">
-              <nz-option [nzLabel]="'Option1-1'" [nzValue]="'Option1-1'"></nz-option>
-              <nz-option [nzLabel]="'Option1-2'" [nzValue]="'Option1-2'"></nz-option>
-            </nz-select>
-          </div>
+        <div nz-col nzSpan="4">
+          <nz-form-label>优先级</nz-form-label>
+        </div>
+        <div nz-col nzSpan="7">
+          <nz-select [ngModel]="'Option1-1'">
+            <nz-option [nzLabel]="'Option1-1'" [nzValue]="'Option1-1'"></nz-option>
+            <nz-option [nzLabel]="'Option1-2'" [nzValue]="'Option1-2'"></nz-option>
+          </nz-select>
+        </div>
+        <div nz-col nzSpan="2"></div>
+        <div nz-col nzSpan="4">
+          <nz-form-label>负责人</nz-form-label>
+        </div>
+        <div nz-col nzSpan="7">
+          <nz-select [ngModel]="'Option1-1'">
+            <nz-option [nzLabel]="'Option1-1'" [nzValue]="'Option1-1'"></nz-option>
+            <nz-option [nzLabel]="'Option1-2'" [nzValue]="'Option1-2'"></nz-option>
+          </nz-select>
+        </div>
       </div>
       <br>
       <div nz-row>
-          <div nz-col nzSpan="4">工作量</div>
-          <div nz-col nzSpan="7"><input nz-input placeholder="工作量" [(ngModel)]="effort">
-          </div>
-          <div nz-col nzSpan="2"></div>
-          <div nz-col nzSpan="4">任务类型</div>
-          <div nz-col nzSpan="7"><nz-select [ngModel]="'Option1-1'">
-              <nz-option [nzLabel]="'Option1-1'" [nzValue]="'Option1-1'"></nz-option>
-              <nz-option [nzLabel]="'Option1-2'" [nzValue]="'Option1-2'"></nz-option>
-            </nz-select>
-          </div>
+        <div nz-col nzSpan="4">
+          <nz-form-label>工作量</nz-form-label>
+        </div>
+        <div nz-col nzSpan="7"><input nz-input placeholder="工作量" [(ngModel)]="effort">
+        </div>
+        <div nz-col nzSpan="2"></div>
+        <div nz-col nzSpan="4">
+          <nz-form-label>任务类型</nz-form-label>
+        </div>
+        <div nz-col nzSpan="7">
+          <nz-select [ngModel]="'Option1-1'">
+            <nz-option [nzLabel]="'Option1-1'" [nzValue]="'Option1-1'"></nz-option>
+            <nz-option [nzLabel]="'Option1-2'" [nzValue]="'Option1-2'"></nz-option>
+          </nz-select>
+        </div>
       </div>
       <br>
       <div nz-row>
-          <div nz-col nzSpan="4">功能点</div>
-          <div nz-col nzSpan="7"><nz-select [ngModel]="'Option1-1'">
-              <nz-option [nzLabel]="'Option1-1'" [nzValue]="'Option1-1'"></nz-option>
-              <nz-option [nzLabel]="'Option1-2'" [nzValue]="'Option1-2'"></nz-option>
-            </nz-select>
-          </div>
-          <div nz-col nzSpan="2"></div>
-          <div nz-col nzSpan="4">故事点</div>
-          <div nz-col nzSpan="7"><nz-select [ngModel]="'Option1-1'">
-              <nz-option [nzLabel]="'Option1-1'" [nzValue]="'Option1-1'"></nz-option>
-              <nz-option [nzLabel]="'Option1-2'" [nzValue]="'Option1-2'"></nz-option>
-            </nz-select>
-          </div>
+        <div nz-col nzSpan="4">
+          <nz-form-label>功能点</nz-form-label>
+        </div>
+        <div nz-col nzSpan="7">
+          <nz-select [ngModel]="'Option1-1'">
+            <nz-option [nzLabel]="'Option1-1'" [nzValue]="'Option1-1'"></nz-option>
+            <nz-option [nzLabel]="'Option1-2'" [nzValue]="'Option1-2'"></nz-option>
+          </nz-select>
+        </div>
+        <div nz-col nzSpan="2"></div>
+        <div nz-col nzSpan="4">
+          <nz-form-label>故事点</nz-form-label>
+        </div>
+        <div nz-col nzSpan="7">
+          <nz-select [ngModel]="'Option1-1'">
+            <nz-option [nzLabel]="'Option1-1'" [nzValue]="'Option1-1'"></nz-option>
+            <nz-option [nzLabel]="'Option1-2'" [nzValue]="'Option1-2'"></nz-option>
+          </nz-select>
+        </div>
       </div>
       <br>
       <div nz-row>
-          <div nz-col nzSpan="4">状态</div>
-          <div nz-col nzSpan="7"><nz-select [ngModel]="'Option1-1'">
-              <nz-option [nzLabel]="'Option1-1'" [nzValue]="'Option1-1'"></nz-option>
-              <nz-option [nzLabel]="'Option1-2'" [nzValue]="'Option1-2'"></nz-option>
-            </nz-select>
-          </div>
-          <div nz-col nzSpan="2"></div>
-          <div nz-col nzSpan="4">困难度</div>
-          <div nz-col nzSpan="7"><nz-select [ngModel]="'Option1-1'">
-              <nz-option [nzLabel]="'Option1-1'" [nzValue]="'Option1-1'"></nz-option>
-              <nz-option [nzLabel]="'Option1-2'" [nzValue]="'Option1-2'"></nz-option>
-            </nz-select>
-          </div>
+        <div nz-col nzSpan="4">
+          <nz-form-label>状态</nz-form-label>
+        </div>
+        <div nz-col nzSpan="7">
+          <nz-select [ngModel]="'Option1-1'">
+            <nz-option [nzLabel]="'Option1-1'" [nzValue]="'Option1-1'"></nz-option>
+            <nz-option [nzLabel]="'Option1-2'" [nzValue]="'Option1-2'"></nz-option>
+          </nz-select>
+        </div>
+        <div nz-col nzSpan="2"></div>
+        <div nz-col nzSpan="4">
+          <nz-form-label>困难度</nz-form-label>
+        </div>
+        <div nz-col nzSpan="7">
+          <nz-select [ngModel]="'Option1-1'">
+            <nz-option [nzLabel]="'Option1-1'" [nzValue]="'Option1-1'"></nz-option>
+            <nz-option [nzLabel]="'Option1-2'" [nzValue]="'Option1-2'"></nz-option>
+          </nz-select>
+        </div>
       </div>
       <br>
       <div nz-row>
-          <div nz-col nzSpan="24">
-              <textarea rows="5" nz-input [(ngModel)]="inputValue"></textarea>
-          </div>
+        <div nz-col nzSpan="24">
+          <textarea rows="5" nz-input [(ngModel)]="inputValue"></textarea>
+        </div>
       </div>
 
     </nz-modal>
   </nz-tab>
   <nz-tab nzTitle="任务追踪">
-    Content of Tab Pane 2
+
   </nz-tab>
 </nz-tabset>
