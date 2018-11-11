@@ -20,7 +20,7 @@ export class LoginComponent implements OnInit {
   password:string;
   userName:string;
   result:any={};
-  user:User={id:0,name:"",password:""};
+  user:User=new User();
   submitForm(): void {
     var id=0;
     for (const i in this.validateForm.controls) {
@@ -32,6 +32,8 @@ export class LoginComponent implements OnInit {
     console.log("userName----"+this.userName);
     if(this.validateForm.valid){
       //执行后台操作
+      this.user.id=1;
+      this.user.name='33';
       this.loginservice.loginAction(this.user).subscribe(
         res=>{
           this.result=res;
