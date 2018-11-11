@@ -32,8 +32,12 @@
       </nz-form-item>
     </form>
 
-    <nz-modal [(nzVisible)]="isVisible" nzTitle="Modal Title" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()" [nzOkLoading]="isOkLoading">
-      <p>Modal Content</p>
+    <nz-modal [(nzVisible)]="isVisible" nzTitle="注册" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()" [nzOkLoading]="isOkLoading">
+      <nz-input-group [nzSuffix]="suffixTemplate" [nzPrefix]="prefixTemplate">
+        <input type="text" nz-input placeholder="请输入您的用户名" [(ngModel)]="username">
+      </nz-input-group>
+      <ng-template #prefixTemplate><i nz-icon type="user"></i></ng-template>
+      <ng-template #suffixTemplate><i nz-icon type="close-circle" (click)="username=null" *ngIf="username"></i></ng-template>
     </nz-modal>
   
     <ng-template #prefixUser><i nz-icon type="user"></i></ng-template>
