@@ -111,7 +111,8 @@
           <td width=80 style="word-break:break-all">
             <div class="editable-row-operations">
               <ng-container *ngIf="!editCache[data.id].edit">
-                <a (click)="startEdit(data.id)">修改</a>
+                <a (click)="startEdit(data.id)">修改</a><br>
+                <a (click)="deleteRow(data.id)">删除</a>
               </ng-container>
               <ng-container *ngIf="editCache[data.id].edit">
                 <a (click)="saveEdit(data.id)">保存</a>
@@ -159,9 +160,12 @@
           <nz-form-label>优先级</nz-form-label>
         </div>
         <div nz-col nzSpan="7">
-          <nz-select [ngModel]="'Option1-1'">
-            <nz-option [nzLabel]="'Option1-1'" [nzValue]="'Option1-1'"></nz-option>
-            <nz-option [nzLabel]="'Option1-2'" [nzValue]="'Option1-2'"></nz-option>
+          <nz-select [(ngModel)]="priority" style="width:100%;">
+            <nz-option [nzLabel]="'不指定'" [nzValue]="'不指定'"></nz-option>
+            <nz-option [nzLabel]="'严重'" [nzValue]="'严重'"></nz-option>
+            <nz-option [nzLabel]="'主要'" [nzValue]="'主要'"></nz-option>
+            <nz-option [nzLabel]="'次要'" [nzValue]="'次要'"></nz-option>
+            <nz-option [nzLabel]="'不重要'" [nzValue]="'不重要'"></nz-option>
           </nz-select>
         </div>
         <div nz-col nzSpan="2"></div>
@@ -169,9 +173,8 @@
           <nz-form-label>负责人</nz-form-label>
         </div>
         <div nz-col nzSpan="7">
-          <nz-select [ngModel]="'Option1-1'">
-            <nz-option [nzLabel]="'Option1-1'" [nzValue]="'Option1-1'"></nz-option>
-            <nz-option [nzLabel]="'Option1-2'" [nzValue]="'Option1-2'"></nz-option>
+          <nz-select [(ngModel)]="membername" style="width:100%;">
+              <nz-option *ngFor="let data of member" [nzLabel]="data.mname" [nzValue]="data.mname"></nz-option>
           </nz-select>
         </div>
       </div>
@@ -187,9 +190,10 @@
           <nz-form-label>任务类型</nz-form-label>
         </div>
         <div nz-col nzSpan="7">
-          <nz-select [ngModel]="'Option1-1'">
-            <nz-option [nzLabel]="'Option1-1'" [nzValue]="'Option1-1'"></nz-option>
-            <nz-option [nzLabel]="'Option1-2'" [nzValue]="'Option1-2'"></nz-option>
+          <nz-select [(ngModel)]="type" style="width:100%;">
+            <nz-option [nzLabel]="'设计'" [nzValue]="'设计'"></nz-option>
+            <nz-option [nzLabel]="'开发'" [nzValue]="'开发'"></nz-option>
+            <nz-option [nzLabel]="'Bug'" [nzValue]="'Bug'"></nz-option>
           </nz-select>
         </div>
       </div>
@@ -199,9 +203,8 @@
           <nz-form-label>功能点</nz-form-label>
         </div>
         <div nz-col nzSpan="7">
-          <nz-select [ngModel]="'Option1-1'">
-            <nz-option [nzLabel]="'Option1-1'" [nzValue]="'Option1-1'"></nz-option>
-            <nz-option [nzLabel]="'Option1-2'" [nzValue]="'Option1-2'"></nz-option>
+          <nz-select [(ngModel)]="functionname" style="width:100%;">
+              <nz-option *ngFor="let data of function" [nzLabel]="data.fname" [nzValue]="data.fname"></nz-option>
           </nz-select>
         </div>
         <div nz-col nzSpan="2"></div>
@@ -209,9 +212,8 @@
           <nz-form-label>故事点</nz-form-label>
         </div>
         <div nz-col nzSpan="7">
-          <nz-select [ngModel]="'Option1-1'">
-            <nz-option [nzLabel]="'Option1-1'" [nzValue]="'Option1-1'"></nz-option>
-            <nz-option [nzLabel]="'Option1-2'" [nzValue]="'Option1-2'"></nz-option>
+          <nz-select [(ngModel)]="sightname" style="width:100%;">
+              <nz-option *ngFor="let data of sightpoint" [nzLabel]="data.sname" [nzValue]="data.sname"></nz-option>
           </nz-select>
         </div>
       </div>
@@ -221,9 +223,11 @@
           <nz-form-label>状态</nz-form-label>
         </div>
         <div nz-col nzSpan="7">
-          <nz-select [ngModel]="'Option1-1'">
-            <nz-option [nzLabel]="'Option1-1'" [nzValue]="'Option1-1'"></nz-option>
-            <nz-option [nzLabel]="'Option1-2'" [nzValue]="'Option1-2'"></nz-option>
+          <nz-select [(ngModel)]="status" style="width:100%;">
+            <nz-option [nzLabel]="'未开始'" [nzValue]="'未开始'"></nz-option>
+            <nz-option [nzLabel]="'进行中'" [nzValue]="'进行中'"></nz-option>
+            <nz-option [nzLabel]="'已完成'" [nzValue]="'已完成'"></nz-option>
+            <nz-option [nzLabel]="'已验收'" [nzValue]="'已验收'"></nz-option>
           </nz-select>
         </div>
         <div nz-col nzSpan="2"></div>
@@ -231,9 +235,12 @@
           <nz-form-label>困难度</nz-form-label>
         </div>
         <div nz-col nzSpan="7">
-          <nz-select [ngModel]="'Option1-1'">
-            <nz-option [nzLabel]="'Option1-1'" [nzValue]="'Option1-1'"></nz-option>
-            <nz-option [nzLabel]="'Option1-2'" [nzValue]="'Option1-2'"></nz-option>
+          <nz-select [(ngModel)]="difficulty" style="width:100%;">
+            <nz-option [nzLabel]="'1'" [nzValue]="'1'"></nz-option>
+            <nz-option [nzLabel]="'2'" [nzValue]="'2'"></nz-option>
+            <nz-option [nzLabel]="'3'" [nzValue]="'3'"></nz-option>
+            <nz-option [nzLabel]="'4'" [nzValue]="'4'"></nz-option>
+            <nz-option [nzLabel]="'5'" [nzValue]="'5'"></nz-option>
           </nz-select>
         </div>
       </div>
