@@ -8,6 +8,7 @@ import { catchError, map, tap } from 'rxjs/operators';
 })
 export class LoginService {
   private useresUrl = 'tz/login';  // URL to web api
+  private useresUrl2 = 'core/register';  // URL to web api
   constructor( private http: HttpClient) { }
   /** POST: add a new user to the server */
 loginAction (user: User): Observable<User> {
@@ -15,6 +16,15 @@ loginAction (user: User): Observable<User> {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
   return this.http.post<User>(this.useresUrl, user, httpOptions).pipe(
+    catchError(this.handleError<User>('addUser'))
+  );
+}
+
+registerAction (user: User): Observable<User> {
+  const httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  };
+  return this.http.post<User>(this.useresUrl2, user, httpOptions).pipe(
     catchError(this.handleError<User>('addUser'))
   );
 }
