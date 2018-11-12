@@ -8,7 +8,9 @@ import { catchError, map, tap } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class FunctionsService {
-  private hosturl = 'project2/allfunctions';  // URL to web api
+  private hosturl = 'project2/findFunctions';
+  private hosturl2 = 'project2/saveFunctions';  
+
   public eventEmit:any;
   constructor(
     private http: HttpClient
@@ -23,6 +25,31 @@ export class FunctionsService {
         catchError(this.handleError('getFunctions', []))
       );
   }
+
+
+  /** PUT: update the hero on the server */
+updateFunctions (functions: Functions): Observable<any> {
+  const httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  };
+  return this.http.put(this.hosturl2, functions, httpOptions).pipe(
+    
+    catchError(this.handleError<any>('updateFunctions'))
+  );
+}
+
+
+/** DELETE: delete the hero from the server */
+deleteUser (id:number): Observable<any>{
+  const  hosturl3 = 'project2/removeFunctions/'+id;
+  const httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  };
+  return this.http.delete<any>(hosturl3,httpOptions).pipe(
+   
+    catchError(this.handleError<Functions>('deleteFunctions'))
+  );
+}
 
   private handleError<T> (operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
