@@ -131,12 +131,12 @@
         <div nz-col nzSpan="4">
           <nz-form-label>任务名称</nz-form-label>
         </div>
-        <div nz-col nzSpan="7"><input nz-input placeholder="任务名称" [(ngModel)]="tname"></div>
+        <div nz-col nzSpan="7"><input style="width:100%;" nz-input placeholder="任务名称" [(ngModel)]="tname"></div>
         <div nz-col nzSpan="2"></div>
         <div nz-col nzSpan="4">
           <nz-form-label>归属项目</nz-form-label>
         </div>
-        <div nz-col nzSpan="7"><input nz-input placeholder="归属项目" [(ngModel)]="pname"></div>
+        <div nz-col nzSpan="7"><input style="width:100%;" nz-input placeholder="归属项目" [(ngModel)]="pname"></div>
       </div>
       <br>
       <div nz-row>
@@ -144,14 +144,14 @@
           <nz-form-label>开始时间</nz-form-label>
         </div>
         <div nz-col nzSpan="7">
-          <nz-date-picker [(ngModel)]="startdt"></nz-date-picker>
+          <nz-date-picker style="width:100%;" [(ngModel)]="startdt"></nz-date-picker>
         </div>
         <div nz-col nzSpan="2"></div>
         <div nz-col nzSpan="4">
           <nz-form-label>结束时间</nz-form-label>
         </div>
         <div nz-col nzSpan="7">
-          <nz-date-picker [(ngModel)]="enddt"></nz-date-picker>
+          <nz-date-picker style="width:100%;" [(ngModel)]="enddt"></nz-date-picker>
         </div>
       </div>
       <br>
@@ -183,7 +183,7 @@
         <div nz-col nzSpan="4">
           <nz-form-label>工作量</nz-form-label>
         </div>
-        <div nz-col nzSpan="7"><input nz-input placeholder="工作量" [(ngModel)]="effort">
+        <div nz-col nzSpan="7"><input onkeyup="value=value.replace(/[^\d]/g,'')" style="width:100%;" nz-input placeholder="工作量" [(ngModel)]="effort" >
         </div>
         <div nz-col nzSpan="2"></div>
         <div nz-col nzSpan="4">

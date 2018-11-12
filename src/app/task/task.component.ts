@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { SharedService } from '../shared.service';
 import { TaskService } from './task.service';
 import { Task } from '../task';
@@ -12,6 +12,7 @@ import { Sightpoint } from '../sightpoint';
   styleUrls: ['./task.component.css']
 })
 export class TaskComponent implements OnInit {
+
   i = 1;
   editCache = {};
   function: Function[];
@@ -31,7 +32,8 @@ export class TaskComponent implements OnInit {
   priority: string;
   type: string;
   status: string;
-  difficulty: string;
+  difficulty: number;
+  task: Task=new Task();
 
 
   isVisible = false;
@@ -43,7 +45,20 @@ export class TaskComponent implements OnInit {
   }
 
   handleOk(): void {
+    this.task.tname=this.tname;
+    this.task.projectid=59;
+    this.task.startdt=this.startdt;
+    this.task.enddt=this.enddt;
+    this.task.effort=this.effort;
+    this.task.owner=this.membername;
+    this.task.type=this.type;
+    this.task.status=this.status;
+    this.task.difficulty=this.difficulty;
+    this.task.functionname=this.functionname;
+    this.task.story=this.sightname;
+    this.task.content=this.inputValue;
     console.log('Button ok clicked!');
+    this.addtask(this.task);
     this.isVisible = false;
   }
 
@@ -53,6 +68,14 @@ export class TaskComponent implements OnInit {
   }
 
   constructor(private sharedService: SharedService, private taskservice: TaskService) { }
+
+  addtask(task: Task): void {
+    this.taskservice.addTask(task)
+      .subscribe(
+        () => {
+          console.log("添加成功");
+        });
+  }
 
   findSightpoint(): void {
     this.taskservice.findsightpoint()
@@ -124,4 +147,6 @@ export class TaskComponent implements OnInit {
       }
     });
   }
+
+ 
 }

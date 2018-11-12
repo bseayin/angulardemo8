@@ -16,8 +16,19 @@ export class TaskService {
   private hosturl3 = 'project1/findfunction';  // URL to web api
   private hosturl4 = 'project1/findmember';  // URL to web api
   private hosturl5 = 'project1/findsightpoint';  // URL to web api
+  private hosturl6 = 'project1/addtask';
+  
   // URL to web api
   constructor(private http: HttpClient) { }
+
+  addTask (task: Task): Observable<any> {
+    const httpOptions = {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    };
+    return this.http.post<Task>(this.hosturl6, task, httpOptions).pipe(
+      catchError(this.handleError<Task>('addTask'))
+    );
+  }
 
   findsightpoint(): Observable<Sightpoint[]> {
     return this.http.get<Sightpoint[]>(this.hosturl5)
