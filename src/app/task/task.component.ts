@@ -38,9 +38,6 @@ export class TaskComponent implements OnInit {
 
   isVisible = false;
   showModal(): void {
-    this.findFunction();
-    this.findMember();
-    this.findSightpoint();
     this.isVisible = true;
   }
 
@@ -128,6 +125,9 @@ export class TaskComponent implements OnInit {
   ngOnInit() {
     this.sharedService.eventEmit.emit("任务");
     this.findTask();
+    this.findFunction();
+    this.findMember();
+    this.findSightpoint();
   }
 
   startEdit(id: number): void {

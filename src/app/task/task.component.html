@@ -41,7 +41,7 @@
               {{data.startdt}}
             </ng-container>
             <ng-container *ngIf="editCache[data.id].edit">
-              <input type="text" nz-input [(ngModel)]="editCache[data.id].data.startdt">
+                <nz-date-picker style="width:100%;" [(ngModel)]="editCache[data.id].data.startdt"></nz-date-picker>
             </ng-container>
           </td>
           <td>
@@ -49,7 +49,7 @@
               {{data.enddt}}
             </ng-container>
             <ng-container *ngIf="editCache[data.id].edit">
-              <input type="text" nz-input [(ngModel)]="editCache[data.id].data.enddt">
+              <nz-date-picker style="width:100%;" [(ngModel)]="editCache[data.id].data.enddt"></nz-date-picker>
             </ng-container>
           </td>
           <td>
@@ -57,7 +57,13 @@
               {{data.priority}}
             </ng-container>
             <ng-container *ngIf="editCache[data.id].edit">
-              <input type="text" nz-input [(ngModel)]="editCache[data.id].data.priority">
+              <nz-select [(ngModel)]="editCache[data.id].data.priority" style="width:100%;">
+                  <nz-option [nzLabel]="'不指定'" [nzValue]="'不指定'"></nz-option>
+                  <nz-option [nzLabel]="'严重'" [nzValue]="'严重'"></nz-option>
+                  <nz-option [nzLabel]="'主要'" [nzValue]="'主要'"></nz-option>
+                  <nz-option [nzLabel]="'次要'" [nzValue]="'次要'"></nz-option>
+                  <nz-option [nzLabel]="'不重要'" [nzValue]="'不重要'"></nz-option>
+                </nz-select>
             </ng-container>
           </td>
           <td width=100 style="word-break:break-all">
@@ -65,7 +71,9 @@
               {{data.functionname}}
             </ng-container>
             <ng-container *ngIf="editCache[data.id].edit">
-              <input type="text" nz-input [(ngModel)]="editCache[data.id].data.functionname">
+              <nz-select [(ngModel)]="editCache[data.id].data.functionname" style="width:100%;">
+                  <nz-option *ngFor="let data of function" [nzLabel]="data.fname" [nzValue]="data.fname"></nz-option>
+              </nz-select>
             </ng-container>
           </td>
           <td>
@@ -73,7 +81,9 @@
               {{data.story}}
             </ng-container>
             <ng-container *ngIf="editCache[data.id].edit">
-              <input type="text" nz-input [(ngModel)]="editCache[data.id].data.story">
+              <nz-select [(ngModel)]="editCache[data.id].data.story" style="width:100%;">
+                  <nz-option *ngFor="let data of sightpoint" [nzLabel]="data.sname" [nzValue]="data.sname"></nz-option>
+              </nz-select>
             </ng-container>
           </td>
           <td>
@@ -81,7 +91,9 @@
               {{data.owner}}
             </ng-container>
             <ng-container *ngIf="editCache[data.id].edit">
-              <input type="text" nz-input [(ngModel)]="editCache[data.id].data.owner">
+              <nz-select [(ngModel)]="editCache[data.id].data.owner" style="width:100%;">
+                  <nz-option *ngFor="let data of member" [nzLabel]="data.mname" [nzValue]="data.mname"></nz-option>
+              </nz-select>
             </ng-container>
           </td>
           <td>
@@ -89,7 +101,11 @@
               {{data.type}}
             </ng-container>
             <ng-container *ngIf="editCache[data.id].edit">
-              <input type="text" nz-input [(ngModel)]="editCache[data.id].data.type">
+              <nz-select [(ngModel)]="editCache[data.id].data.type" style="width:100%;">
+                  <nz-option [nzLabel]="'设计'" [nzValue]="'设计'"></nz-option>
+                  <nz-option [nzLabel]="'开发'" [nzValue]="'开发'"></nz-option>
+                  <nz-option [nzLabel]="'Bug'" [nzValue]="'Bug'"></nz-option>
+                </nz-select>
             </ng-container>
           </td>
           <td>
@@ -97,7 +113,7 @@
               {{data.effort}}
             </ng-container>
             <ng-container *ngIf="editCache[data.id].edit">
-              <input type="text" nz-input [(ngModel)]="editCache[data.id].data.effort">
+              <input onkeyup="value=value.replace(/[^\d]/g,'')" style="width:100%;" nz-input placeholder="工作量" [(ngModel)]="editCache[data.id].data.effort" >
             </ng-container>
           </td>
           <td>
@@ -105,7 +121,12 @@
               {{data.status}}
             </ng-container>
             <ng-container *ngIf="editCache[data.id].edit">
-              <input type="text" nz-input [(ngModel)]="editCache[data.id].data.status">
+              <nz-select [(ngModel)]="editCache[data.id].data.status" style="width:100%;">
+                  <nz-option [nzLabel]="'未开始'" [nzValue]="'未开始'"></nz-option>
+                  <nz-option [nzLabel]="'进行中'" [nzValue]="'进行中'"></nz-option>
+                  <nz-option [nzLabel]="'已完成'" [nzValue]="'已完成'"></nz-option>
+                  <nz-option [nzLabel]="'已验收'" [nzValue]="'已验收'"></nz-option>
+                </nz-select>
             </ng-container>
           </td>
           <td width=80 style="word-break:break-all">
