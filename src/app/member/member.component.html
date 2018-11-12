@@ -1,0 +1,38 @@
+<nz-tabset>
+    <nz-tab nzTitle="成员管理">
+        <nz-table #basicTable [nzData]="dataSet">
+            <thead>
+              <tr>
+                <th>成员管理</th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th>编号</th>
+                    <th>组员名称</th>
+                    <th>组员真实姓名</th>
+                    <th>组员邮箱</th>
+                    <th>组员电话</th>
+                    <th>组员角色</th>
+                    <th>项目id</th>
+                  </tr>
+              <tr *ngFor="let data of basicTable.data">
+                <td>{{data.name}}</td>
+                <td>{{data.age}}</td>
+                <td>{{data.address}}</td>
+                <td>
+                  <a>Action 一 {{data.name}}</a>
+                  <nz-divider nzType="vertical"></nz-divider>
+                  <a>Delete</a>
+                </td>
+              </tr>
+            </tbody>
+          </nz-table>
+    </nz-tab> 
+  </nz-tabset>
