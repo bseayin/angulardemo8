@@ -8,35 +8,80 @@ import { FunctionsService } from './functions.service';
 })
 export class FunctionsComponent implements OnInit {
   i = 1;
-  editCacheFunctions = {};
-  dataFunctionsSet:Functions[];
-
-  startEditFunctions(id: number): void {
-    this.editCacheFunctions[ id ].edit = true;
+  editCache = {};
+  dataSet :Functions[];
+  dt1:Date=new Date();
+  dateinput:string='';
+  isVisible = false;
+  isOkLoading = false;
+  newfunctions:Functions=new Functions();
+  pwd:string;
+  showModal(): void {
+    this.isVisible = true;
   }
 
-  cancelEditFunctions(id: number): void {
-    this.editCacheFunctions[ id ].edit = false;
+  handleOk(): void {
+    this.isOkLoading = true;
+
+      this.functionsService.updateFunctions(this.newfunctions).subscribe(
+        functions => {
+        this.isVisible = false;
+        this.isOkLoading = false;
+        this.addRow(this.newfunctions);
+        console.log('添加成功')}
+      );
+
+    
+   
   }
 
-  saveEditFunctions(id: number): void {
-    const index = this.dataFunctionsSet.findIndex(item => item.id === id);
-    Object.assign(this.dataFunctionsSet[ index ], this.editCacheFunctions[ id ].dataFunctionsSet);
-    // this.dataSet[ index ] = this.editCache[ id ].dataFunctionsSet;
-    this.editCacheFunctions[ id ].edit = false;
+  handleCancel(): void {
+    this.isVisible = false;
   }
 
-  updateEditCacheFunctions(): void {
-    this.dataFunctionsSet.forEach(item => {
-      if (!this.editCacheFunctions[ item.id ]) {
-        this.editCacheFunctions[ item.id ] = {
+  startEdit(id: number): void {
+    this.editCache[ id ].edit = true;
+  }
+
+ 
+
+  cancelEdit(id: number): void {
+    this.editCache[ id ].edit = false;
+  }
+
+  addRow(f:Functions): void {
+    this.i++; 
+    this.dataSet = [ ...this.dataSet, f
+     ];
+    this.updateEditCache();
+  }
+
+  deleteRow(i: number): void {
+    const dataSet = this.dataSet.filter(d => d.id !== i);
+    this.dataSet = dataSet;
+    this.functionsService.deleteUser(i).subscribe(()=>console.log('删除成功'));
+  }
+
+  saveEdit(id: number): void {
+    const index = this.dataSet.findIndex(item => item.id === id);
+    Object.assign(this.dataSet[ index ], this.editCache[ id ].data);
+    // this.dataSet[ index ] = this.editCache[ id ].data;
+    this.editCache[ id ].edit = false;
+    this.functionsService.updateFunctions(this.editCache[ id ].data).subscribe(
+      user => console.log('修改成功')
+    );
+  }
+
+  updateEditCache(): void {
+    this.dataSet.forEach(item => {
+      if (!this.editCache[ item.id ]) {
+        this.editCache[ item.id ] = {
           edit: false,
-          dataFunctions: { ...item }
+          data: { ...item }
         };
       }
     });
   }
-
   constructor(private functionsService:FunctionsService) { }
 
   ngOnInit() {
@@ -46,8 +91,9 @@ export class FunctionsComponent implements OnInit {
     this.functionsService.getFunctions()
       .subscribe(
         functionsService => {
-          this.dataFunctionsSet = functionsService;
-          this.updateEditCacheFunctions();
+                this.dataSet = functionsService;
+                console.log(this.dataSet);
+                this.updateEditCache();
         });
   }
 }
