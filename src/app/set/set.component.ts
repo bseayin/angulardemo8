@@ -12,10 +12,6 @@ export class SetComponent implements OnInit {
   i = 1;
   editCacheFunctions = {};
   dataFunctionsSet:Functions[];
-  functionsList:Functions[];
-
-   // 输出属性，需要定义成事件
-   @Output() childtellEvent: EventEmitter<any> = new EventEmitter();
 
   startEditFunctions(id: number): void {
     this.editCacheFunctions[ id ].edit = true;
