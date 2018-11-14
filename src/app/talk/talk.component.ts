@@ -7,7 +7,6 @@ import { SharedService } from '../shared.service';
   styleUrls: ['./talk.component.css']
 })
 export class TalkComponent implements OnInit {
-
   constructor(private sharedService:SharedService) { }
 
   ngOnInit() {
