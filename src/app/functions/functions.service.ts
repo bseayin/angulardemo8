@@ -9,7 +9,8 @@ import { catchError, map, tap } from 'rxjs/operators';
 })
 export class FunctionsService {
   private hosturl = 'project2/findFunctions';
-  private hosturl2 = 'project2/saveFunctions';  
+  private hosturl2 = 'project2/saveFunctions';
+  private hosturl4 = 'project2/insertFunctions';  
 
   public eventEmit:any;
   constructor(
@@ -38,9 +39,20 @@ updateFunctions (functions: Functions): Observable<any> {
   );
 }
 
+  /** PUT: update the hero on the server */
+  addFunctions (functions: Functions): Observable<any> {
+    const httpOptions = {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    };
+    return this.http.put(this.hosturl4, functions, httpOptions).pipe(
+      
+      catchError(this.handleError<any>('addFunctions'))
+    );
+  }
+  
 
 /** DELETE: delete the hero from the server */
-deleteUser (id:number): Observable<any>{
+deleteFunctions (id:number): Observable<any>{
   const  hosturl3 = 'project2/removeFunctions/'+id;
   const httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })

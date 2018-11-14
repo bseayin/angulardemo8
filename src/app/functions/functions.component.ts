@@ -21,14 +21,12 @@ export class FunctionsComponent implements OnInit {
   }
 
   handleOk(): void {
-    this.isOkLoading = true;
-
-      this.functionsService.updateFunctions(this.newfunctions).subscribe(
+      this.isOkLoading = true;
+      this.functionsService.addFunctions(this.newfunctions).subscribe(
         functions => {
         this.isVisible = false;
         this.isOkLoading = false;
-        this.addRow(this.newfunctions);
-        console.log('添加成功')}
+        this.addRow(this.newfunctions);}
       );
 
     
@@ -59,7 +57,7 @@ export class FunctionsComponent implements OnInit {
   deleteRow(i: number): void {
     const dataSet = this.dataSet.filter(d => d.id !== i);
     this.dataSet = dataSet;
-    this.functionsService.deleteUser(i).subscribe(()=>console.log('删除成功'));
+    this.functionsService.deleteFunctions(i).subscribe(()=>console.log('删除成功'));
   }
 
   saveEdit(id: number): void {
@@ -68,7 +66,7 @@ export class FunctionsComponent implements OnInit {
     // this.dataSet[ index ] = this.editCache[ id ].data;
     this.editCache[ id ].edit = false;
     this.functionsService.updateFunctions(this.editCache[ id ].data).subscribe(
-      user => console.log('修改成功')
+      functions => console.log('修改成功')
     );
   }
 

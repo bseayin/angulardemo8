@@ -20,7 +20,7 @@
     "secure":false
 },
 "/project2":{
-    "target":"http://localhost:8666",
+    "target":"http://xiaogaogao.xyz",
     "secure":false
 },
 "/project3":{
