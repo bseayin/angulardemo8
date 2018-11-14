@@ -1,9 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
 import { AppComponent } from './app.component';
 import { HeroesComponent } from './heroes/heroes.component';
-
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { HeroDetailComponent } from './hero-detail/hero-detail.component';
 import { MessagesComponent } from './messages/messages.component';
@@ -34,7 +32,7 @@ import { UserComponent } from './user/user.component';
 import {SharedService} from './shared.service';
 import { FunctionsComponent } from './functions/functions.component';
 import { ProtectComponent } from './protect/protect.component';
-import { SlightComponent } from './slight/slight.component';
+import { SightComponent } from './sight/sight.component';
 import { MemberComponent } from './member/member.component';
 
 registerLocaleData(zh);
@@ -74,7 +72,7 @@ registerLocaleData(zh);
   
     ProtectComponent,
   
-    SlightComponent,
+    SightComponent,
   
     MemberComponent
   ],

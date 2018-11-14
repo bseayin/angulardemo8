@@ -1,0 +1,91 @@
+<button nz-button nzType="primary" nzGhost  style="margin-left:90%" (click)="showModal()">
+  <span>添加场景点</span>
+</button>
+<nz-modal [(nzVisible)]="isVisible" nzTitle="Modal Title" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()" [nzOkLoading]="isOkLoading">
+  <nz-input-group [nzSize]="'large'">
+    <div nz-col nzSpan="6">
+      <nz-form-label nzRequired>场景点名称</nz-form-label>
+    </div>
+    <div nz-col nzSpan="16">
+      <input type="text" nz-input [(ngModel)]="newslight.sname"> 
+    </div>
+  </nz-input-group>
+  <br>
+  <div nz-row>
+    <div nz-col nzSpan="6">
+      <nz-form-label>场景点开始时间</nz-form-label>
+    </div>
+    <div nz-col nzSpan="16">
+      <nz-date-picker style="width:100%;" [(ngModel)]="newslight.sightstart"></nz-date-picker>
+    </div>
+  </div>
+  <br>
+  <div nz-row>
+    <div nz-col nzSpan="6">
+      <nz-form-label>场景点结束时间</nz-form-label>
+    </div>
+    <div nz-col nzSpan="16">
+      <nz-date-picker style="width:100%;" [(ngModel)]="newslight.sightend"></nz-date-picker>
+    </div>
+  </div>
+
+</nz-modal>
+<nz-table
+    #editRowTable
+    nzBordered
+    [nzData]="dataSet">
+    <thead>
+      <tr>
+        <th nzWidth="15%">id</th>
+        <th nzWidth="15%">projectid</th>
+        <th nzWidth="20%">场景点名称</th>
+        <th nzWidth="20%">场景点开始时间</th>
+        <th nzWidth="20%">场景点结束时间</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of editRowTable.data">
+          <td>
+              <ng-container *ngIf="!editCache[data.id].edit">
+                {{data.id}}
+              </ng-container>
+              <ng-container *ngIf="editCache[data.id].edit">
+                <input type="text" nz-input [(ngModel)]="editCache[data.id].data.id">
+              </ng-container>
+            </td>
+            <td>
+                <ng-container *ngIf="!editCache[data.id].edit">
+                  {{data.projectid}}
+                </ng-container>
+                <ng-container *ngIf="editCache[data.id].edit">
+                  <input type="text" nz-input [(ngModel)]="editCache[data.id].data.projectid">
+                </ng-container>
+              </td>
+        <td>
+          <ng-container *ngIf="!editCache[data.id].edit">
+            {{data.sname}}
+          </ng-container>
+          <ng-container *ngIf="editCache[data.id].edit">
+            <input type="text" nz-input [(ngModel)]="editCache[data.id].data.sname">
+          </ng-container>
+        </td>
+        <td>
+          <ng-container *ngIf="!editCache[data.id].edit">
+            {{data.sightstart}}
+          </ng-container>
+          <ng-container *ngIf="editCache[data.id].edit">
+              <nz-date-picker style="width:100%;" [(ngModel)]="editCache[data.id].data.sightstart"></nz-date-picker>
+          </ng-container>
+        </td>
+        <td>
+          <ng-container *ngIf="!editCache[data.id].edit">
+            {{data.sightend}}
+          </ng-container>
+          <ng-container *ngIf="editCache[data.id].edit">
+            <nz-date-picker style="width:100%;" [(ngModel)]="editCache[data.id].data.sightend"></nz-date-picker>
+          </ng-container>
+        </td>
+        
+      </tr>
+    </tbody>
+  </nz-table>

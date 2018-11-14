@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SlightComponent } from './slight.component';
+import { SightComponent } from './sight.component';
 
 describe('SlightComponent', () => {
-  let component: SlightComponent;
-  let fixture: ComponentFixture<SlightComponent>;
+  let component: SightComponent;
+  let fixture: ComponentFixture<SightComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SlightComponent ]
+      declarations: [ SightComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SlightComponent);
+    fixture = TestBed.createComponent(SightComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
