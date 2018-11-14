@@ -1,3 +1,48 @@
-<p>
-  document works!
-</p>
+<div nz-row>
+  <div nz-col nzSpan="5"></div>
+    <div nz-col nzSpan="14">
+      <div nz-row>
+        <button nz-button nzType="primary" style="margin-left: 90%">点击下载文档</button>
+        <h2 style="margin-top: 2%">{{functionName}}</h2>
+        <div nz-col nzSpan="3">
+        <nz-form-label nzRequired>模块名称</nz-form-label>
+        </div>
+        <div nz-col nzSpan="8">
+          <input type="text" nz-input placeholder="请输入模块名称" [(ngModel)]="moduleName">
+        </div>
+        <div nz-col nzSpan="3">
+            <nz-form-label nzRequired style="margin-left: 40%">区块</nz-form-label>
+        </div>
+        <div nz-col nzSpan="8">
+            <nz-select style="width: 120px;" [(ngModel)]="blockName" nzAllowClear nzPlaceHolder="Choose">
+                <nz-option nzValue="跳转关系" nzLabel="跳转关系"></nz-option>
+                <nz-option nzValue="内部逻辑" nzLabel="内部逻辑"></nz-option>
+                <nz-option nzValue="参数尺寸" nzLabel="参数尺寸"></nz-option>
+            </nz-select> 
+        </div>
+        
+        <button nz-button nzType="primary" (click)="show()">点击</button>
+      </div>
+      <div nz-row>
+        <nz-form-label nzRequired>添加图片</nz-form-label>
+        <div class="clearfix">
+          <nz-upload
+            nzAction="https://chenxijian.vip/img/"
+            nzListType="picture-card"
+            [(nzFileList)]="fileList"
+            [nzShowButton]="fileList.length < 4"
+            [nzPreview]="handlePreview">
+              <i nz-icon type="plus"></i>
+              <div class="ant-upload-text">Upload</div>
+          </nz-upload>
+          <nz-modal [nzVisible]="previewVisible" [nzContent]="modalContent" [nzFooter]="null" (nzOnCancel)="previewVisible=false">
+            <ng-template #modalContent>
+              <img [src]="previewImage" [ngStyle]="{ 'width': '100%' }" />
+            </ng-template>
+          </nz-modal>
+        </div>
+      </div>
+
+    </div>
+  <div nz-col nzSpan="5"></div>
+</div>
