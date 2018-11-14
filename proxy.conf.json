@@ -20,7 +20,7 @@
     "secure":false
 },
 "/project2":{
-    "target":"http://xiaogaogao.xyz",
+    "target":"https://xiaogaogao.xyz",
     "secure":false
 },
 "/project3":{
