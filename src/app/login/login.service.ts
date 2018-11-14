@@ -7,11 +7,11 @@ import { catchError, map, tap } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class LoginService {
-  private useresUrl = 'tz/login';  // URL to web api
+  private useresUrl = 'tz/lx/login';  // URL to web api
   private useresUrl2 = 'core/register';  // URL to web api
   constructor( private http: HttpClient) { }
   /** POST: add a new user to the server */
-loginAction (user: User): Observable<User> {
+loginAction (user: User): Observable<any> {
   const httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };

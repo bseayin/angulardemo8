@@ -1,6 +1,6 @@
 {
     "/tz":{
-    "target":"http://localhost",
+    "target":"http://localhost:8006",
     "secure":false
     },
     "/shiro":{

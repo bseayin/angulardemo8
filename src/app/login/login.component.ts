@@ -19,7 +19,7 @@ import {
 })
 export class LoginComponent implements OnInit {
   validateForm: FormGroup;
- 
+  loginvalidateForm: FormGroup;
   password:string;
   userName:string;
   classname:string;
@@ -28,17 +28,13 @@ export class LoginComponent implements OnInit {
   user2:User=new User();
   submitForm(): void {
     var id=0;
-    for (const i in this.validateForm.controls) {
-      this.validateForm.controls[ i ].markAsDirty();
-      this.validateForm.controls[ i ].updateValueAndValidity();
+    for (const i in this.loginvalidateForm.controls) {
+      this.loginvalidateForm.controls[ i ].markAsDirty();
+      this.loginvalidateForm.controls[ i ].updateValueAndValidity();
     }
-    console.log("hasError----"+this.validateForm.valid);
-    console.log("password----"+this.password);
-    console.log("userName----"+this.userName);
-    if(this.validateForm.valid){
+    console.log(this.loginvalidateForm.valid);
+    if(this.loginvalidateForm.valid){
       //执行后台操作
-      this.user.id=1;
-      this.user.name='33';
       this.loginservice.loginAction(this.user).subscribe(
         res=>{
           this.result=res;
@@ -77,10 +73,15 @@ export class LoginComponent implements OnInit {
     }
   };
   ngOnInit(): void {
+    this.loginvalidateForm = this.fb.group({
+      userName: [ null, [ Validators.required ] ],
+      password: [ null, [ Validators.required ] ],
+      remember: [ true ]
+    });
     this.validateForm = this.fb.group({
       userName: [ null, [ Validators.required ] ],
       password: [ null, [ Validators.required ] ],
-      remember: [ true ],
+     
       email            : [ null, [ Validators.email ] ],
       
       checkPassword    : [ null, [ Validators.required, this.confirmationValidator ] ],
@@ -89,7 +90,6 @@ export class LoginComponent implements OnInit {
       phoneNumber      : [ null, [ Validators.required ] ],
       username2          : [ null, [ Validators.required ] ],
       classname2          : [ null, [ Validators.required ] ],
-   
       agree            : [ false ]
     });
   }

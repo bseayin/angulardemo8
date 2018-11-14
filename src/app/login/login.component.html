@@ -1,14 +1,14 @@
 
         <h1 style="text-align:center">登录</h1>
 
-    <form nz-form [formGroup]="validateForm" class="login-form" (ngSubmit)="submitForm()">
+    <form nz-form [formGroup]="loginvalidateForm" class="login-form" (ngSubmit)="submitForm()">
       <nz-form-item>
         <nz-form-control>
           <nz-input-group [nzPrefix]="prefixUser">
             <input type="text" nz-input formControlName="userName" placeholder="用户名"  [(ngModel)]="user.name">
  
           </nz-input-group>
-          <nz-form-explain *ngIf="validateForm.get('userName').dirty && validateForm.get('userName').errors">Please input your username!</nz-form-explain>
+          <nz-form-explain *ngIf="loginvalidateForm.get('userName').dirty && loginvalidateForm.get('userName').errors">Please input your username!</nz-form-explain>
         </nz-form-control>
       </nz-form-item>
       <nz-form-item>
@@ -16,7 +16,7 @@
           <nz-input-group [nzPrefix]="prefixLock">
             <input type="password" nz-input formControlName="password" placeholder="密码" [(ngModel)]="user.password">
           </nz-input-group>
-          <nz-form-explain *ngIf="validateForm.get('password').dirty && validateForm.get('password').errors">Please input your Password!</nz-form-explain>
+          <nz-form-explain *ngIf="loginvalidateForm.get('password').dirty && loginvalidateForm.get('password').errors">Please input your Password!</nz-form-explain>
         </nz-form-control>
       </nz-form-item>
       <nz-form-item>
