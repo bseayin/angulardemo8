@@ -37,8 +37,12 @@ export class LoginComponent implements OnInit {
       //执行后台操作
       this.loginservice.loginAction(this.user).subscribe(
         res=>{
-          this.result=res;
-          this.router.navigateByUrl("index1");
+          if(res.result=="Y"){
+            this.router.navigateByUrl("index1");
+          }else{
+            alert("登录失败，请检查账号！！！");
+          }
+          
         }
       );
     }
