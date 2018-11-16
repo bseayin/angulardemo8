@@ -19,15 +19,16 @@
                 <nz-option nzValue="内部逻辑" nzLabel="内部逻辑"></nz-option>
                 <nz-option nzValue="参数尺寸" nzLabel="参数尺寸"></nz-option>
             </nz-select> 
+            
         </div>
         
         <button nz-button nzType="primary" (click)="show()">点击</button>
       </div>
-      <div nz-row>
+      <div nz-row style="margin-top: 2%">
         <nz-form-label nzRequired>添加图片</nz-form-label>
         <div class="clearfix">
           <nz-upload
-            nzAction="https://chenxijian.vip/img/"
+            nzAction="project3/upLoadFile"
             nzListType="picture-card"
             [(nzFileList)]="fileList"
             [nzShowButton]="fileList.length < 4"
@@ -41,6 +42,35 @@
             </ng-template>
           </nz-modal>
         </div>
+      </div>
+
+      <div nz-row style="margin-top: 2%">
+        <textarea [(ngModel)]="content" style="width: 100%"  rows="8" placeholder="请输入该部分文档的内容"></textarea>
+      </div>
+
+      <div nz-row style="margin-top: 2%">
+        <nz-table #editRowTable nzBordered [nzData]="dataSet">
+          <thead>
+            <tr>
+              <th nzWidth="30%">模块</th>
+              <th>功能点</th>
+              <th>状态</th>
+              <th>操作</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let data of editRowTable.data">
+              <td>{{data.docmodule}}</td>
+              <td>{{data.fname}}</td>
+              <td>{{data.docstatus}}</td>
+              <td>
+                <nz-popconfirm [nzTitle]="'Sure to delete?'" (nzOnConfirm)="deleteRow(data.key)">
+                  <a nz-popconfirm>删除</a>
+                </nz-popconfirm>
+              </td>
+            </tr>
+          </tbody>
+        </nz-table>
       </div>
 
     </div>
