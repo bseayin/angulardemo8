@@ -1,38 +1,102 @@
-<nz-tabset>
-    <nz-tab nzTitle="成员管理">
-        <nz-table #basicTable [nzData]="dataSet">
-            <thead>
-              <tr>
-                <th>成员管理</th>
-                <th></th>
-                <th></th>
-                <th></th>
-                <th></th>
-                <th></th>
-                <th></th>
-              </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <th>编号</th>
-                    <th>组员名称</th>
-                    <th>组员真实姓名</th>
-                    <th>组员邮箱</th>
-                    <th>组员电话</th>
-                    <th>组员角色</th>
-                    <th>项目id</th>
-                  </tr>
-              <tr *ngFor="let data of basicTable.data">
-                <td>{{data.name}}</td>
-                <td>{{data.age}}</td>
-                <td>{{data.address}}</td>
-                <td>
-                  <a>Action 一 {{data.name}}</a>
-                  <nz-divider nzType="vertical"></nz-divider>
-                  <a>Delete</a>
-                </td>
-              </tr>
-            </tbody>
-          </nz-table>
-    </nz-tab> 
-  </nz-tabset>
+<nz-table
+    #editRowTable
+    nzBordered
+    [nzData]="dataSet">
+    <thead>
+      <tr>
+        <th nzWidth="10%">编号</th>
+        <th nzWidth="10%">组员名称</th>
+        <th nzWidth="15%">组员真实名称</th>
+        <th nzWidth="10%">组员邮箱</th>
+        <th nzWidth="10%">组员电话</th>
+        <th nzWidth="15%">组员角色</th>
+        <th nzWidth="10%">项目id</th>
+        <th nzWidth="10%">评分</th>
+        <th nzWidth="10%">操作</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of editRowTable.data">
+          <td>
+              <ng-container *ngIf="!editCache[data.id].edit">
+                {{data.id}}
+              </ng-container>
+              <ng-container *ngIf="editCache[data.id].edit">
+                <input type="text" nz-input [(ngModel)]="editCache[data.id].data.id">
+              </ng-container>
+            </td>
+            <td>
+                <ng-container *ngIf="!editCache[data.id].edit">
+                  {{data.name}}
+                </ng-container>
+                <ng-container *ngIf="editCache[data.id].edit">
+                  <input type="text" nz-input [(ngModel)]="editCache[data.id].data.name">
+                </ng-container>
+              </td>
+        <td>
+          <ng-container *ngIf="!editCache[data.id].edit">
+            {{data.mrealname}}
+          </ng-container>
+          <ng-container *ngIf="editCache[data.id].edit">
+            <input type="text" nz-input [(ngModel)]="editCache[data.id].data.mrealname">
+          </ng-container>
+        </td>
+        <td>
+          <ng-container *ngIf="!editCache[data.id].edit">
+            {{data.memail}}
+          </ng-container>
+          <ng-container *ngIf="editCache[data.id].edit">
+              <nz-date-picker style="width:100%;" [(ngModel)]="editCache[data.id].data.memail"></nz-date-picker>
+          </ng-container>
+        </td>
+        <td>
+          <ng-container *ngIf="!editCache[data.id].edit">
+            {{data.mtel }}
+          </ng-container>
+          <ng-container *ngIf="editCache[data.id].edit">
+            <nz-date-picker style="width:100%;" [(ngModel)]="editCache[data.id].data.mtel"></nz-date-picker>
+          </ng-container>
+        </td>
+        <td>
+          <ng-container *ngIf="!editCache[data.id].edit">
+            {{data.mrole }}
+          </ng-container>
+          <ng-container *ngIf="editCache[data.id].edit">
+            <nz-date-picker style="width:100%;" [(ngModel)]="editCache[data.id].data.mrole"></nz-date-picker>
+          </ng-container>
+        </td>
+        <td>
+          <ng-container *ngIf="!editCache[data.id].edit">
+            {{data.pid }}
+          </ng-container>
+          <ng-container *ngIf="editCache[data.id].edit">
+            <nz-date-picker style="width:100%;" [(ngModel)]="editCache[data.id].data.pid"></nz-date-picker>
+          </ng-container>
+        </td>
+        <td>
+          <ng-container *ngIf="!editCache[data.id].edit">
+            {{data.grade }}
+          </ng-container>
+          <ng-container *ngIf="editCache[data.id].edit">
+            <nz-date-picker style="width:100%;" [(ngModel)]="editCache[data.id].data.grade"></nz-date-picker>
+          </ng-container>
+        </td>
+        <td>
+          <div class="editable-row-operations">
+            <ng-container *ngIf="!editCache[data.id].edit">
+              <a (click)="startEdit(data.id)">修改</a>
+              
+              <a (click)="deleteRow(data.id)" style="margin-left: 1cm">删除</a>
+            </ng-container>
+            <ng-container *ngIf="editCache[data.id].edit">
+              <a (click)="saveEdit(data.id)" >确认</a>
+              <nz-popconfirm [nzTitle]="'确认取消?'" (nzOnConfirm)="cancelEdit(data.id)">
+                <a nz-popconfirm style="margin-left: 1cm">取消</a>
+              </nz-popconfirm>
+            </ng-container>
+          </div>
+        </td>
+        
+      </tr>
+    </tbody>
+  </nz-table>

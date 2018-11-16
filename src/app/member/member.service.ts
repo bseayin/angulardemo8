@@ -2,16 +2,16 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, map, tap } from 'rxjs/operators';
 import { Injectable,EventEmitter } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { Sight } from './sight';
+import { Member } from './member';
 
 
 @Injectable({
   providedIn: 'root'
 })
-export class SightService {
-  private hosturl = 'project5/getSights';
-  private hosturl2 = 'project5/saveSight';  
-  private hosturl4 = 'project5/insertSight'; 
+export class MemberService {
+  private hosturl = 'project5/getMembers';
+  private hosturl2 = 'project5/saveMember';  
+  private hosturl4 = 'project5/insertMember'; 
 
   public eventEmit:any;
   constructor(
@@ -20,47 +20,46 @@ export class SightService {
     this.eventEmit=new EventEmitter();
    }
 
-   addSight (sight: Sight): Observable<any> {
+   addMember (member: Member): Observable<any> {
     const httpOptions = {
       headers: new HttpHeaders({ 'Content-Type': 'application/json' })
     };
-    console.log(sight.sname);
-    console.log(sight.sightstart);
-    sight.projectid=59;
-    return this.http.put(this.hosturl4, sight, httpOptions).pipe(
+
+   
+    return this.http.put(this.hosturl4, member, httpOptions).pipe(
       
-      catchError(this.handleError<any>('addSight'))
+      catchError(this.handleError<any>('addMember'))
     );
   }
-  getSlights (): Observable<Sight[]> {
-    return this.http.get<Sight[]>(this.hosturl)
+  getMembers (): Observable<Member[]> {
+    return this.http.get<Member[]>(this.hosturl)
       .pipe(
-        catchError(this.handleError('getSights', []))
+        catchError(this.handleError('getMembers', []))
       );
   }
 
 
   /** PUT: update the hero on the server */
-updateSight (sight: Sight): Observable<any> {
+updateMember (member: Member): Observable<any> {
   const httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
-  return this.http.put(this.hosturl2, sight, httpOptions).pipe(
+  return this.http.put(this.hosturl2, member, httpOptions).pipe(
     
-    catchError(this.handleError<any>('updateSight'))
+    catchError(this.handleError<any>('updateMember'))
   );
 }
 
 
 /** DELETE: delete the hero from the server */
-deleteSlight (id:number): Observable<any>{
-  const  hosturl3 = 'project5/removeSight/'+id;
+deleteMember (id:number): Observable<any>{
+  const  hosturl3 = 'project5/removeMember/'+id;
   const httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
   return this.http.delete<any>(hosturl3,httpOptions).pipe(
    
-    catchError(this.handleError<Sight>('deleteSlight '))
+    catchError(this.handleError<Member>('deleteMember '))
   );
 }
 

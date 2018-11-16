@@ -24,8 +24,8 @@ export class SightComponent implements OnInit {
   handleOk(): void {
     this.isOkLoading = true;
 
-      this.slightService.updateSlight(this.newslight).subscribe(
-        slight => {
+      this.slightService.addSight(this.newslight).subscribe(
+        sight => {
         this.isVisible = false;
         this.isOkLoading = false;
         this.addRow(this.newslight);
@@ -68,7 +68,7 @@ export class SightComponent implements OnInit {
     Object.assign(this.dataSet[ index ], this.editCache[ id ].data);
     // this.dataSet[ index ] = this.editCache[ id ].data;
     this.editCache[ id ].edit = false;
-    this.slightService.updateSlight(this.editCache[ id ].data).subscribe(
+    this.slightService.updateSight(this.editCache[ id ].data).subscribe(
       user => console.log('修改成功')
     );
   }
