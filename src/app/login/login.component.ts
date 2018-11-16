@@ -57,7 +57,7 @@ export class LoginComponent implements OnInit {
     this.user2.name=this.validateForm.controls.username2.value;
     this.user2.password=this.validateForm.controls.password2.value;
     this.user2.clazzid=this.validateForm.controls.classname2.value;
-    console.log("classname----"+this.user2.clazzid);
+    this.user2.tel=this.validateForm.controls.phoneNumber.value;
     this.loginservice.registerAction(this.user2).subscribe(
       res=>{
         this.result=res;
