@@ -20,6 +20,7 @@ import {
 export class LoginComponent implements OnInit {
   validateForm: FormGroup;
   loginvalidateForm: FormGroup;
+  errAlert:boolean=false;
   password:string;
   userName:string;
   classname:string;
@@ -32,7 +33,6 @@ export class LoginComponent implements OnInit {
       this.loginvalidateForm.controls[ i ].markAsDirty();
       this.loginvalidateForm.controls[ i ].updateValueAndValidity();
     }
-    console.log(this.loginvalidateForm.valid);
     if(this.loginvalidateForm.valid){
       //执行后台操作
       this.loginservice.loginAction(this.user).subscribe(
@@ -40,7 +40,7 @@ export class LoginComponent implements OnInit {
           if(res.result=="Y"){
             this.router.navigateByUrl("index1");
           }else{
-            alert("登录失败，请检查账号！！！");
+            this.errAlert=true;
           }
           
         }
@@ -114,5 +114,9 @@ export class LoginComponent implements OnInit {
 
   handleCancel(): void {
     this.isVisible = false;
+  }
+//关闭登陆错误提示框
+  afterClose(){
+    this.errAlert=false;
   }
 }

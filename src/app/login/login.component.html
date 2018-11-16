@@ -106,5 +106,12 @@
         </nz-form-item>
       </form>
     </nz-modal>
-  
-  
+    <div *ngIf="errAlert">
+      <nz-alert
+      nzType="error"
+      nzCloseable
+      nzMessage="抱歉"
+      nzDescription="登录失败，请检查账号或密码！"
+      (nzOnClose)="afterClose()">
+    </nz-alert>
+    </div>  
