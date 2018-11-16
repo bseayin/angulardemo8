@@ -38,5 +38,9 @@
 "/project6":{
     "target":"http://localhost:8006",
     "secure":false
+},
+"/img":{
+    "target":"https://chenxijian.vip",
+    "secure":false
 }
 }
