@@ -7,6 +7,7 @@ import { Sightpoint } from '../sightpoint';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, map, tap } from 'rxjs/operators';
 import {SharedService} from '../shared.service';
+import { CookieService } from 'ngx-cookie-service'; 
 
 @Injectable({
   providedIn: 'root'
@@ -31,7 +32,7 @@ export class TaskService {
 
   
   // URL to web api
-  constructor(private http: HttpClient,private sharedservice:SharedService) { }
+  constructor(private http: HttpClient,private sharedservice:SharedService,private cookie:CookieService) { }
 
   addTask (task: Task): Observable<any> {
     const httpOptions = {
@@ -65,9 +66,10 @@ export class TaskService {
 
   findtasks(): Observable<Task[]> {
     var userid:string=this.sharedservice.userid;
-    console.log("userid----"+userid)
+    let userid2=this.cookie.get("loginuid");
+    console.log("userid----"+userid+"----userid2---"+userid2)
     const httpOptions = {
-      headers: new HttpHeaders({ 'Content-Type': 'application/json','Authorization': userid})
+      headers: new HttpHeaders({ 'Content-Type': 'application/json','Authorization': userid2})
     };
     return this.http.get<Task[]>(this.hosturl,httpOptions)
       .pipe(
