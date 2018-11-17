@@ -18,6 +18,17 @@ export class TaskService {
   private hosturl4 = 'project1/findmember';  // URL to web api
   private hosturl5 = 'project1/findsightpoint';  // URL to web api
   private hosturl6 = 'project1/addtask';
+  private hosturl7 = 'project1/findownpasstask';   //老鄢的添加
+  private hosturl8 = 'project1/findownnotpasstask';   //老鄢的添加
+
+  //老鄢的添加
+  findOwnPassTasks(): Observable<Task[]> {
+    return this.http.get<Task[]>(this.hosturl7)
+      .pipe(
+        catchError(this.handleError('findOwnPassTasks', []))
+      );
+  }
+
   
   // URL to web api
   constructor(private http: HttpClient,private sharedservice:SharedService) { }

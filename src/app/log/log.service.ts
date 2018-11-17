@@ -9,8 +9,8 @@ import { Dplog } from './dplog';
 })
 export class LogService {
   private hosturl = 'project4/getAllLog';
-  private hosturl2 = 'project4/saveFunctions';
-  private hosturl4 = 'project4/insertFunctions';
+  private hosturl2 = 'project4/getLogFlag';
+  private hosturl3 = 'project4/getLog';
   
   public eventEmit:any;
   constructor(
@@ -25,7 +25,19 @@ export class LogService {
         catchError(this.handleError('getDplog', []))
       );
   }
+  getLog (): Observable<Dplog[]> {
+    return this.http.get<Dplog[]>(this.hosturl3)
+      .pipe(
+        catchError(this.handleError('getLog', []))
+      );
+  }
 
+  getLogFlag (): Observable<Dplog[]> {
+    return this.http.get<Dplog[]>(this.hosturl2)
+      .pipe(
+        catchError(this.handleError('getLogFlag', []))
+      );
+  }
 
 
 
