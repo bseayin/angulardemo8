@@ -53,9 +53,10 @@ export class TaskService {
   }
 
   findtasks(): Observable<Task[]> {
-    var userid=this.sharedservice.userid;
+    var userid:string=this.sharedservice.userid;
+    console.log("userid----"+userid)
     const httpOptions = {
-      headers: new HttpHeaders({ 'Content-Type': 'application/json','AuthenticationInfo': userid })
+      headers: new HttpHeaders({ 'Content-Type': 'application/json','Authorization': userid})
     };
     return this.http.get<Task[]>(this.hosturl,httpOptions)
       .pipe(
