@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Sight } from './sight';
+import { Sight } from '../Model/sight';
 import {SightService  } from './sight.service';
 
 @Component({

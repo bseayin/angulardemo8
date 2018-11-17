@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, map, tap } from 'rxjs/operators';
 import { Injectable,EventEmitter } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { Sight } from './sight';
+import { Sight } from '../Model/sight';
 
 
 @Injectable({

@@ -1,0 +1,32 @@
+<form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
+  <nz-form-item>
+    <nz-form-label [nzSpan]="5" nzRequired nzFor="pname">项目名称</nz-form-label>
+    <nz-form-control [nzSpan]="12">
+      <input id="pname" type="text" nz-input formControlName="pname" [(ngModel)]="newproject.pname">
+      <nz-form-explain *ngIf="validateForm.get('pname').dirty && validateForm.get('pname').errors">请输入项目名称!</nz-form-explain>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSpan]="5" nzFor="gender" nzRequired>项目大小</nz-form-label>
+    <nz-form-control [nzSpan]="12">
+      <nz-select id="size" formControlName="size" nzPlaceHolder="选择项目大小"[(ngModel)]="newproject.psize">
+        <nz-option nzValue="小" nzLabel="小"></nz-option>
+        <nz-option nzValue="中" nzLabel="中"></nz-option>
+        <nz-option nzValue="大" nzLabel="大"></nz-option>
+      </nz-select>
+      <nz-form-explain *ngIf="validateForm.get('size').dirty && validateForm.get('size').errors">清选择项目规模!</nz-form-explain>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+      <nz-form-label [nzSpan]="5" nzRequired nzFor="price">项目人天报价</nz-form-label>
+      <nz-form-control [nzSpan]="12">
+        <input id="price" type="text" nz-input formControlName="price" [(ngModel)]="newproject.price">
+        <nz-form-explain *ngIf="validateForm.get('price').dirty && validateForm.get('price').errors">请输入项目人天报价!</nz-form-explain>
+      </nz-form-control>
+    </nz-form-item>
+  <nz-form-item>
+    <nz-form-control [nzSpan]="12" [nzOffset]="5">
+      <button nz-button nzType="primary">创建项目</button>
+    </nz-form-control>
+  </nz-form-item>
+</form>

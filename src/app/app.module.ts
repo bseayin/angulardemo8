@@ -31,9 +31,9 @@ import { HallComponent } from './hall/hall.component';
 import { UserComponent } from './user/user.component';
 import {SharedService} from './shared.service';
 import { FunctionsComponent } from './functions/functions.component';
-import { ProtectComponent } from './protect/protect.component';
 import { SightComponent } from './sight/sight.component';
 import { MemberComponent } from './member/member.component';
+import { ProjectComponent } from './project/project.component';
 
 registerLocaleData(zh);
 @NgModule({
@@ -70,11 +70,11 @@ registerLocaleData(zh);
   
     FunctionsComponent,
   
-    ProtectComponent,
-  
     SightComponent,
   
-    MemberComponent
+    MemberComponent,
+  
+    ProjectComponent
   ],
   imports: [
     BrowserModule,
