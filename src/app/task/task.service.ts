@@ -6,6 +6,7 @@ import { Member } from '../member';
 import { Sightpoint } from '../sightpoint';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, map, tap } from 'rxjs/operators';
+import {SharedService} from '../shared.service';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +20,7 @@ export class TaskService {
   private hosturl6 = 'project1/addtask';
   
   // URL to web api
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,private sharedservice:SharedService) { }
 
   addTask (task: Task): Observable<any> {
     const httpOptions = {
@@ -52,7 +53,11 @@ export class TaskService {
   }
 
   findtasks(): Observable<Task[]> {
-    return this.http.get<Task[]>(this.hosturl)
+    var userid=this.sharedservice.userid;
+    const httpOptions = {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json','AuthenticationInfo': userid })
+    };
+    return this.http.get<Task[]>(this.hosturl,httpOptions)
       .pipe(
         catchError(this.handleError('findtasks', []))
       );

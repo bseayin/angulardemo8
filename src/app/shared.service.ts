@@ -4,6 +4,7 @@ import { Injectable,EventEmitter } from '@angular/core';
   providedIn: 'root'
 })
 export class SharedService {
+  userid:string='34';
   public eventEmit: any;
   
   constructor() { 
