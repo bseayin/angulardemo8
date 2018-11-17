@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { LoginService } from './login.service';
 import { User } from '../user';
 import { Router } from '@angular/router';
+import { SharedService } from '../shared.service';
 
 import {
   AbstractControl,
@@ -38,6 +39,8 @@ export class LoginComponent implements OnInit {
       this.loginservice.loginAction(this.user).subscribe(
         res=>{
           if(res.result=="Y"){
+           // this.sharedService.userid=res.result.user
+           this.sharedService.userid=res.user.id;
             this.router.navigateByUrl("index1");
           }else{
             this.errAlert=true;
@@ -67,7 +70,7 @@ export class LoginComponent implements OnInit {
     );
   }
 
-  constructor(private fb: FormBuilder,private loginservice:LoginService,private router:Router) {
+  constructor(private fb: FormBuilder,private loginservice:LoginService,private sharedService:SharedService,private router:Router) {
   }
   confirmationValidator = (control: FormControl): { [ s: string ]: boolean } => {
     if (!control.value) {
