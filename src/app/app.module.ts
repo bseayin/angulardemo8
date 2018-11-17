@@ -34,6 +34,7 @@ import { FunctionsComponent } from './functions/functions.component';
 import { SightComponent } from './sight/sight.component';
 import { MemberComponent } from './member/member.component';
 import { ProjectComponent } from './project/project.component';
+import { CookieService } from 'ngx-cookie-service';
 
 registerLocaleData(zh);
 @NgModule({
@@ -88,7 +89,7 @@ registerLocaleData(zh);
     NgZorroAntdModule,
   ],
 
-  providers: [{ provide: NZ_I18N, useValue: zh_CN },SharedService],
+  providers: [{ provide: NZ_I18N, useValue: zh_CN },SharedService,CookieService ],
   bootstrap: [AppComponent]
 })
 
