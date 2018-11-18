@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {AbstractControl,FormBuilder,FormGroup,Validators} from '@angular/forms';
 import {Project } from '../Model/Project';
+import { ProjectService } from './project.service';
 @Component({
   selector: 'app-project',
   templateUrl: './project.component.html',
@@ -14,18 +15,23 @@ export class ProjectComponent implements OnInit {
     for (const i in this.validateForm.controls) {
       this.validateForm.controls[ i ].markAsDirty();
       this.validateForm.controls[ i ].updateValueAndValidity();
-      
     }
+    this.newproject.pname=this.validateForm.controls['pname'].value;
+    this.newproject.psize=this.validateForm.controls['size'].value;
+    this.newproject.price=this.validateForm.controls['price'].value;
+    this.projectService.addProject(this.newproject).subscribe(
+      project => {
+      alert('添加成功')}
+    );
   }
 
-  genderChange(value: string): void {
-    this.validateForm.get('size').setValue(value === '大' ?'项目规模, 大!' : value === '中' ?'项目规模, 中!' :'项目规模, 小!');
-  }
 
-  constructor(private fb: FormBuilder) {
+
+  constructor(private fb: FormBuilder,private projectService: ProjectService) {
   }
 
   ngOnInit(): void {
+    
     this.validateForm = this.fb.group({
       size  : [ null, [ Validators.required ] ],
       price  : [ null, [ Validators.required ] ],
