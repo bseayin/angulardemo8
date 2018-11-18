@@ -1,0 +1,111 @@
+<nz-tabset>
+  <nz-tab nzTitle="已处理的任务">
+    <nz-table
+    #borderedTable
+    nzBordered
+    nzTitle="需求反馈列表"
+    [nzData]="dataSet2" 
+    >
+    <thead>
+      <tr>
+        <th>任务ID</th>
+        <th>任务名称</th>
+        <th>任务人</th>
+        <th nzWidth="20%">任务内容</th>
+        <th>开始时间</th>
+        <th>结束时间</th>
+        <th  nzWidth="20%">反馈内容</th>
+        <th>审查状态</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of borderedTable.data">
+        <td>{{data.id}}</td>
+        <td>{{data.tname}}</td>
+        <td>{{data.owner}}</td>
+        <td>{{data.content}}</td>
+        <td>{{data.startdt}}</td>
+        <td>{{data.enddt}}</td>
+        <td>{{data.dmcontent}}</td>
+        <td>{{data.dmstate}}</td>
+      </tr>
+    </tbody>
+  </nz-table>
+  </nz-tab>
+
+  <nz-tab nzTitle="未处理的任务">
+    <nz-table #editRowTable nzBordered [nzData]="dataSet">
+      <thead>
+        <tr>
+          <th>任务ID</th>
+          <th>任务名称</th>
+          <th>任务人</th>
+          <th>任务内容</th>
+          <th>开始时间</th>
+          <th>结束时间</th>
+          <th>反馈内容</th>
+          <th>审查状态</th>
+          <th>管理操作</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let data of editRowTable.data">
+          <td>
+              {{data.id}} </td>
+          <td>
+            <ng-container >
+              {{data.tname}}
+            </ng-container>
+          </td>
+          <td>
+              <ng-container >
+                {{data.owner}}
+              </ng-container>
+            </td>
+          <td>
+            <ng-container >
+              {{data.content}}
+            </ng-container>
+          </td>
+          <td>
+            <ng-container >
+              {{data.startdt}}
+            </ng-container> 
+          </td>
+          <td>
+            <ng-container >
+              {{data.enddt}}
+            </ng-container>
+          </td>
+          <td nzWidth="40%">
+            <ng-container *ngIf="!editCache[data.id].edit">
+              {{data.dmcontent}}
+            </ng-container>
+            <ng-container *ngIf="editCache[data.id].edit">
+              <textarea rows="4" nz-input [(ngModel)]="editCache[data.id].data.dmcontent"></textarea>
+            </ng-container>
+          </td>
+          <td>
+            <ng-container>
+              {{data.dmstate}}
+            </ng-container>
+          </td>
+          
+          <td width=80 style="word-break:break-all">
+            <div class="editable-row-operations">
+              <ng-container *ngIf="!editCache[data.id].edit">
+                <a (click)="startEdit(data.id)">修改</a><br>
+              </ng-container>
+              <ng-container *ngIf="editCache[data.id].edit">
+                <a (click)="saveEdit(data.id)">保存</a>
+                <nz-popconfirm [nzTitle]="'确定取消？'" (nzOnConfirm)="cancelEdit(data.id)">
+                  &nbsp;<a nz-popconfirm>取消</a>
+                </nz-popconfirm>
+              </ng-container>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </nz-table>
+  </nz-tab>
+</nz-tabset>

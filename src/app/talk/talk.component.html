@@ -8,6 +8,7 @@
       >
       <thead>
         <tr>
+            <th>任务ID</th>
           <th>任务名称</th>
           <th nzWidth="20%">任务内容</th>
           <th>开始时间</th>
@@ -18,6 +19,7 @@
       </thead>
       <tbody>
         <tr *ngFor="let data of borderedTable.data">
+          <td>{{data.id}}</td>
           <td>{{data.tname}}</td>
           <td>{{data.content}}</td>
           <td>{{data.startdt}}</td>
@@ -46,16 +48,14 @@
         <tbody>
           <tr *ngFor="let data of editRowTable.data">
             <td>
-              <ng-container >
-                {{data.id}}
-              </ng-container>
+                {{data.id}} 
             </td>
             <td>
               <ng-container >
                 {{data.tname}}
               </ng-container>
             </td>
-            <td width=150 style="word-break:break-all">
+            <td>
               <ng-container >
                 {{data.content}}
               </ng-container>
@@ -70,12 +70,12 @@
                 {{data.enddt}}
               </ng-container>
             </td>
-            <td>
+            <td nzWidth="40%">
               <ng-container *ngIf="!editCache[data.id].edit">
                 {{data.dmcontent}}
               </ng-container>
               <ng-container *ngIf="editCache[data.id].edit">
-                <input type="text" nz-input [(ngModel)]="editCache[data.id].data.dmcontent">
+                <textarea rows="4" nz-input [(ngModel)]="editCache[data.id].data.dmcontent"></textarea>
               </ng-container>
             </td>
             <td>

@@ -34,7 +34,8 @@ import { FunctionsComponent } from './functions/functions.component';
 import { SightComponent } from './sight/sight.component';
 import { MemberComponent } from './member/member.component';
 import { ProjectComponent } from './project/project.component';
-import { CookieService } from 'ngx-cookie-service'; 
+import { CookieService } from 'ngx-cookie-service';
+import { CheckComponent } from './check/check.component'; 
 
 registerLocaleData(zh);
 @NgModule({
@@ -75,7 +76,9 @@ registerLocaleData(zh);
   
     MemberComponent,
   
-    ProjectComponent
+    ProjectComponent,
+  
+    CheckComponent
   ],
   imports: [
     BrowserModule,

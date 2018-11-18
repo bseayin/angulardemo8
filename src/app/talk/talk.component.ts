@@ -13,7 +13,6 @@ export class TalkComponent implements OnInit {
   dataSet: Task[];
   dataSet2: Task[];
   
-
   constructor(private sharedService:SharedService, private taskservice: TaskService) { }
 
   ngOnInit() {
