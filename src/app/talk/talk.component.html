@@ -46,119 +46,48 @@
         <tbody>
           <tr *ngFor="let data of editRowTable.data">
             <td>
-              <ng-container *ngIf="!editCache[data.id].edit">
-                {{data.tname}}
+              <ng-container >
+                {{data.id}}
               </ng-container>
-              <ng-container *ngIf="editCache[data.id].edit">
-                <input type="text" nz-input [(ngModel)]="editCache[data.id].data.tname">
+            </td>
+            <td>
+              <ng-container >
+                {{data.tname}}
               </ng-container>
             </td>
             <td width=150 style="word-break:break-all">
-              <ng-container *ngIf="!editCache[data.id].edit">
+              <ng-container >
                 {{data.content}}
               </ng-container>
-              <ng-container *ngIf="editCache[data.id].edit">
-                <textarea type="text" nz-input [(ngModel)]="editCache[data.id].data.content"></textarea>
-              </ng-container>
             </td>
             <td>
-              <ng-container *ngIf="!editCache[data.id].edit">
+              <ng-container >
                 {{data.startdt}}
-              </ng-container>
-              <ng-container *ngIf="editCache[data.id].edit">
-                  <nz-date-picker style="width:100%;" [(ngModel)]="editCache[data.id].data.startdt"></nz-date-picker>
-              </ng-container>
+              </ng-container> 
             </td>
             <td>
-              <ng-container *ngIf="!editCache[data.id].edit">
+              <ng-container >
                 {{data.enddt}}
               </ng-container>
-              <ng-container *ngIf="editCache[data.id].edit">
-                <nz-date-picker style="width:100%;" [(ngModel)]="editCache[data.id].data.enddt"></nz-date-picker>
-              </ng-container>
             </td>
             <td>
               <ng-container *ngIf="!editCache[data.id].edit">
-                {{data.priority}}
+                {{data.dmcontent}}
               </ng-container>
               <ng-container *ngIf="editCache[data.id].edit">
-                <nz-select [(ngModel)]="editCache[data.id].data.priority" style="width:100%;">
-                    <nz-option [nzLabel]="'不指定'" [nzValue]="'不指定'"></nz-option>
-                    <nz-option [nzLabel]="'严重'" [nzValue]="'严重'"></nz-option>
-                    <nz-option [nzLabel]="'主要'" [nzValue]="'主要'"></nz-option>
-                    <nz-option [nzLabel]="'次要'" [nzValue]="'次要'"></nz-option>
-                    <nz-option [nzLabel]="'不重要'" [nzValue]="'不重要'"></nz-option>
-                  </nz-select>
-              </ng-container>
-            </td>
-            <td width=100 style="word-break:break-all">
-              <ng-container *ngIf="!editCache[data.id].edit">
-                {{data.functionname}}
-              </ng-container>
-              <ng-container *ngIf="editCache[data.id].edit">
-                <nz-select [(ngModel)]="editCache[data.id].data.functionname" style="width:100%;">
-                    <nz-option *ngFor="let data of function" [nzLabel]="data.fname" [nzValue]="data.fname"></nz-option>
-                </nz-select>
+                <input type="text" nz-input [(ngModel)]="editCache[data.id].data.dmcontent">
               </ng-container>
             </td>
             <td>
-              <ng-container *ngIf="!editCache[data.id].edit">
-                {{data.story}}
-              </ng-container>
-              <ng-container *ngIf="editCache[data.id].edit">
-                <nz-select [(ngModel)]="editCache[data.id].data.story" style="width:100%;">
-                    <nz-option *ngFor="let data of sightpoint" [nzLabel]="data.sname" [nzValue]="data.sname"></nz-option>
-                </nz-select>
+              <ng-container>
+                {{data.dmstate}}
               </ng-container>
             </td>
-            <td>
-              <ng-container *ngIf="!editCache[data.id].edit">
-                {{data.owner}}
-              </ng-container>
-              <ng-container *ngIf="editCache[data.id].edit">
-                <nz-select [(ngModel)]="editCache[data.id].data.owner" style="width:100%;">
-                    <nz-option *ngFor="let data of member" [nzLabel]="data.mname" [nzValue]="data.mname"></nz-option>
-                </nz-select>
-              </ng-container>
-            </td>
-            <td>
-              <ng-container *ngIf="!editCache[data.id].edit">
-                {{data.type}}
-              </ng-container>
-              <ng-container *ngIf="editCache[data.id].edit">
-                <nz-select [(ngModel)]="editCache[data.id].data.type" style="width:100%;">
-                    <nz-option [nzLabel]="'设计'" [nzValue]="'设计'"></nz-option>
-                    <nz-option [nzLabel]="'开发'" [nzValue]="'开发'"></nz-option>
-                    <nz-option [nzLabel]="'Bug'" [nzValue]="'Bug'"></nz-option>
-                  </nz-select>
-              </ng-container>
-            </td>
-            <td>
-              <ng-container *ngIf="!editCache[data.id].edit">
-                {{data.effort}}
-              </ng-container>
-              <ng-container *ngIf="editCache[data.id].edit">
-                <input onkeyup="value=value.replace(/[^\d]/g,'')" style="width:100%;" nz-input placeholder="工作量" [(ngModel)]="editCache[data.id].data.effort" >
-              </ng-container>
-            </td>
-            <td>
-              <ng-container *ngIf="!editCache[data.id].edit">
-                {{data.status}}
-              </ng-container>
-              <ng-container *ngIf="editCache[data.id].edit">
-                <nz-select [(ngModel)]="editCache[data.id].data.status" style="width:100%;">
-                    <nz-option [nzLabel]="'未开始'" [nzValue]="'未开始'"></nz-option>
-                    <nz-option [nzLabel]="'进行中'" [nzValue]="'进行中'"></nz-option>
-                    <nz-option [nzLabel]="'已完成'" [nzValue]="'已完成'"></nz-option>
-                    <nz-option [nzLabel]="'已验收'" [nzValue]="'已验收'"></nz-option>
-                  </nz-select>
-              </ng-container>
-            </td>
+            
             <td width=80 style="word-break:break-all">
               <div class="editable-row-operations">
                 <ng-container *ngIf="!editCache[data.id].edit">
                   <a (click)="startEdit(data.id)">修改</a><br>
-                  <a (click)="deleteRow(data.id)">删除</a>
                 </ng-container>
                 <ng-container *ngIf="editCache[data.id].edit">
                   <a (click)="saveEdit(data.id)">保存</a>

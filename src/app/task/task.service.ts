@@ -30,16 +30,12 @@ export class TaskService {
       );
   }
   //老鄢的添加
-  findOwnNotPassTasks(): Observable<Task[]> {
-    var userid=this.sharedservice.userid;
-    const httpOptions = {
-      headers: new HttpHeaders({ 'Content-Type': 'application/json','AuthenticationInfo': userid })
-    };
-    return this.http.get<Task[]>(this.hosturl8,httpOptions)
-      .pipe(
-        catchError(this.handleError('findOwnNotPassTasks', []))
-      );
-  }
+    findOwnNotPassTasks(): Observable<Task[]> {
+      return this.http.get<Task[]>(this.hosturl8)
+        .pipe(
+          catchError(this.handleError('findOwnNotPassTasks', []))
+        );
+    } 
 
   
   // URL to web api
