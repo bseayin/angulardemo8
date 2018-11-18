@@ -30,6 +30,14 @@ export class TalkComponent implements OnInit {
           this.dataSet2 = taskservice
         });
   }
+  findOwnNotPassTask(): void {
+    this.taskservice.findOwnNotPassTasks()
+      .subscribe(
+        taskservice => {
+          console.log(this.dataSet2);
+          this.dataSet2 = taskservice
+        });
+  }
   
   startEdit(id: number): void {
     this.editCache[ id ].edit = true;
