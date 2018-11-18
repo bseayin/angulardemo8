@@ -1,14 +1,30 @@
     <nz-layout class="layout">
-      <nz-header>
+      <!-- <nz-header>
         <div class="logo"></div>
-      </nz-header>
+      </nz-header> -->
       <nz-layout>
         <nz-sider [nzWidth]="200" style="background:#fff">
-          <ul nz-menu [nzMode]="'inline'" style="height:100%">
+            <ul nz-menu [nzMode]="'inline'" style="width: 200px;">
+                
+                
+                <li nz-submenu>
+                  <span title><i nz-icon type="setting"></i> Navigation Three</span>
+                  <ul>
+                    <li nz-menu-item>Option 11</li>
+                    <li nz-menu-item>Option 12</li>
+                    <li nz-menu-item>Option 13</li>
+                    <li nz-menu-item  *ngFor="let user of users">
+                        {{user.name}}
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+
+          <!-- <ul nz-menu [nzMode]="'inline'" style="height:100%">
                 <li *ngFor="let user of users">
                        {{user.name}}
                 </li>
-          </ul>
+          </ul> -->
         </nz-sider>
         <nz-layout style="padding:0 24px 24px">
           <nz-content style="background:#fff; min-height: 700px;">
@@ -36,10 +52,11 @@
                 <input type="text" nz-input [(ngModel)]="sendText"> 
               </div>
               <div nz-col nzSpan="3">
-              <button nz-button nzType="primary"  (click)="send()" nzGhost>发送</button>
+              <button nz-button nzType="primary"  (click)="sendMessageToserver()" nzGhost>发送</button>
               </div>
             </nz-input-group>
         </nz-content>
         </nz-layout>
       </nz-layout>
     </nz-layout>
+  

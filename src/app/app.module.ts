@@ -34,7 +34,9 @@ import { FunctionsComponent } from './functions/functions.component';
 import { SightComponent } from './sight/sight.component';
 import { MemberComponent } from './member/member.component';
 import { ProjectComponent } from './project/project.component';
-import { CookieService } from 'ngx-cookie-service'; 
+import { CookieService } from 'ngx-cookie-service';
+import { WebSocketComponent } from './web-socket/web-socket.component'; 
+import { WebSocketService } from './shared/web-socket.service'; 
 
 registerLocaleData(zh);
 @NgModule({
@@ -75,7 +77,9 @@ registerLocaleData(zh);
   
     MemberComponent,
   
-    ProjectComponent
+    ProjectComponent,
+  
+    WebSocketComponent
   ],
   imports: [
     BrowserModule,
@@ -89,7 +93,7 @@ registerLocaleData(zh);
     NgZorroAntdModule,
   ],
 
-  providers: [{ provide: NZ_I18N, useValue: zh_CN },SharedService,CookieService ],
+  providers: [{ provide: NZ_I18N, useValue: zh_CN },SharedService,CookieService,WebSocketService ],
   bootstrap: [AppComponent]
 })
 
