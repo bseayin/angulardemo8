@@ -14,6 +14,7 @@ import { TalkComponent }  from './talk/talk.component';
 import { SetComponent }  from './set/set.component';
 import { HallComponent }  from './hall/hall.component';
 import { UserComponent }  from './user/user.component';
+import { CheckComponent }  from './check/check.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -22,6 +23,7 @@ const routes: Routes = [
       { path: '', component: HallComponent },
       { path: 'hall', component: HallComponent },
       { path: 'task', component: TaskComponent },
+      { path: 'check', component: CheckComponent },
       { path: 'talk', component: TalkComponent },
       { path: 'log', component: LogComponent },
       { path: 'set', component: SetComponent },

@@ -4,38 +4,46 @@ import { Task } from '../task';
 import { TaskService } from '../task/task.service';
 
 @Component({
-  selector: 'app-talk',
-  templateUrl: './talk.component.html',
-  styleUrls: ['./talk.component.css']
+  selector: 'app-check',
+  templateUrl: './check.component.html',
+  styleUrls: ['./check.component.css']
 })
-export class TalkComponent implements OnInit {
+export class CheckComponent implements OnInit {
   editCache = {};
   dataSet: Task[];
   dataSet2: Task[];
-  
+
   constructor(private sharedService:SharedService, private taskservice: TaskService) { }
 
   ngOnInit() {
-    this.sharedService.eventEmit.emit("讨论");
-    this.findOwnPassTask();
-    this.findOwnNotPassTask();
+    this.sharedService.eventEmit.emit("审查");
+    this.findPassTask();
+    this.findNotPassTask();
   }
-  findOwnPassTask(): void {
-    this.taskservice.findOwnPassTasks()
+  ngOnInit2():void{
+    console.log("过");
+    this.findPassTask();
+    this.findNotPassTask();
+  }
+  findPassTask(): void {
+    this.taskservice.findPassTasks()
       .subscribe(
         taskservice => {
            this.dataSet2 = taskservice
+           console.log("获取通过");
+           console.log(this.dataSet2);
         });
   }
 
 
-  findOwnNotPassTask(): void {
-    this.taskservice.findOwnNotPassTasks()
+  findNotPassTask(): void {
+    this.taskservice.findNotPassTasks()
       .subscribe(
         taskservice => {
+          
+          this.dataSet = taskservice;
           console.log("获取未通过");
           console.log(this.dataSet);
-          this.dataSet = taskservice;
           this.updateEditCache();
         });
   }
@@ -53,7 +61,7 @@ export class TalkComponent implements OnInit {
     Object.assign(this.dataSet[index], this.editCache[id].data);
     // this.dataSet[ index ] = this.editCache[ id ].data;
     this.editCache[id].edit = false;
-    this.taskservice.updateTask(this.editCache[id].data).subscribe();
+    this.taskservice.updateTask(this.editCache[id].data).subscribe(() =>this.ngOnInit2());
   }
 
   updateEditCache(): void {

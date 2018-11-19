@@ -40,7 +40,7 @@ updateFunctions (functions: Functions): Observable<any> {
 }
 
   /** PUT: update the hero on the server */
-  addFunctions (functions: Functions): Observable<any> {
+addFunctions (functions: Functions): Observable<any> {
     const httpOptions = {
       headers: new HttpHeaders({ 'Content-Type': 'application/json' })
     };
