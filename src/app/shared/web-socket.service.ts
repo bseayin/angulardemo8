@@ -23,8 +23,10 @@ export class WebSocketService {
     );
 }
 
-sendMessage(message: any){
-    this.ws.send(JSON.stringify(message));
-}
-
+    sendMessage(message: any){
+        this.ws.send(JSON.stringify(message));
+    }
+    closeWebSocket(){
+      this.ws.close();
+    }
 }
