@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 import { Functions} from './functions'
+import { Document} from './document'
 
 
 @Injectable({
@@ -11,6 +12,9 @@ import { Functions} from './functions'
 export class DocumentService {
   private hosturl = 'project3/getAllDoc';
   private hosturl1 = 'project3/allFunction';
+  private hosturl2;
+  private hosturl3 = 'project3/savedoc';
+  private hosturl4 = 'project3/updateFunction';
 
   constructor(private http: HttpClient,) { }
 
@@ -19,6 +23,33 @@ export class DocumentService {
       .pipe(
         catchError(this.handleError('getFunctions', []))
       );
+  }
+
+  getFunction (): Observable<Document[]> {
+    return this.http.get<Document[]>(this.hosturl)
+      .pipe(
+        catchError(this.handleError('getFunction', []))
+      );
+  }
+
+  savedoc (document:Document):Observable<any>{
+    const httpOptions = {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    };
+    return this.http.put(this.hosturl3, document, httpOptions).pipe(
+      
+      catchError(this.handleError<any>('savedoc'))
+    );
+  }
+
+  updateFunction (functions:Functions):Observable<any>{
+    const httpOptions = {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    };
+    return this.http.put(this.hosturl4, functions, httpOptions).pipe(
+      
+      catchError(this.handleError<any>('updateFunction'))
+    );
   }
 
   
