@@ -4,4 +4,5 @@ export class User {
     password: string;
     clazzid: string;
     tel: string;
+    remember:boolean;
   }

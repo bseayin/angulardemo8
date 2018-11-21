@@ -38,12 +38,12 @@ export class LoginComponent implements OnInit {
     if(this.loginvalidateForm.valid){
       //执行后台操作
       this.loginservice.loginAction(this.user).subscribe(
+
         res=>{
           if(res.result=="Y"){
             this.cookie.set("loginuid",res.user.id,2*60*60*1000);
            // this.sharedService.userid=res.result.user
-           this.sharedService.userid=res.user.id;
-
+            this.sharedService.userid=res.user.id;
             this.router.navigateByUrl("index1");
           }else{
             this.errAlert=true;
@@ -89,7 +89,7 @@ export class LoginComponent implements OnInit {
     this.loginvalidateForm = this.fb.group({
       userName: [ null, [ Validators.required ] ],
       password: [ null, [ Validators.required ] ],
-      remember: [ true ]
+      rememberMe: [ true ]
     });
     this.validateForm = this.fb.group({
       userName: [ null, [ Validators.required ] ],

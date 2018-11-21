@@ -21,7 +21,7 @@
       </nz-form-item>
       <nz-form-item>
         <nz-form-control>
-          <label nz-checkbox formControlName="remember">
+          <label nz-checkbox formControlName="rememberMe" [(ngModel)]="user.rememberMe">
             <span>记住我</span>
           </label>
           <a class="login-form-forgot" class="login-form-forgot">忘记密码</a>
