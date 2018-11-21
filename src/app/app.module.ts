@@ -38,6 +38,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { WebSocketComponent } from './web-socket/web-socket.component'; 
 import { WebSocketService } from './shared/web-socket.service'; 
 import { CheckComponent } from './check/check.component'; 
+import { LocalStorage } from './hall/local.storage';
 
 registerLocaleData(zh);
 @NgModule({
@@ -95,7 +96,7 @@ registerLocaleData(zh);
     NgZorroAntdModule,
   ],
 
-  providers: [{ provide: NZ_I18N, useValue: zh_CN },SharedService,CookieService,WebSocketService ],
+  providers: [{ provide: NZ_I18N, useValue: zh_CN },SharedService,CookieService,WebSocketService,LocalStorage ],
   bootstrap: [AppComponent]
 })
 
