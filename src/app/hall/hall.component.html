@@ -25,7 +25,7 @@
         </nz-sider>
         <nz-layout style="padding:0 24px 24px">
           <nz-content style="background:#fff; min-height: 700px;">
-             <h1 style="text-align:center">聊天室  <button nz-button nzType="primary"  (click)="join()" style="margin-left: 80px" nzGhost>加入聊天室</button></h1>
+             <h1 style="text-align:center">聊天室  <button nz-button nzType="primary"  (click)="join()" style="margin-left: 80px" nzGhost>加入聊天室</button><button nz-button nzType="danger"  (click)="exit()" style="margin-left: 80px" nzGhost>退出聊天室</button></h1>
              <textarea cols="100" rows="9" nz-input [(ngModel)]="chatContent"></textarea>
              <br>
             <nz-input-group [nzSize]="'large'">
