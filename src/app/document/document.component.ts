@@ -12,10 +12,10 @@ import { Functions} from './functions'
   styleUrls: ['./document.component.css']
 })
 export class DocumentComponent implements OnInit {
-  // functionName:string='功能点';
-  // moduleName:string=''; //文档中的模块名称
-  // blockName:string='跳转关系'; //区块名称
-  // content: string = '';
+  functionName:string='功能点';
+  moduleName:string=''; //文档中的模块名称
+  blockName:string='跳转关系'; //区块名称
+  content: string = '';
   fileList = [];
   previewImage = '';
   previewVisible = false;
@@ -25,6 +25,8 @@ export class DocumentComponent implements OnInit {
   doucument:Document=new Document();
   function:Document[];
   edit = false;
+  flag:number;
+  
 
 
   constructor(private sharedService:SharedService,private documentService:DocumentService) { }
@@ -47,7 +49,6 @@ export class DocumentComponent implements OnInit {
       .subscribe(
         documents => {
           this.dataSet = documents;
-          this.updateEditCache();
         });
   }
 
@@ -76,26 +77,37 @@ export class DocumentComponent implements OnInit {
     alert('保存成功');
   }
 
-  updateEditCache(): void {
-    this.dataSet.forEach(item => {
-      if (!this.editCache[ item.id ]) {
-        this.editCache[ item.id ] = {
-          edit: false,
-          data: { ...item }
-        };
-      }
-    });
-  }
 
   startEdit(id: number): void {
+    this.flag = id;
     const index = this.dataSet.findIndex(item => item.id === id);
-    Object.assign(this.dataSet[ index ], this.editCache[ id ].data);
     // this.dataSet[ index ] = this.editCache[ key ].data;
     this.fun = this.dataSet[ index ];
     if(this.fun.docstatus == '已编辑'){
-      this.doucument = this.function.find(item => item.functionname === this.dataSet[ index ].fname && item.module ===this.dataSet[index].docmodule);
+      console.log("-----------已编辑------------")
+      console.log("-----------index------------"+index)
+      console.log("-----------id------------"+id)
+      console.log(this.dataSet[ index ])
+      console.log(this.function)
+      this.doucument.functionname=this.fun.fname;
+      this.doucument.module=this.fun.docmodule;
+      this.doucument.content = "";
+      for(var i=0;i<this.function.length;i++){
+        if(this.function[i].functionname===this.dataSet[ index ].fname&&this.function[i].module===this.dataSet[index].docmodule&&this.function[i].block===this.blockName){
+          this.doucument=this.function[i];
+          console.log("-----------if------------")
+          console.log(this.doucument);
+          break;
+        }else{
+          console.log("-----------else------------")
+          
+        }
+      }
+      console.log("-----------aaaa------------")
       console.log(this.doucument);
+      
     }else{
+      console.log("-----------wei编辑------------")
       this.doucument.functionname = this.dataSet[ index ].fname;
       this.doucument.module = this.dataSet[index].docmodule;
       this.dataSet[index].docstatus = '已编辑';
@@ -104,32 +116,11 @@ export class DocumentComponent implements OnInit {
     this.edit = true;
   }
 
-  show(): void{
-    console.log(this.doucument);
-  }
-
-  i = 1;
-  
-
-  addRow(): void {
-    this.i++;
+  select():void{
     
-    this.updateEditCache();
+    if(this.edit){
+      this.startEdit(this.flag);
+    }
   }
-
-  deleteRow(i: number): void {
-    const dataSet = this.dataSet.filter(d => d.id !== i);
-    this.dataSet = dataSet;
-  }
-
-
-  finishEdit(key: number): void {
-    this.editCache[ key ].edit = false;
-    this.dataSet.find(item => item.id === key).docmodule = this.editCache[ key ].module;
-  }
-
-  
-  
-
 
 }

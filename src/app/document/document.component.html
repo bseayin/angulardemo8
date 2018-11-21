@@ -14,7 +14,7 @@
             <nz-form-label nzRequired style="margin-left: 40%">区块</nz-form-label>
         </div>
         <div nz-col nzSpan="8">
-            <nz-select style="width: 120px;" [(ngModel)]="doucument.block" nzAllowClear nzPlaceHolder="Choose">
+            <nz-select style="width: 120px;" [(ngModel)]="blockName"  (ngModelChange)="select()">
                 <nz-option nzValue="跳转关系" nzLabel="跳转关系"></nz-option>
                 <nz-option nzValue="内部逻辑" nzLabel="内部逻辑"></nz-option>
                 <nz-option nzValue="参数尺寸" nzLabel="参数尺寸"></nz-option>
