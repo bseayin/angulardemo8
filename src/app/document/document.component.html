@@ -3,18 +3,18 @@
     <div nz-col nzSpan="14">
       <div nz-row>
         <button nz-button nzType="primary" style="margin-left: 90%">点击下载文档</button>
-        <h2 style="margin-top: 2%">{{functionName}}</h2>
+        <h2 style="margin-top: 2%">{{doucument.functionname}}</h2>
         <div nz-col nzSpan="3">
         <nz-form-label nzRequired>模块名称</nz-form-label>
         </div>
         <div nz-col nzSpan="8">
-          <input type="text" nz-input placeholder="请输入模块名称" [(ngModel)]="moduleName">
+          <input type="text" nz-input placeholder="请输入模块名称" [(ngModel)]="doucument.module">
         </div>
         <div nz-col nzSpan="3">
             <nz-form-label nzRequired style="margin-left: 40%">区块</nz-form-label>
         </div>
         <div nz-col nzSpan="8">
-            <nz-select style="width: 120px;" [(ngModel)]="blockName" nzAllowClear nzPlaceHolder="Choose">
+            <nz-select style="width: 120px;" [(ngModel)]="doucument.block" nzAllowClear nzPlaceHolder="Choose">
                 <nz-option nzValue="跳转关系" nzLabel="跳转关系"></nz-option>
                 <nz-option nzValue="内部逻辑" nzLabel="内部逻辑"></nz-option>
                 <nz-option nzValue="参数尺寸" nzLabel="参数尺寸"></nz-option>
@@ -22,7 +22,6 @@
             
         </div>
         
-        <button nz-button nzType="primary" (click)="show()">点击</button>
       </div>
       <div nz-row style="margin-top: 2%">
         <nz-form-label nzRequired>添加图片</nz-form-label>
@@ -45,9 +44,11 @@
       </div>
 
       <div nz-row style="margin-top: 2%">
-        <textarea [(ngModel)]="content" style="width: 100%"  rows="8" placeholder="请输入该部分文档的内容"></textarea>
+        <textarea [(ngModel)]="doucument.content" style="width: 100%"  rows="8" placeholder="请输入该部分文档的内容"></textarea>
       </div>
-
+      <div *ngIf="edit">
+        <button nz-button style="margin-top: 2%;margin-left: 85%" nzType="primary" (click)="savedoc()">保存</button>
+      </div>
       <div nz-row style="margin-top: 2%">
         <nz-table #editRowTable nzBordered [nzData]="dataSet">
           <thead>
@@ -64,9 +65,7 @@
               <td>{{data.fname}}</td>
               <td>{{data.docstatus}}</td>
               <td>
-                <nz-popconfirm [nzTitle]="'Sure to delete?'" (nzOnConfirm)="deleteRow(data.key)">
-                  <a nz-popconfirm>删除</a>
-                </nz-popconfirm>
+                <a (click)="startEdit(data.id)">编辑</a>
               </td>
             </tr>
           </tbody>

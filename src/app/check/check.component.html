@@ -51,43 +51,35 @@
       <tbody>
         <tr *ngFor="let data of editRowTable.data">
           <td>
-              {{data.id}} </td>
-          <td>
-            <ng-container >
-              {{data.tname}}
-            </ng-container>
+              {{data.id}}
           </td>
           <td>
-              <ng-container >
+              {{data.tname}} 
+          </td>
+          <td>
                 {{data.owner}}
-              </ng-container>
-            </td>
+          </td>
           <td>
-            <ng-container >
               {{data.content}}
-            </ng-container>
           </td>
           <td>
-            <ng-container >
               {{data.startdt}}
-            </ng-container> 
           </td>
           <td>
-            <ng-container >
               {{data.enddt}}
-            </ng-container>
           </td>
           <td nzWidth="40%">
-            <ng-container *ngIf="!editCache[data.id].edit">
               {{data.dmcontent}}
-            </ng-container>
-            <ng-container *ngIf="editCache[data.id].edit">
-              <textarea rows="4" nz-input [(ngModel)]="editCache[data.id].data.dmcontent"></textarea>
-            </ng-container>
           </td>
           <td>
-            <ng-container>
+            <ng-container *ngIf="!editCache[data.id].edit">
               {{data.dmstate}}
+            </ng-container>
+            <ng-container *ngIf="editCache[data.id].edit">
+              <nz-select [(ngModel)]="editCache[data.id].data.dmstate" style="width:100%;">
+                  <nz-option [nzLabel]="'未通过'" [nzValue]="'未通过'"></nz-option>
+                  <nz-option [nzLabel]="'通过'" [nzValue]="'通过'"></nz-option>
+                </nz-select>
             </ng-container>
           </td>
           

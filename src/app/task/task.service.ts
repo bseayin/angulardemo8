@@ -21,6 +21,8 @@ export class TaskService {
   private hosturl6 = 'project1/addtask';
   private hosturl7 = 'project1/findownpasstask';   //老鄢的添加
   private hosturl8 = 'project1/findownnotpasstask';   //老鄢的添加
+  private hosturl9 = 'project1/findldpasstask';   //老鄢的添加
+  private hosturl10 = 'project1/findldnotpasstask';   //老鄢的添加
 
   //老鄢的添加
   findOwnPassTasks(): Observable<Task[]> {
@@ -30,10 +32,24 @@ export class TaskService {
       );
   }
   //老鄢的添加
+  findPassTasks(): Observable<Task[]> {
+    return this.http.get<Task[]>(this.hosturl9)
+      .pipe(
+        catchError(this.handleError('findPassTasks', []))
+      );
+  }
+  //老鄢的添加
     findOwnNotPassTasks(): Observable<Task[]> {
       return this.http.get<Task[]>(this.hosturl8)
         .pipe(
           catchError(this.handleError('findOwnNotPassTasks', []))
+        );
+    } 
+    //老鄢的添加
+    findNotPassTasks(): Observable<Task[]> {
+      return this.http.get<Task[]>(this.hosturl10)
+        .pipe(
+          catchError(this.handleError('findNotPassTasks', []))
         );
     } 
 
