@@ -39,6 +39,8 @@ import { WebSocketComponent } from './web-socket/web-socket.component';
 import { WebSocketService } from './shared/web-socket.service'; 
 import { CheckComponent } from './check/check.component'; 
 import { LocalStorage } from './hall/local.storage';
+import { EditorComponent } from './editor/editor.component';
+import { OwnwikiComponent } from './ownwiki/ownwiki.component';
 
 registerLocaleData(zh);
 @NgModule({
@@ -82,7 +84,9 @@ registerLocaleData(zh);
     ProjectComponent,
   
     WebSocketComponent,
-    CheckComponent
+    CheckComponent,
+    EditorComponent,
+    OwnwikiComponent
   ],
   imports: [
     BrowserModule,
