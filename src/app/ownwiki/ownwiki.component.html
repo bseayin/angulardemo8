@@ -1,3 +1,100 @@
-<p>
-  ownwiki works!
-</p>
+<div style="background: #ECECEC;padding:30px;">
+<div nz-row>
+  <div nz-col nzSpan="4"></div>
+  <div nz-col nzSpan="16">TGKW</div>
+  <div nz-col nzSpan="4"><button nz-button nzType="danger">写博客</button></div>
+</div>
+
+<div nz-row>
+  <div nz-col nzSpan="1"></div>
+  <div nz-col nzSpan="5">
+    <nz-card style="width:300px;">
+        <div nz-row>
+            <div nz-row>
+                <div nz-col nzSpan="4"><nz-avatar nzSize="large" nzIcon="anticon anticon-user"></nz-avatar></div>
+                <div nz-col nzSpan="16"><span>鄢瑜晗</span></div>
+                <div nz-col nzSpan="4"><button nz-button nzType="danger">关注</button></div>
+            </div>
+        </div>
+    
+        <div nz-row>
+            <nz-table #basicTable [nzData]="dataSet">
+                <thead>
+                  <tr>
+                    <th>原创</th>
+                    <th>粉丝</th>
+                    <th>喜欢</th>
+                    <th>评论</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let data of basicTable.data">
+                    <td>111</td>
+                    <td>222</td>
+                    <td>323</td>
+                    <td>3232</td>
+                  </tr>
+                </tbody>
+              </nz-table>
+        </div>  
+    </nz-card>
+    <nz-card style="width:300px;">
+      <div nz-row>
+        <nz-table
+        #borderedTable
+        nzTitle="博客分类"
+        [nzData]="dataSet">
+        <tbody>
+          <tr>
+            <td>达人课</td>
+            <td>8篇</td>
+          </tr>
+          <tr>
+            <td>数据库</td>
+            <td>8篇</td>
+          </tr>
+          <tr>
+            <td>人工智能</td>
+            <td>11篇</td>
+          </tr>
+          <tr>
+            <td>游戏</td>
+            <td>7篇</td>
+          </tr>
+        </tbody>
+      </nz-table>
+      </div>
+    </nz-card>
+    <nz-card style="width:300px;">
+    <div nz-row>
+        <nz-table
+        nzTitle="归档"
+        >
+        <tbody>
+          <tr>
+			<td>2018年11月</td>
+			<td>8篇</td>
+          </tr>
+          <tr>
+            <td>2018年10月</td>
+            <td>8篇</td>
+          </tr>
+          <tr>
+            <td>2018年9月</td>
+            <td>11篇</td>
+          </tr>
+          <tr>
+            <td>2018年8月</td>
+            <td>7篇</td>
+          </tr>
+        </tbody>
+      </nz-table>
+    </div>
+    </nz-card>
+  </div>
+  <div nz-col nzSpan="17">
+      <img alt="example" src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png"/>
+  </div>
+  <div nz-col nzSpan="1"></div>
+</div>
+</div>

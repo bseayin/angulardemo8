@@ -15,6 +15,7 @@ import { SetComponent }  from './set/set.component';
 import { HallComponent }  from './hall/hall.component';
 import { UserComponent }  from './user/user.component';
 import { CheckComponent }  from './check/check.component';
+import { OwnwikiComponent }  from './ownwiki/ownwiki.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -36,6 +37,7 @@ const routes: Routes = [
   { path: 'basicdemo', component: BasicdemoComponent },
   { path: 'material', component: MaterialdemoComponent },
   { path: 'detail/:id', component: HeroDetailComponent },
+  { path: 'ownwiki', component: OwnwikiComponent },
   { path: 'heroes', component: HeroesComponent }
 ];
 @NgModule({
