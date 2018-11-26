@@ -9,7 +9,7 @@ import { Project } from '../Model/project';
   providedIn: 'root'
 })
 export class ProjectService {
-
+  private useresUrl = 'project6/';
   private hosturl = 'project5/createProject'; 
 
   public eventEmit:any;
@@ -39,4 +39,5 @@ export class ProjectService {
       return of(result as T);
     };
   }
+
 }

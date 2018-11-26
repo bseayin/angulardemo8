@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { User } from '../user';
+import { Project } from '../model/project';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, map, tap } from 'rxjs/operators';
 @Injectable({
@@ -28,6 +29,15 @@ registerAction (user: User): Observable<User> {
     catchError(this.handleError<User>('addUser'))
   );
 }
+  //登录显示用户已有项目名
+  getProject (name: string): Observable<any> {
+    const httpOptions = {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    };
+    return this.http.post<any>(this.useresUrl+"getProjects",name, httpOptions).pipe(
+      catchError(this.handleError<Project>('getProject'))
+    );
+  }
 
 
 /**

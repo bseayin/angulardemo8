@@ -1,11 +1,11 @@
 
         <h1 style="text-align:center">登录</h1>
 
-    <form nz-form [formGroup]="loginvalidateForm" class="login-form" (ngSubmit)="submitForm()">
+    <form nz-form [formGroup]="loginvalidateForm" class="login-form"  >
       <nz-form-item>
         <nz-form-control>
           <nz-input-group [nzPrefix]="prefixUser">
-            <input type="text" nz-input formControlName="userName" placeholder="用户名"  [(ngModel)]="user.name">
+            <input type="text" nz-input formControlName="userName" placeholder="用户名"  [(ngModel)]="user.name" (blur)="getProject()">
  
           </nz-input-group>
           <nz-form-explain *ngIf="loginvalidateForm.get('userName').dirty && loginvalidateForm.get('userName').errors">Please input your username!</nz-form-explain>
@@ -20,12 +20,22 @@
         </nz-form-control>
       </nz-form-item>
       <nz-form-item>
+        <nz-dropdown [nzPlacement]="'bottomCenter'">
+          <button nz-button nz-dropdown >{{projectSelect}}</button>
+          <ul nz-menu>
+            <li nz-menu-item *ngFor="let project of projects" (click)="projectSelected(project.pname,project.id)">
+               <span>项目名:</span>{{project.pname}}
+            </li>
+          </ul>
+        </nz-dropdown>
+      </nz-form-item>
+      <nz-form-item>
         <nz-form-control>
           <label nz-checkbox formControlName="rememberMe" [(ngModel)]="user.rememberMe">
             <span>记住我</span>
           </label>
           <a class="login-form-forgot" class="login-form-forgot">忘记密码</a>
-          <button nz-button class="login-form-button" [nzType]="'primary'">登录</button>
+          <button nz-button class="login-form-button" [nzType]="'primary'" (click)="submitForm()">登录</button>
           Or
           <a (click)="showModal()">注册!</a>
         </nz-form-control>

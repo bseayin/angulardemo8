@@ -4,7 +4,7 @@ import { User } from '../user';
 import { Router } from '@angular/router';
 import { SharedService } from '../shared.service';
 import { CookieService } from 'ngx-cookie-service'; 
-
+import { Project } from '../Model/Project';
 import {
   AbstractControl,
   FormBuilder,
@@ -29,19 +29,22 @@ export class LoginComponent implements OnInit {
   result:any={};
   user:User=new User();
   user2:User=new User();
+  projectSelect:string="请选择项目";
+  selectProject:Project=new Project();
+  projects:Project[];
   submitForm(): void {
     var id=0;
     for (const i in this.loginvalidateForm.controls) {
       this.loginvalidateForm.controls[ i ].markAsDirty();
       this.loginvalidateForm.controls[ i ].updateValueAndValidity();
     }
-    if(this.loginvalidateForm.valid){
       //执行后台操作
       this.loginservice.loginAction(this.user).subscribe(
 
         res=>{
           if(res.result=="Y"){
-            this.cookie.set("loginuid",res.user.id,2*60*60*1000);
+            this.cookie.set("loginuid",(parseInt(res.user.id)*8).toString(),2*60*60*1000);
+            this.cookie.set("pid",((this.selectProject.id)*8).toString(),2*60*60*1000);
            // this.sharedService.userid=res.result.user
             this.sharedService.userid=res.user.id;
             this.router.navigateByUrl("index1");
@@ -51,7 +54,6 @@ export class LoginComponent implements OnInit {
           
         }
       );
-    }
   }
 
 
@@ -71,6 +73,23 @@ export class LoginComponent implements OnInit {
         //this.router.navigateByUrl("index1");
       }
     );
+  }
+
+  
+  getProject(): void {
+    this.loginservice.getProject(this.user.name).subscribe(
+      res=>{ 
+        if(res!=null){
+          this.projects=res.project;
+        }
+      }
+    );
+  }
+
+  projectSelected(name:string,pid:number){
+    this.selectProject.id=pid;
+    this.selectProject.pname=name;
+    this.projectSelect=name;
   }
 
   constructor(private fb: FormBuilder,private loginservice:LoginService,
