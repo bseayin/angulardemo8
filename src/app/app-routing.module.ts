@@ -16,6 +16,8 @@ import { HallComponent }  from './hall/hall.component';
 import { UserComponent }  from './user/user.component';
 import { CheckComponent }  from './check/check.component';
 import { OwnwikiComponent }  from './ownwiki/ownwiki.component';
+import { WriteComponent }  from './write/write.component';
+import { ShowblogComponent }  from './showblog/showblog.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -37,7 +39,12 @@ const routes: Routes = [
   { path: 'basicdemo', component: BasicdemoComponent },
   { path: 'material', component: MaterialdemoComponent },
   { path: 'detail/:id', component: HeroDetailComponent },
-  { path: 'ownwiki', component: OwnwikiComponent },
+  { path: 'ownwiki', component: OwnwikiComponent ,
+     children:[
+        { path: '', component: ShowblogComponent }
+     ]
+},
+  { path: 'write', component: WriteComponent },
   { path: 'heroes', component: HeroesComponent }
 ];
 @NgModule({

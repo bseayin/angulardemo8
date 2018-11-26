@@ -41,6 +41,8 @@ import { CheckComponent } from './check/check.component';
 import { LocalStorage } from './hall/local.storage';
 import { EditorComponent } from './editor/editor.component';
 import { OwnwikiComponent } from './ownwiki/ownwiki.component';
+import { WriteComponent } from './write/write.component';
+import { ShowblogComponent } from './showblog/showblog.component';
 
 registerLocaleData(zh);
 @NgModule({
@@ -86,7 +88,9 @@ registerLocaleData(zh);
     WebSocketComponent,
     CheckComponent,
     EditorComponent,
-    OwnwikiComponent
+    OwnwikiComponent,
+    WriteComponent,
+    ShowblogComponent
   ],
   imports: [
     BrowserModule,
