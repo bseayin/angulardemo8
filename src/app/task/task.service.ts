@@ -89,7 +89,7 @@ export class TaskService {
 
   findtasks(): Observable<Task[]> {
     var userid:string=this.sharedservice.userid;
-    let userid2=this.cookie.get("loginuid");
+    let userid2=this.cookie.get("pid");
     console.log("userid----"+userid+"----userid2---"+userid2)
     const httpOptions = {
       headers: new HttpHeaders({ 'Content-Type': 'application/json','Authorization': userid2})
