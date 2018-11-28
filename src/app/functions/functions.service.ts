@@ -3,6 +3,7 @@ import { Observable, of } from 'rxjs';
 import { Functions } from './functions';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, map, tap } from 'rxjs/operators';
+import { CookieService } from 'ngx-cookie-service'; 
 
 @Injectable({
   providedIn: 'root'
@@ -14,14 +15,20 @@ export class FunctionsService {
 
   public eventEmit:any;
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private cookie:CookieService
   ) {
     this.eventEmit=new EventEmitter();
    }
 
 
   getFunctions (): Observable<Functions[]> {
-    return this.http.get<Functions[]>(this.hosturl)
+    let pid=this.cookie.get("pid");
+    console.log("pid"+pid);
+    const httpOptions = {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json','gdpAuthorization2': pid})
+    };
+    return this.http.get<Functions[]>(this.hosturl,httpOptions)
       .pipe(
         catchError(this.handleError('getFunctions', []))
       );
