@@ -4,7 +4,9 @@ import { TaskService } from './task.service';
 import { Task } from '../task';
 import { Function } from '../function';
 import { Member } from '../member';
+import { Project } from '../project';
 import { Sightpoint } from '../sightpoint';
+import { CookieService } from 'ngx-cookie-service'; 
 
 @Component({
   selector: 'app-task',
@@ -22,9 +24,9 @@ export class TaskComponent implements OnInit {
   membername: string;
   sightname: string;
   dataSet: Task[];
+  project: Project;
 
   tname: string;
-  pname: string;
   effort: number;
   startdt: Date;
   enddt: Date;
@@ -43,7 +45,7 @@ export class TaskComponent implements OnInit {
 
   handleOk(): void {
     this.task.tname = this.tname;
-    this.task.projectid = 59;
+    this.task.projectid = parseInt(this.cookie.get("pid"))/8;
     this.task.startdt = this.startdt;
     this.task.enddt = this.enddt;
     this.task.effort = this.effort;
@@ -55,7 +57,7 @@ export class TaskComponent implements OnInit {
     this.task.story = this.sightname;
     this.task.content = this.inputValue;
     this.task.priority = this.priority;
-    console.log('Button ok clicked!');
+    console.log(this.task);
     this.addtask(this.task);
     this.isVisible = false;
   }
@@ -65,7 +67,7 @@ export class TaskComponent implements OnInit {
     this.isVisible = false;
   }
 
-  constructor(private sharedService: SharedService, private taskservice: TaskService) { }
+  constructor(private sharedService: SharedService, private taskservice: TaskService,private cookie:CookieService) { }
 
   addtask(task: Task): void {
     this.taskservice.addTask(task)
@@ -81,6 +83,14 @@ export class TaskComponent implements OnInit {
     this.dataSet = [...this.dataSet, t
     ];
     this.updateEditCache();
+  }
+
+  findProject(): void {
+    this.taskservice.findproject()
+      .subscribe(
+        taskservice => {
+          this.project = taskservice;
+        });
   }
 
   findSightpoint(): void {
@@ -128,6 +138,7 @@ export class TaskComponent implements OnInit {
     this.findFunction();
     this.findMember();
     this.findSightpoint();
+    this.findProject();
   }
 
   startEdit(id: number): void {

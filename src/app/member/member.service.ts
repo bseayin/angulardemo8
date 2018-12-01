@@ -3,6 +3,7 @@ import { catchError, map, tap } from 'rxjs/operators';
 import { Injectable,EventEmitter } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { Member } from '../Model/member';
+import { CookieService } from 'ngx-cookie-service'; 
 
 
 @Injectable({
@@ -15,24 +16,28 @@ export class MemberService {
 
   public eventEmit:any;
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private cookie:CookieService
   ) {
     this.eventEmit=new EventEmitter();
    }
 
    addMember (member: Member): Observable<any> {
+    let userid2=this.cookie.get("pid");
     const httpOptions = {
-      headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+      headers: new HttpHeaders({ 'Content-Type': 'application/json','Authorization': userid2 })
     };
-
-   
     return this.http.put(this.hosturl4, member, httpOptions).pipe(
       
       catchError(this.handleError<any>('addMember'))
     );
   }
   getMembers (): Observable<Member[]> {
-    return this.http.get<Member[]>(this.hosturl)
+    let userid2=this.cookie.get("pid");
+    const httpOptions = {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json','Authorization': userid2 })
+    };
+    return this.http.get<Member[]>(this.hosturl,httpOptions)
       .pipe(
         catchError(this.handleError('getMembers', []))
       );
@@ -41,8 +46,9 @@ export class MemberService {
 
   /** PUT: update the hero on the server */
 updateMember (member: Member): Observable<any> {
+  let userid2=this.cookie.get("pid");
   const httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    headers: new HttpHeaders({ 'Content-Type': 'application/json','Authorization': userid2 })
   };
   return this.http.put(this.hosturl2, member, httpOptions).pipe(
     
@@ -54,6 +60,7 @@ updateMember (member: Member): Observable<any> {
 /** DELETE: delete the hero from the server */
 deleteMember (id:number): Observable<any>{
   const  hosturl3 = 'project5/removeMember/'+id;
+
   const httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };

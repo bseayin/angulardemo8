@@ -4,6 +4,7 @@ import { DocumentService } from './document.service';
 import { NzMessageService, UploadFile } from 'ng-zorro-antd';
 import { Document} from './document'
 import { Functions} from './functions'
+import { CookieService } from 'ngx-cookie-service'; 
 
 
 @Component({
@@ -12,10 +13,10 @@ import { Functions} from './functions'
   styleUrls: ['./document.component.css']
 })
 export class DocumentComponent implements OnInit {
-  functionName:string='功能点';
-  moduleName:string=''; //文档中的模块名称
+  // functionName:string='功能点';
+  // moduleName:string=''; //文档中的模块名称
   blockName:string='跳转关系'; //区块名称
-  content: string = '';
+  // content: string = '';
   fileList = [];
   previewImage = '';
   previewVisible = false;
@@ -23,20 +24,20 @@ export class DocumentComponent implements OnInit {
   dataSet:Functions[];
   fun:Functions = new Functions();
   doucument:Document=new Document();
-  function:Document[];
+  docs:Document[];
   edit = false;
   flag:number;
+  pid = parseInt(this.cookie.get("pid"))/8;
+  hosturl2 =  'project3/downloadDoc/'+this.pid;
   
-
-
-  constructor(private sharedService:SharedService,private documentService:DocumentService) { }
+  constructor(private sharedService:SharedService,private documentService:DocumentService,private cookie:CookieService) { }
 
   ngOnInit() {
     this.sharedService.eventEmit.emit("文档");
     this.doucument.functionname="功能点";
     this.doucument.block="跳转关系";
     this.getFunctions();
-    this.getFunction();
+    this.getDocs();
   }
 
   handlePreview = (file: UploadFile) => {
@@ -44,19 +45,23 @@ export class DocumentComponent implements OnInit {
     this.previewVisible = true;
   }
 
+  downloadDoc():void{
+    this.documentService.downloadDoc();
+  }
+
   getFunctions(): void {
     this.documentService.getFunctions()
       .subscribe(
-        documents => {
-          this.dataSet = documents;
+        functions => {
+          this.dataSet = functions;
         });
   }
 
-  getFunction(): void {
-    this.documentService.getFunction()
+  getDocs(): void {
+    this.documentService.getDocs()
       .subscribe(
         documents => {
-          this.function = documents;
+          this.docs = documents;
         });
   }
 
@@ -80,36 +85,23 @@ export class DocumentComponent implements OnInit {
 
   startEdit(id: number): void {
     this.flag = id;
+    this.fun = this.dataSet.find(item => item.id === id);
     const index = this.dataSet.findIndex(item => item.id === id);
-    // this.dataSet[ index ] = this.editCache[ key ].data;
-    this.fun = this.dataSet[ index ];
     if(this.fun.docstatus == '已编辑'){
-      console.log("-----------已编辑------------")
-      console.log("-----------index------------"+index)
-      console.log("-----------id------------"+id)
-      console.log(this.dataSet[ index ])
-      console.log(this.function)
-      this.doucument.functionname=this.fun.fname;
-      this.doucument.module=this.fun.docmodule;
-      this.doucument.content = "";
-      for(var i=0;i<this.function.length;i++){
-        if(this.function[i].functionname===this.dataSet[ index ].fname&&this.function[i].module===this.dataSet[index].docmodule&&this.function[i].block===this.blockName){
-          this.doucument=this.function[i];
-          console.log("-----------if------------")
-          console.log(this.doucument);
-          break;
-        }else{
-          console.log("-----------else------------")
-          
-        }
+      this.doucument = this.docs.find(item => item.functionname === this.fun.fname && item.module === this.fun.docmodule && item.block === this.blockName);
+      if(!this.doucument){
+        this.doucument = new Document();
+        this.doucument.functionname = this.fun.fname;
+        this.doucument.module = this.fun.docmodule;
+        this.doucument.content = "";
+        this.doucument.block = this.blockName;
       }
-      console.log("-----------aaaa------------")
-      console.log(this.doucument);
-      
     }else{
-      console.log("-----------wei编辑------------")
-      this.doucument.functionname = this.dataSet[ index ].fname;
-      this.doucument.module = this.dataSet[index].docmodule;
+      this.doucument = new Document();
+      this.doucument.functionname = this.fun.fname;
+      this.doucument.module = this.fun.docmodule;
+      this.doucument.content = "";
+      this.doucument.block = this.blockName;
       this.dataSet[index].docstatus = '已编辑';
       this.fun.docstatus = '已编辑';
     }

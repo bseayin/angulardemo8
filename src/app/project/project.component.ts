@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {AbstractControl,FormBuilder,FormGroup,Validators} from '@angular/forms';
 import {Project } from '../Model/Project';
 import { ProjectService } from './project.service';
+import { CookieService } from 'ngx-cookie-service'; 
 @Component({
   selector: 'app-project',
   templateUrl: './project.component.html',
@@ -10,6 +11,7 @@ import { ProjectService } from './project.service';
 export class ProjectComponent implements OnInit {
   validateForm: FormGroup;
   newproject:Project=new Project();
+  project :Project=new Project();
 
   submitForm(): void {
     for (const i in this.validateForm.controls) {
@@ -21,13 +23,24 @@ export class ProjectComponent implements OnInit {
     this.newproject.price=this.validateForm.controls['price'].value;
     this.projectService.addProject(this.newproject).subscribe(
       project => {
-      alert('添加成功')}
+        let res=this.cookie.get("pid");
+        if(res!=null&&res!=''){
+         alert("已创建项目，不能重复创建");
+        }else{
+          this.project=project;
+          this.cookie.set("pid",((this.project.id)*8).toString(),2*60*60*1000);
+          alert("添加成功");
+        }
+      }
+      
+        
+      
     );
   }
 
 
 
-  constructor(private fb: FormBuilder,private projectService: ProjectService) {
+  constructor(private fb: FormBuilder,private projectService: ProjectService,private cookie:CookieService) {
   }
 
   ngOnInit(): void {

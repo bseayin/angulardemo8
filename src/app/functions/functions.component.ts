@@ -1,12 +1,27 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { Functions } from './functions';
 import { FunctionsService } from './functions.service';
+import { PublishService } from './publish.service';
+import { CookieService } from 'ngx-cookie-service';
+import { User } from '../user';
+import { Mail } from '../model/mail';
 @Component({
   selector: 'app-functions',
   templateUrl: './functions.component.html',
   styleUrls: ['./functions.component.css']
 })
 export class FunctionsComponent implements OnInit {
+  uid=parseInt(this.cookieService.get("loginuid"));
+  pid=parseInt(this.cookieService.get("pid"));
+  user:User;
+  fid:number;
+  publishList : User[];
+  selectedPublishList : User[];
+  mails:Mail[];
+  mail:Mail=new Mail;
+  allChecked = false;
+  indeterminate = false;
+  displayData = [];
   i = 1;
   editCache = {};
   dataSet :Functions[];
@@ -80,7 +95,9 @@ export class FunctionsComponent implements OnInit {
       }
     });
   }
-  constructor(private functionsService:FunctionsService) { }
+  constructor(private functionsService:FunctionsService,private publishService:PublishService,
+    private cookieService:CookieService
+    ) { }
 
   ngOnInit() {
     this.getFunctions();
@@ -93,5 +110,64 @@ export class FunctionsComponent implements OnInit {
                 console.log(this.dataSet);
                 this.updateEditCache();
         });
+  }
+
+
+  publishModalVisible = false;
+  publicIsOkLoading = false;
+
+  showPublishModal(fid:number): void {
+    this.fid=fid;
+    this.publishService.getPublishUser(this.uid,this.pid).subscribe(
+      res=>{
+       this.publishList=res;
+      }
+    );
+    this.publishModalVisible = true;
+  }
+
+  publishHandleOk(): void {
+    
+    this.publicIsOkLoading = true;
+    window.setTimeout(() => {
+      this.publishModalVisible = false;
+      this.publicIsOkLoading = false;
+    }, 1000);
+    this.selectedPublishList=this.displayData.filter(value => value.checked);
+    this.selectedPublishList.forEach(date=>{
+      this.mail.sid=date.id;
+      this.mail.fid=this.fid;
+      this.mail.uid=this.uid/8;
+      this.mails.push(this.mail);
+    })
+ console.log(this.mails);
+    // this.publishService.publishInvitation(this.selectedPublishList);
+
+  }
+
+  publishHandleCancel(): void {
+    this.publishModalVisible = false;
+  }
+
+
+  currentPageDataChange($event: Array<{ id: number;name:string ;skill:string;checked: boolean; disabled: boolean; }>): void {
+    this.displayData = $event;
+    this.refreshStatus();
+  }
+
+  refreshStatus(): void {
+    const allChecked = this.displayData.filter(value => !value.disabled).every(value => value.checked === true);
+    const allUnChecked = this.displayData.filter(value => !value.disabled).every(value => !value.checked);
+    this.allChecked = allChecked;
+    this.indeterminate = (!allChecked) && (!allUnChecked);
+  }
+
+  checkAll(value: boolean): void {
+    this.displayData.forEach(data => {
+      if (!data.disabled) {
+        data.checked = value;
+      }
+    });
+    this.refreshStatus();
   }
 }

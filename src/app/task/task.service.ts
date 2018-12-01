@@ -4,6 +4,7 @@ import { Task } from '../task';
 import { Function } from '../function';
 import { Member } from '../member';
 import { Sightpoint } from '../sightpoint';
+import { Project } from '../project';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, map, tap } from 'rxjs/operators';
 import {SharedService} from '../shared.service';
@@ -23,6 +24,7 @@ export class TaskService {
   private hosturl8 = 'project1/findownnotpasstask';   //老鄢的添加
   private hosturl9 = 'project1/findldpasstask';   //老鄢的添加
   private hosturl10 = 'project1/findldnotpasstask';   //老鄢的添加
+  private hosturl11 = 'project1/findproject';  // URL to web api
 
   //老鄢的添加
   findOwnPassTasks(): Observable<Task[]> {
@@ -66,31 +68,52 @@ export class TaskService {
     );
   }
 
+  findproject(): Observable<Project> {
+    let userid2=this.cookie.get("pid");
+    const httpOptions = {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json','Authorization': userid2})
+    };
+    return this.http.get<Project>(this.hosturl11,httpOptions)
+      .pipe(
+        catchError(this.handleError('findproject', []))
+      );
+  }
+
   findsightpoint(): Observable<Sightpoint[]> {
-    return this.http.get<Sightpoint[]>(this.hosturl5)
+    let userid2=this.cookie.get("pid");
+    const httpOptions = {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json','Authorization': userid2})
+    };
+    return this.http.get<Sightpoint[]>(this.hosturl5,httpOptions)
       .pipe(
         catchError(this.handleError('findsightpoint', []))
       );
   }
 
   findmember(): Observable<Member[]> {
-    return this.http.get<Member[]>(this.hosturl4)
+    let userid2=this.cookie.get("pid");
+    const httpOptions = {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json','Authorization': userid2})
+    };
+    return this.http.get<Member[]>(this.hosturl4,httpOptions)
       .pipe(
         catchError(this.handleError('findmember', []))
       );
   }
 
   findfunction(): Observable<Function[]> {
-    return this.http.get<Function[]>(this.hosturl3)
+    let userid2=this.cookie.get("pid");
+    const httpOptions = {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json','Authorization': userid2})
+    };
+    return this.http.get<Function[]>(this.hosturl3,httpOptions)
       .pipe(
         catchError(this.handleError('findfunction', []))
       );
   }
 
   findtasks(): Observable<Task[]> {
-    var userid:string=this.sharedservice.userid;
     let userid2=this.cookie.get("pid");
-    console.log("userid----"+userid+"----userid2---"+userid2)
     const httpOptions = {
       headers: new HttpHeaders({ 'Content-Type': 'application/json','Authorization': userid2})
     };
