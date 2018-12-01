@@ -52,6 +52,7 @@ addFunctions (functions: Functions): Observable<any> {
     if(pid==null){
       alert("请创建项目");
     }else{
+      functions.projectid=parseInt(pid);
       const httpOptions = {
         headers: new HttpHeaders({ 'Content-Type': 'application/json' })
       };
