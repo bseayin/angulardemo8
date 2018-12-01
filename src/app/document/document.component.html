@@ -2,7 +2,7 @@
   <div nz-col nzSpan="5"></div>
     <div nz-col nzSpan="14">
       <div nz-row>
-        <button nz-button nzType="primary" style="margin-left: 90%">点击下载文档</button>
+        <button nz-button nzType="primary" style="margin-left: 90%" (click)="downloadDoc()">点击下载文档</button>
         <h2 style="margin-top: 2%">{{doucument.functionname}}</h2>
         <div nz-col nzSpan="3">
         <nz-form-label nzRequired>模块名称</nz-form-label>
