@@ -46,7 +46,7 @@
             {{data.memail}}
           </ng-container>
           <ng-container *ngIf="editCache[data.id].edit">
-              <nz-date-picker style="width:100%;" [(ngModel)]="editCache[data.id].data.memail"></nz-date-picker>
+            <input type="text" nz-input [(ngModel)]="editCache[data.id].data.memail">
           </ng-container>
         </td>
         <td>
@@ -54,7 +54,7 @@
             {{data.mtel }}
           </ng-container>
           <ng-container *ngIf="editCache[data.id].edit">
-            <nz-date-picker style="width:100%;" [(ngModel)]="editCache[data.id].data.mtel"></nz-date-picker>
+            <input type="text" nz-input [(ngModel)]="editCache[data.id].data.mtel">
           </ng-container>
         </td>
         <td>
@@ -62,7 +62,7 @@
             {{data.mrole }}
           </ng-container>
           <ng-container *ngIf="editCache[data.id].edit">
-            <nz-date-picker style="width:100%;" [(ngModel)]="editCache[data.id].data.mrole"></nz-date-picker>
+            <input type="text" nz-input [(ngModel)]="editCache[data.id].data.mrole">
           </ng-container>
         </td>
         <td>
@@ -70,7 +70,7 @@
             {{data.pid }}
           </ng-container>
           <ng-container *ngIf="editCache[data.id].edit">
-            <nz-date-picker style="width:100%;" [(ngModel)]="editCache[data.id].data.pid"></nz-date-picker>
+            <input type="text" nz-input [(ngModel)]="editCache[data.id].data.pid">
           </ng-container>
         </td>
         <td>
@@ -78,7 +78,7 @@
             {{data.grade }}
           </ng-container>
           <ng-container *ngIf="editCache[data.id].edit">
-            <nz-date-picker style="width:100%;" [(ngModel)]="editCache[data.id].data.grade"></nz-date-picker>
+            <input type="text" nz-input [(ngModel)]="editCache[data.id].data.grade">
           </ng-container>
         </td>
         <td>

@@ -3,6 +3,7 @@ import { catchError, map, tap } from 'rxjs/operators';
 import { Injectable,EventEmitter } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { Sight } from '../Model/sight';
+import { CookieService } from 'ngx-cookie-service'; 
 
 
 @Injectable({
@@ -15,14 +16,17 @@ export class SightService {
 
   public eventEmit:any;
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private cookie:CookieService
   ) {
     this.eventEmit=new EventEmitter();
    }
 
    addSight (sight: Sight): Observable<any> {
+
+    let userid2=this.cookie.get("pid");
     const httpOptions = {
-      headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+      headers: new HttpHeaders({ 'Content-Type': 'application/json','Authorization': userid2 })
     };
     console.log(sight.sname);
     console.log(sight.sightstart);
@@ -33,7 +37,11 @@ export class SightService {
     );
   }
   getSlights (): Observable<Sight[]> {
-    return this.http.get<Sight[]>(this.hosturl)
+    let userid2=this.cookie.get("pid");
+    const httpOptions = {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json','Authorization': userid2 })
+    };
+    return this.http.get<Sight[]>(this.hosturl,httpOptions)
       .pipe(
         catchError(this.handleError('getSights', []))
       );
@@ -42,8 +50,9 @@ export class SightService {
 
   /** PUT: update the hero on the server */
 updateSight (sight: Sight): Observable<any> {
+  
   const httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    headers: new HttpHeaders({ 'Content-Type': 'application/json'})
   };
   return this.http.put(this.hosturl2, sight, httpOptions).pipe(
     
@@ -55,6 +64,7 @@ updateSight (sight: Sight): Observable<any> {
 /** DELETE: delete the hero from the server */
 deleteSlight (id:number): Observable<any>{
   const  hosturl3 = 'project5/removeSight/'+id;
+  
   const httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };

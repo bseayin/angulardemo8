@@ -3,24 +3,26 @@ import { catchError, map, tap } from 'rxjs/operators';
 import { Injectable,EventEmitter } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { Project } from '../Model/project';
+import { CookieService } from 'ngx-cookie-service'; 
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProjectService {
-  private useresUrl = 'project6/';
   private hosturl = 'project5/createProject'; 
 
   public eventEmit:any;
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private cookie:CookieService
   ) {
     this.eventEmit=new EventEmitter();
    }
-   addProject (project: Project): Observable<any> {
+   addProject (project: Project): Observable<Project> {
+    let loginuid=this.cookie.get("loginuid");
     const httpOptions = {
-      headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+      headers: new HttpHeaders({ 'Content-Type': 'application/json','Authorization': loginuid })
     };
     console.log(project.pname);
     return this.http.put<Project>(this.hosturl, project, httpOptions).pipe(
