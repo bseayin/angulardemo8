@@ -107,6 +107,8 @@
                 <a (click)="startEdit(data.id)">修改</a>
                 
                 <a (click)="deleteRow(data.id)" style="margin-left: 1cm">删除</a>
+
+                <a (click)="showPublishModal(data.id)" style="margin-left: 1cm">发布</a>
               </ng-container>
               <ng-container *ngIf="editCache[data.id].edit">
                 <a (click)="saveEdit(data.id)" >确认</a>
@@ -119,3 +121,28 @@
         </tr>
       </tbody>
     </nz-table>
+    <nz-modal [(nzVisible)]="publishModalVisible" nzTitle="发布人选" nzOkText="确认发布" (nzOnCancel)="publishHandleCancel()" (nzOnOk)="publishHandleOk()" 
+    [nzOkLoading]="publicIsOkLoading" >
+    <nz-table #publishTable [nzData]="publishList" [nzShowPagination]=false [nzScroll]="{ y: '240px' }"
+    (nzCurrentPageDataChange)="currentPageDataChange(publishList)"
+      (nzPageIndexChange)="refreshStatus()"
+      (nzPageSizeChange)="refreshStatus()">
+      <thead>
+        <tr>
+          <th nzWidth="50px">ID</th>
+          <th nzWidth="150px">姓名</th>
+          <th nzWidth="150px">特长</th>
+          <th nzShowCheckbox [(nzChecked)]="allChecked" [nzIndeterminate]="indeterminate" (nzCheckedChange)="checkAll($event)"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let data of publishList">
+          <td>{{data.id}}</td>
+          <td>{{data.name}}</td>
+          <td>{{data.skill}}</td>
+          <td nzShowCheckbox [(nzChecked)]="data.checked" [nzDisabled]="data.disabled" (nzCheckedChange)="refreshStatus()"></td>
+        </tr>
+      </tbody>
+    </nz-table>
+    </nz-modal>
+    

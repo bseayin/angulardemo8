@@ -43,7 +43,7 @@ import { EditorComponent } from './editor/editor.component';
 import { OwnwikiComponent } from './ownwiki/ownwiki.component';
 import { WriteComponent } from './write/write.component';
 import { ShowblogComponent } from './showblog/showblog.component';
-
+import { MailComponent } from './mail/mail.component';
 registerLocaleData(zh);
 @NgModule({
   declarations: [
@@ -90,7 +90,8 @@ registerLocaleData(zh);
     EditorComponent,
     OwnwikiComponent,
     WriteComponent,
-    ShowblogComponent
+    ShowblogComponent,
+    MailComponent
   ],
   imports: [
     BrowserModule,
