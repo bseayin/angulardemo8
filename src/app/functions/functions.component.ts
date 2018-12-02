@@ -141,9 +141,16 @@ export class FunctionsComponent implements OnInit {
       mail.uid=this.uid/8;
       this.mails.push(mail);
     })
- console.log(this.mails);
-    // this.publishService.publishInvitation(this.selectedPublishList);
-
+     this.publishService.publishInvitation(this.mails).subscribe(
+      res=>{
+      if(res!=null){
+        alert("发送成功");
+      }else{
+        alert("发送失败");
+      }
+      }
+    );
+    this.mails.splice(0,this.mails.length);
   }
 
   publishHandleCancel(): void {
