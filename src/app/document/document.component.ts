@@ -29,9 +29,8 @@ export class DocumentComponent implements OnInit {
   flag:number;
   pid = parseInt(this.cookie.get("pid"))/8;
   hosturl2 =  'project3/downloadDoc/'+this.pid;
-  currentStyles = {
-    'background-color': true ? 'cyan': 'grey'
-  };
+  
+  currentTr1:any;
   
   constructor(private sharedService:SharedService,private documentService:DocumentService,private cookie:CookieService) { }
 
@@ -69,6 +68,7 @@ export class DocumentComponent implements OnInit {
   }
 
   savedoc():void{
+    this.currentTr1.style='background-color:none';
     for(var i=0;i<this.fileList.length;i++){
       if(i==0)
         this.doucument.picture1 = this.fileList[i].name;
@@ -92,7 +92,12 @@ export class DocumentComponent implements OnInit {
   }
 
 
-  startEdit(id: number): void {
+  startEdit(id: number,currentTr): void {
+    if(this.currentTr1&&this.currentTr1!=currentTr){
+      this.currentTr1.style='background-color:none';
+    }
+    currentTr.style='background-color:#F0F8FF';
+    this.currentTr1 = currentTr;
     this.flag = id;
     this.fun = this.dataSet.find(item => item.id === id);
     const index = this.dataSet.findIndex(item => item.id === id);
@@ -120,7 +125,7 @@ export class DocumentComponent implements OnInit {
   select():void{
     
     if(this.edit){
-      this.startEdit(this.flag);
+      this.startEdit(this.flag,this.currentTr1);
     }
   }
 
