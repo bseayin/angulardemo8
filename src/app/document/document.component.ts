@@ -30,6 +30,8 @@ export class DocumentComponent implements OnInit {
   pid = parseInt(this.cookie.get("pid"))/8;
   hosturl2 =  'project3/downloadDoc/'+this.pid;
   
+  currentTr1:any;
+  
   constructor(private sharedService:SharedService,private documentService:DocumentService,private cookie:CookieService) { }
 
   ngOnInit() {
@@ -66,6 +68,7 @@ export class DocumentComponent implements OnInit {
   }
 
   savedoc():void{
+    this.currentTr1.style='background-color:none';
     for(var i=0;i<this.fileList.length;i++){
       if(i==0)
         this.doucument.picture1 = this.fileList[i].name;
@@ -76,14 +79,25 @@ export class DocumentComponent implements OnInit {
       if(i==3)
         this.doucument.picture4 = this.fileList[i].name;
     }
-    this.documentService.savedoc(this.doucument);
-    this.documentService.updateFunction(this.fun);
+    this.fun.docmodule = this.doucument.module;
+    this.documentService.savedoc(this.doucument).subscribe();
+    this.documentService.updateFunction(this.fun).subscribe();
     this.edit = false;
+    this.doucument = new Document();
+    this.doucument.functionname = "功能点";
+    this.doucument.module = "";
+    this.doucument.content = "";
+    this.doucument.block = "跳转关系";
     alert('保存成功');
   }
 
 
-  startEdit(id: number): void {
+  startEdit(id: number,currentTr): void {
+    if(this.currentTr1&&this.currentTr1!=currentTr){
+      this.currentTr1.style='background-color:none';
+    }
+    currentTr.style='background-color:#F0F8FF';
+    this.currentTr1 = currentTr;
     this.flag = id;
     this.fun = this.dataSet.find(item => item.id === id);
     const index = this.dataSet.findIndex(item => item.id === id);
@@ -111,7 +125,7 @@ export class DocumentComponent implements OnInit {
   select():void{
     
     if(this.edit){
-      this.startEdit(this.flag);
+      this.startEdit(this.flag,this.currentTr1);
     }
   }
 

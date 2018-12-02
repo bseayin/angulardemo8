@@ -17,7 +17,7 @@ export class FunctionsComponent implements OnInit {
   fid:number;
   publishList : User[];
   selectedPublishList : User[];
-  mails:Mail[];
+  mails:Array<Mail> = new Array<Mail>();
   mail:Mail=new Mail;
   allChecked = false;
   indeterminate = false;
@@ -135,14 +135,22 @@ export class FunctionsComponent implements OnInit {
     }, 1000);
     this.selectedPublishList=this.displayData.filter(value => value.checked);
     this.selectedPublishList.forEach(date=>{
-      this.mail.sid=date.id;
-      this.mail.fid=this.fid;
-      this.mail.uid=this.uid/8;
-      this.mails.push(this.mail);
+      let mail:Mail=new Mail();
+      mail.sid=date.id;
+      mail.fid=this.fid;
+      mail.uid=this.uid/8;
+      this.mails.push(mail);
     })
- console.log(this.mails);
-    // this.publishService.publishInvitation(this.selectedPublishList);
-
+     this.publishService.publishInvitation(this.mails).subscribe(
+      res=>{
+      if(res!=null){
+        alert("发送成功");
+      }else{
+        alert("发送失败");
+      }
+      }
+    );
+    this.mails.splice(0,this.mails.length);
   }
 
   publishHandleCancel(): void {

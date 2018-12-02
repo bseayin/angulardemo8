@@ -60,12 +60,12 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let data of editRowTable.data">
+            <tr *ngFor="let data of editRowTable.data"  #currentTr>
               <td>{{data.docmodule}}</td>
               <td>{{data.fname}}</td>
               <td>{{data.docstatus}}</td>
               <td>
-                <a (click)="startEdit(data.id)">编辑</a>
+                <a (click)="startEdit(data.id,currentTr)">编辑</a>
               </td>
             </tr>
           </tbody>

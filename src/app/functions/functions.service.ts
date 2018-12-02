@@ -24,7 +24,6 @@ export class FunctionsService {
 
   getFunctions (): Observable<Functions[]> {
     let pid=this.cookie.get("pid");
-    console.log("pid"+pid);
     const httpOptions = {
       headers: new HttpHeaders({ 'Content-Type': 'application/json','gdpAuthorization2': pid})
     };
@@ -35,7 +34,7 @@ export class FunctionsService {
   }
 
 
-  /** PUT: update the hero on the server */
+  /** PUT: update the functions on the server */
 updateFunctions (functions: Functions): Observable<any> {
   const httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -46,19 +45,25 @@ updateFunctions (functions: Functions): Observable<any> {
   );
 }
 
-  /** PUT: update the hero on the server */
+  /** POST: add the functions on the server */
 addFunctions (functions: Functions): Observable<any> {
-    const httpOptions = {
-      headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-    };
-    return this.http.put(this.hosturl4, functions, httpOptions).pipe(
-      
-      catchError(this.handleError<any>('addFunctions'))
-    );
+    let pid=this.cookie.get("pid");
+    if(pid==null){
+      alert("请创建项目");
+    }else{
+      functions.projectid=parseInt(pid)/8;
+      const httpOptions = {
+        headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+      };
+      return this.http.post(this.hosturl4, functions, httpOptions).pipe(
+        
+        catchError(this.handleError<any>('addFunctions'))
+      );
+    }
   }
   
 
-/** DELETE: delete the hero from the server */
+/** DELETE: delete the functions from the server */
 deleteFunctions (id:number): Observable<any>{
   const  hosturl3 = 'project2/removeFunctions/'+id;
   const httpOptions = {

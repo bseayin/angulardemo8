@@ -30,7 +30,26 @@ export class PublishService {
       catchError(this.handleError<any>('addFunctions'))
     );
   }
-
+//刷新邮件数
+  refreshMesseges (uid:number): Observable<any> {
+    const httpOptions = {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    };
+    return this.http.get(this.useresUrl+"refreshMesseges/"+uid, httpOptions).pipe(
+      
+      catchError(this.handleError<any>('addFunctions'))
+    );
+  }
+//显示信息详情
+  displayMesseges (uid:number): Observable<any> {
+    const httpOptions = {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    };
+    return this.http.get(this.useresUrl+"displayMessege/"+uid, httpOptions).pipe(
+      
+      catchError(this.handleError<any>('displayMails'))
+    );
+  }
 
 
   private handleError<T> (operation = 'operation', result?: T) {

@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { SharedService } from '../shared.service';
 import { CookieService } from 'ngx-cookie-service'; 
 import { Project } from '../Model/Project';
+import { LocalStorage } from '../hall/local.storage';
 import {
   AbstractControl,
   FormBuilder,
@@ -48,6 +49,7 @@ export class LoginComponent implements OnInit {
            // this.sharedService.userid=res.result.user
             this.sharedService.userid=res.user.id;
             this.router.navigateByUrl("index1");
+            this.localStorage.setObject("data"," ");
           }else{
             this.errAlert=true;
           }
@@ -95,6 +97,7 @@ export class LoginComponent implements OnInit {
   constructor(private fb: FormBuilder,private loginservice:LoginService,
     private sharedService:SharedService,
     private cookie:CookieService,
+    private localStorage:LocalStorage,
     private router:Router) {
   }
   confirmationValidator = (control: FormControl): { [ s: string ]: boolean } => {
