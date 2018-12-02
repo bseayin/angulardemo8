@@ -42,7 +42,7 @@ import { LocalStorage } from './hall/local.storage';
 import { EditorComponent } from './editor/editor.component';
 import { OwnwikiComponent } from './ownwiki/ownwiki.component';
 import { WriteComponent } from './write/write.component';
-import { ShowblogComponent } from './showblog/showblog.component';
+
 import { MailComponent } from './mail/mail.component';
 registerLocaleData(zh);
 @NgModule({
@@ -90,7 +90,6 @@ registerLocaleData(zh);
     EditorComponent,
     OwnwikiComponent,
     WriteComponent,
-    ShowblogComponent,
     MailComponent
   ],
   imports: [
