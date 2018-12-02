@@ -11,10 +11,11 @@ import { User } from '../user';
 export class HallService {
   user:User=new User();
   private hosturl = 'project2/findUser';
+  private hosturl2= 'project2/allusers';
   constructor(private cookieService:CookieService,private http: HttpClient) { }
 
   getU():Observable<any> {
-    let uid=this.cookieService.get("uid");
+    let uid=this.cookieService.get("loginuid");
     console.log("uid"+uid);
     const httpOptions = {
       headers: new HttpHeaders({ 'Content-Type': 'application/json','gdpAuthorization1': uid})
@@ -24,6 +25,15 @@ export class HallService {
       catchError(this.handleError('getU', []))
     );
   }
+
+  getUsers (): Observable<User[]> {
+    return this.http.get<User[]>(this.hosturl2)
+      .pipe(
+        catchError(this.handleError('getUsers', []))
+      );
+  }
+
+
   private handleError<T> (operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
   

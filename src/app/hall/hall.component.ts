@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SharedService } from '../shared.service';
 import { User } from '../user';
-import {UserService} from '../user/user.service';
 import { WebSocketService } from '../shared/web-socket.service'; 
 import { CookieService } from 'ngx-cookie-service'; 
 import { LocalStorage } from './local.storage';
@@ -20,20 +19,28 @@ export class HallComponent implements OnInit {
   chatContent: string=' ';
   user:User=new User();
   name:string;
-  constructor(private userservice:UserService,private sharedService:SharedService
-    ,private wsService:WebSocketService,private cookieService:CookieService,private localStorage:LocalStorage,private hallService:HallService) { }
+  constructor(private sharedService:SharedService,
+    private wsService:WebSocketService,
+    private cookieService:CookieService,
+    private localStorage:LocalStorage,
+    private hallService:HallService) { }
 
   ngOnInit() {
     this.sharedService.eventEmit.emit("大厅");
     let userid=this.cookieService.get("loginuid");
-    this.getUsers();
     this.chatContent=this.localStorage.getObject("data");
+    this.getUsers();
+    this.hallService.getU().subscribe(
+        user => {
+      this.user = user;
+      this.name= this.user.name;
+    });
   }
   getUsers(): void {
-    this.userservice.getUsers()
+    this.hallService.getUsers()
       .subscribe(
-        userservice => {
-          this.users = userservice;
+        hallService => {
+          this.users = hallService;
         });
   }
 
@@ -42,11 +49,6 @@ export class HallComponent implements OnInit {
   }
 
   join(){
-         this.hallService.getU().subscribe(
-            user => {
-          this.user = user;
-          this.name= this.user.name;
-         });
          // this.wsService.createObservableSocket(this.prefixUrl+this.user.name+"/")
          this.wsService.createObservableSocket(this.prefixUrl+this.name+"/")
          .subscribe(    
@@ -54,7 +56,8 @@ export class HallComponent implements OnInit {
              this.localStorage.setObject("data",this.chatContent);
             },
              err => console.log(err),
-             () => console.log("流已经结束"),
+             () => {this.localStorage.setObject("data"," ");
+                    console.log("流已经结束")},
          );
   }
   exit(){

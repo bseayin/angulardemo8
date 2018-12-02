@@ -52,11 +52,11 @@ addFunctions (functions: Functions): Observable<any> {
     if(pid==null){
       alert("请创建项目");
     }else{
-      functions.projectid=parseInt(pid);
+      functions.projectid=parseInt(pid)/8;
       const httpOptions = {
         headers: new HttpHeaders({ 'Content-Type': 'application/json' })
       };
-      return this.http.put(this.hosturl4, functions, httpOptions).pipe(
+      return this.http.post(this.hosturl4, functions, httpOptions).pipe(
         
         catchError(this.handleError<any>('addFunctions'))
       );
