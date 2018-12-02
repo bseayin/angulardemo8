@@ -24,7 +24,6 @@ export class FunctionsService {
 
   getFunctions (): Observable<Functions[]> {
     let pid=this.cookie.get("pid");
-    console.log("pid"+pid);
     const httpOptions = {
       headers: new HttpHeaders({ 'Content-Type': 'application/json','gdpAuthorization2': pid})
     };
