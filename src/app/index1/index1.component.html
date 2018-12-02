@@ -16,8 +16,10 @@
     <nz-layout>
       <nz-header style="background: #fff; padding:0;">
         <i class="trigger" nz-icon [type]="isCollapsed?'menu-unfold':'menu-fold'" (click)="isCollapsed=!isCollapsed"></i>
-        <i style="margin-left: 85%"><a><nz-badge [nzCount]="messegesNum" [nzStyle]="{ backgroundColor: '#52c41a' }"><span nz-icon type="mail"></span></nz-badge></a></i>
-        <i style="margin-left: 3%" nz-icon type="user"></i> 
+        <i style="margin-left: 85%" (click)="displayMail()" ><a  nz-popover nzTitle="信息" [nzContent]="contentTemplate" nzTrigger="click" >
+          <nz-badge [nzCount]="messegesNum" [nzStyle]="{ backgroundColor: '#52c41a' }"><span nz-icon type="mail"></span></nz-badge>
+        </a></i>
+        <i style="margin-left: 3%" ><span nz-icon type="user" ></span></i> 
       </nz-header>
       <nz-content style="margin:0 16px;">
         <nz-breadcrumb style="margin:16px 0;">
@@ -32,3 +34,31 @@
       <nz-footer style="text-align: center;">Ant Design ©2018 Implement By Angular</nz-footer>
     </nz-layout>
   </nz-layout>
+  <ng-template #contentTemplate>
+      <nz-table #mailsTable [nzData]="mails" [nzPageSize]="2">
+          <thead>
+            <tr>
+              <th nzShowExpand></th>
+              <th nzWidth="20%">发件人</th>
+              <th nzWidth="20%">功能点</th>
+              <th nzWidth="25%">时间</th>
+              <th>回应</th>
+            </tr>
+          </thead>
+          <tbody>
+            <ng-template ngFor let-data [ngForOf]="mailsTable.data">
+              <tr>
+                <td nzShowExpand [(nzExpand)]="data.expand"></td>
+                <td>{{data.sender}}</td>
+                <td>{{data.functionName}}</td>
+                <td>{{data.sendTime}}</td>
+                <td><a href="#">Delete</a></td>
+              </tr>
+              <tr [nzExpand]="data.expand">
+                <td></td>
+                <td colspan="4">{{data.functionContent}}</td>
+              </tr>
+            </ng-template>
+          </tbody>
+        </nz-table>
+    </ng-template>

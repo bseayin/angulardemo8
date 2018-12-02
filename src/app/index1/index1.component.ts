@@ -4,12 +4,29 @@ import { SharedService } from '../shared.service';
 import { PublishService } from '../functions/publish.service';
 import { CookieService } from 'ngx-cookie-service'; 
 import { Hero } from '../hero';
+import { Mail } from '../model/mail';
 @Component({
   selector: 'app-index1',
   templateUrl: './index1.component.html',
   styleUrls: ['./index1.component.css']
 })
 export class Index1Component implements OnInit {
+  mails :Mail[];
+  //mails:Array<Mail> = new Array<Mail>();
+  displayMail(){
+    if(this.cookieService.get("loginuid")!=null){
+
+      this.publishService.displayMesseges(parseInt(this.cookieService.get("loginuid"))).subscribe( res=>{
+         if(res!=null){
+        this.mails=res;
+         }
+      });
+     }else{
+       alert("未登录");
+     }
+  }
+
+
   messegesNum:number=0;
   result:any ;
   path:String;
