@@ -29,6 +29,9 @@ export class DocumentComponent implements OnInit {
   flag:number;
   pid = parseInt(this.cookie.get("pid"))/8;
   hosturl2 =  'project3/downloadDoc/'+this.pid;
+  currentStyles = {
+    'background-color': true ? 'cyan': 'grey'
+  };
   
   constructor(private sharedService:SharedService,private documentService:DocumentService,private cookie:CookieService) { }
 
@@ -76,9 +79,15 @@ export class DocumentComponent implements OnInit {
       if(i==3)
         this.doucument.picture4 = this.fileList[i].name;
     }
-    this.documentService.savedoc(this.doucument);
-    this.documentService.updateFunction(this.fun);
+    this.fun.docmodule = this.doucument.module;
+    this.documentService.savedoc(this.doucument).subscribe();
+    this.documentService.updateFunction(this.fun).subscribe();
     this.edit = false;
+    this.doucument = new Document();
+    this.doucument.functionname = "功能点";
+    this.doucument.module = "";
+    this.doucument.content = "";
+    this.doucument.block = "跳转关系";
     alert('保存成功');
   }
 

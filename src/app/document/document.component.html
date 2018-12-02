@@ -60,7 +60,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let data of editRowTable.data">
+            <tr *ngFor="let data of editRowTable.data" [ngStyle]="currentStyles">
               <td>{{data.docmodule}}</td>
               <td>{{data.fname}}</td>
               <td>{{data.docstatus}}</td>
