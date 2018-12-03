@@ -34,20 +34,33 @@ export class Index1Component implements OnInit {
     this.user.id=parseInt(this.cookieService.get("loginuid"));
     this.user.fid=fid;
     this.publishService.acceptInvitation(this.user).subscribe( res=>{
-      if(res){
+      if(res.result){
         this.hide=true;
         this.invitationAction="已接受";
       }
     });
     this.refreshMessegeNum();
   }
-
+  refuseInvitation(fid:number){
+    this.user.id=parseInt(this.cookieService.get("loginuid"));
+    this.user.fid=fid;
+    this.publishService.refuseInvitation(this.user).subscribe( res=>{
+      console.log(res);
+      if(res.result){
+        this.hide=true;
+        this.invitationAction="已拒绝";
+      }
+    });
+    this.refreshMessegeNum();
+  }
   refreshMessegeNum(){
     if(this.cookieService.get("loginuid")!=null){
 
       this.publishService.refreshMesseges(parseInt(this.cookieService.get("loginuid"))).subscribe(res=>{
         if(res[0].count!=0){
           this.messegesNum=res[0].count;
+        }else{
+          this.messegesNum=0;
         }
       })
      }

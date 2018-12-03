@@ -57,7 +57,17 @@ export class PublishService {
     };
     return this.http.post(this.useresUrl+"acceptInvitation",user,httpOptions).pipe(
       
-      catchError(this.handleError<any>('displayMails'))
+      catchError(this.handleError<any>('acceptInvitation'))
+    );
+  }
+//拒绝邀请
+  refuseInvitation (user:User): Observable<any> {
+    const httpOptions = {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    };
+    return this.http.put(this.useresUrl+"refuseInvitation",user,httpOptions).pipe(
+      
+      catchError(this.handleError<any>('refuseInvitation'))
     );
   }
 

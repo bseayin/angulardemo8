@@ -56,7 +56,7 @@
                     <ng-container *ngIf="hide"><span>{{invitationAction}}</span></ng-container>
                     <ng-container *ngIf="!hide"><a (click)=acceptInvitation(data.fid)>接受</a></ng-container>
                     <ng-container *ngIf="!hide"><span>/</span></ng-container>
-                    <ng-container *ngIf="!hide"> <a>拒绝</a></ng-container>
+                    <ng-container *ngIf="!hide"> <a (click)=refuseInvitation(data.fid)>拒绝</a></ng-container>
                 </td>
               </tr>
               <tr [nzExpand]="data.expand">
