@@ -24,7 +24,6 @@ import { BasicdemoComponent } from './basicdemo/basicdemo.component';
 import { Basicdemo2Component } from './basicdemo2/basicdemo2.component';
 import { ParentComponent } from './parent/parent.component';
 import { ChildComponent } from './parent/child/child.component';
-import { LogComponent } from './log/log.component';
 import { TalkComponent } from './talk/talk.component';
 import { SetComponent } from './set/set.component';
 import { HallComponent } from './hall/hall.component';
@@ -40,8 +39,6 @@ import { WebSocketService } from './shared/web-socket.service';
 import { CheckComponent } from './check/check.component'; 
 import { LocalStorage } from './hall/local.storage';
 import { EditorComponent } from './editor/editor.component';
-import { OwnwikiComponent } from './ownwiki/ownwiki.component';
-import { WriteComponent } from './write/write.component';
 
 import { MailComponent } from './mail/mail.component';
 registerLocaleData(zh);
@@ -67,8 +64,6 @@ registerLocaleData(zh);
   
     ChildComponent,
   
-    LogComponent,
-  
     TalkComponent,
   
     SetComponent,
@@ -88,8 +83,6 @@ registerLocaleData(zh);
     WebSocketComponent,
     CheckComponent,
     EditorComponent,
-    OwnwikiComponent,
-    WriteComponent,
     MailComponent
   ],
   imports: [

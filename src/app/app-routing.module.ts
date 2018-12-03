@@ -9,14 +9,12 @@ import { Index1Component }  from './index1/index1.component';
 import { TaskComponent }  from './task/task.component';
 import { DocumentComponent }  from './document/document.component';
 import { BasicdemoComponent }  from './basicdemo/basicdemo.component';
-import { LogComponent }  from './log/log.component';
 import { TalkComponent }  from './talk/talk.component';
 import { SetComponent }  from './set/set.component';
 import { HallComponent }  from './hall/hall.component';
 import { UserComponent }  from './user/user.component';
 import { CheckComponent }  from './check/check.component';
-import { OwnwikiComponent }  from './ownwiki/ownwiki.component';
-import { WriteComponent }  from './write/write.component';
+
 
 
 const routes: Routes = [
@@ -28,7 +26,6 @@ const routes: Routes = [
       { path: 'task', component: TaskComponent },
       { path: 'check', component: CheckComponent },
       { path: 'talk', component: TalkComponent },
-      { path: 'log', component: LogComponent },
       { path: 'set', component: SetComponent },
       { path: 'user', component: UserComponent },
       { path: 'document', component: DocumentComponent }
@@ -39,8 +36,6 @@ const routes: Routes = [
   { path: 'basicdemo', component: BasicdemoComponent },
   { path: 'material', component: MaterialdemoComponent },
   { path: 'detail/:id', component: HeroDetailComponent },
-  { path: 'ownwiki', component: OwnwikiComponent },
-  { path: 'write', component: WriteComponent },
   { path: 'heroes', component: HeroesComponent }
 ];
 @NgModule({

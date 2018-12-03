@@ -3,6 +3,7 @@ import { Index1Service } from '../index1.service';
 import { SharedService } from '../shared.service';
 import { PublishService } from '../functions/publish.service';
 import { CookieService } from 'ngx-cookie-service'; 
+import { YyhloginService } from './yyhlogin.service';
 import { Hero } from '../hero';
 import { Mail } from '../model/mail';
 @Component({
@@ -32,7 +33,7 @@ export class Index1Component implements OnInit {
   path:String;
   path2:String="首页";
   constructor(private index1Service:Index1Service,private sharedService:SharedService,
-    private publishService:PublishService,private cookieService:CookieService 
+    private publishService:PublishService,private cookieService:CookieService, private yyhloginService:YyhloginService
     ) { }
 
   ngOnInit() {
@@ -59,5 +60,9 @@ export class Index1Component implements OnInit {
       }
     );
   }
-
+  yyhceshi(){
+ 
+    this.yyhloginService.ceshilianjie().subscribe();
+  }
+  
 }
