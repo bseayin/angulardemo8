@@ -6,13 +6,17 @@ import { CookieService } from 'ngx-cookie-service';
 import { YyhloginService } from './yyhlogin.service';
 import { Hero } from '../hero';
 import { Mail } from '../model/mail';
+import { User } from '../user';
 @Component({
   selector: 'app-index1',
   templateUrl: './index1.component.html',
   styleUrls: ['./index1.component.css']
 })
 export class Index1Component implements OnInit {
+  hide:boolean=false;
+  invitationAction:string="";
   mails :Mail[];
+  user:User=new User();
   //mails:Array<Mail> = new Array<Mail>();
   displayMail(){
     if(this.cookieService.get("loginuid")!=null){
@@ -26,7 +30,28 @@ export class Index1Component implements OnInit {
        alert("未登录");
      }
   }
+  acceptInvitation(fid:number){
+    this.user.id=parseInt(this.cookieService.get("loginuid"));
+    this.user.fid=fid;
+    this.publishService.acceptInvitation(this.user).subscribe( res=>{
+      if(res){
+        this.hide=true;
+        this.invitationAction="已接受";
+      }
+    });
+    this.refreshMessegeNum();
+  }
 
+  refreshMessegeNum(){
+    if(this.cookieService.get("loginuid")!=null){
+
+      this.publishService.refreshMesseges(parseInt(this.cookieService.get("loginuid"))).subscribe(res=>{
+        if(res[0].count!=0){
+          this.messegesNum=res[0].count;
+        }
+      })
+     }
+  }
 
   messegesNum:number=0;
   result:any ;
@@ -41,14 +66,7 @@ export class Index1Component implements OnInit {
      this.sharedService.eventEmit.subscribe((value: any) => {
        this.path2=value;
    });
-   if(this.cookieService.get("loginuid")!=null){
-
-    this.publishService.refreshMesseges(parseInt(this.cookieService.get("loginuid"))).subscribe(res=>{
-      if(res[0].count!=0){
-        this.messegesNum=res[0].count;
-      }
-    })
-   }
+   this.refreshMessegeNum();
    
     
     var name='ttt';

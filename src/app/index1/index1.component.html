@@ -51,8 +51,13 @@
                 <td nzShowExpand [(nzExpand)]="data.expand"></td>
                 <td>{{data.sender}}</td>
                 <td>{{data.functionName}}</td>
-                <td>{{data.sendTime}}</td>
-                <td><a href="#">Delete</a></td>
+                <td>{{data.sendTime | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+                <td>
+                    <ng-container *ngIf="hide"><span>{{invitationAction}}</span></ng-container>
+                    <ng-container *ngIf="!hide"><a (click)=acceptInvitation(data.fid)>接受</a></ng-container>
+                    <ng-container *ngIf="!hide"><span>/</span></ng-container>
+                    <ng-container *ngIf="!hide"> <a>拒绝</a></ng-container>
+                </td>
               </tr>
               <tr [nzExpand]="data.expand">
                 <td></td>
