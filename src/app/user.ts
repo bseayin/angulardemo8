@@ -1,6 +1,8 @@
 export class User {
     id: number;
     pid: number;
+    fid:number;
+    mailId:number;
     name: string;
     password: string;
     clazzid: string;

@@ -50,6 +50,16 @@ export class PublishService {
       catchError(this.handleError<any>('displayMails'))
     );
   }
+//接受邀请
+  acceptInvitation (user:User): Observable<any> {
+    const httpOptions = {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    };
+    return this.http.post(this.useresUrl+"acceptInvitation",user,httpOptions).pipe(
+      
+      catchError(this.handleError<any>('displayMails'))
+    );
+  }
 
 
   private handleError<T> (operation = 'operation', result?: T) {
