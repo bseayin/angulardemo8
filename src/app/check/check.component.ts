@@ -21,7 +21,6 @@ export class CheckComponent implements OnInit {
     this.findNotPassTask();
   }
   ngOnInit2():void{
-    console.log("过");
     this.findPassTask();
     this.findNotPassTask();
   }
@@ -30,8 +29,6 @@ export class CheckComponent implements OnInit {
       .subscribe(
         taskservice => {
            this.dataSet2 = taskservice
-           console.log("获取通过");
-           console.log(this.dataSet2);
         });
   }
 
@@ -42,10 +39,11 @@ export class CheckComponent implements OnInit {
         taskservice => {
           
           this.dataSet = taskservice;
-          console.log("获取未通过");
-          console.log(this.dataSet);
           this.updateEditCache();
         });
+        console.log("zheli")
+        console.log(this.taskservice);
+        console.log(this.dataSet);
   }
   
   startEdit(id: number): void {

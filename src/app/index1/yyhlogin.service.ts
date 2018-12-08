@@ -15,7 +15,7 @@ export class YyhloginService {
   
   ceshilianjie (): Observable<any>{
     let id=this.cookie.get("loginuid");
-    const  hostur4 = 'project4/ceshi/'+7;
+    const  hostur4 = 'project4/ceshi/'+id;
     const httpOptions = {
       headers: new HttpHeaders({ 'Content-Type': 'application/json' })
     };

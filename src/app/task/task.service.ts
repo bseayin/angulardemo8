@@ -20,36 +20,61 @@ export class TaskService {
   private hosturl4 = 'project1/findmember';  // URL to web api
   private hosturl5 = 'project1/findsightpoint';  // URL to web api
   private hosturl6 = 'project1/addtask';
-  private hosturl7 = 'project1/findownpasstask';   //老鄢的添加
-  private hosturl8 = 'project1/findownnotpasstask';   //老鄢的添加
-  private hosturl9 = 'project1/findldpasstask';   //老鄢的添加
-  private hosturl10 = 'project1/findldnotpasstask';   //老鄢的添加
   private hosturl11 = 'project1/findproject';  // URL to web api
 
-  //老鄢的添加
+  //老鄢的添加1
   findOwnPassTasks(): Observable<Task[]> {
-    return this.http.get<Task[]>(this.hosturl7)
+    let pid=this.cookie.get("pid");
+    let uid=this.cookie.get("loginuid");
+    const hosturl7 = 'project1/findownpasstask/'+pid+"@"+uid;   //老鄢的添加
+    console.log(pid);
+    console.log(hosturl7);
+    const httpOptions = {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    };
+    return this.http.get<Task[]>(hosturl7,httpOptions)
       .pipe(
         catchError(this.handleError('findOwnPassTasks', []))
       );
   }
-  //老鄢的添加
+  //老鄢的添加1
   findPassTasks(): Observable<Task[]> {
-    return this.http.get<Task[]>(this.hosturl9)
+    let pid=this.cookie.get("pid");
+    const hosturl9 = 'project1/findldpasstask/'+pid;   //老鄢的添加
+    console.log(pid);
+    const httpOptions = {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    };
+    return this.http.get<Task[]>(hosturl9,httpOptions)
       .pipe(
         catchError(this.handleError('findPassTasks', []))
       );
   }
-  //老鄢的添加
+  //老鄢的添加1
     findOwnNotPassTasks(): Observable<Task[]> {
-      return this.http.get<Task[]>(this.hosturl8)
+      let pid=this.cookie.get("pid");
+      let uid=this.cookie.get("loginuid");
+      const hosturl8 = 'project1/findownnotpasstask/'+pid+"@"+uid;   //老鄢的添加
+      console.log(pid);
+      console.log(hosturl8);
+      const httpOptions = {
+        headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+      };
+      return this.http.get<Task[]>(hosturl8,httpOptions)
         .pipe(
           catchError(this.handleError('findOwnNotPassTasks', []))
         );
     } 
     //老鄢的添加
+   
     findNotPassTasks(): Observable<Task[]> {
-      return this.http.get<Task[]>(this.hosturl10)
+      let pid=this.cookie.get("pid");
+      const hosturl10 = 'project1/findldnotpasstask/'+pid;   //老鄢的添加
+      console.log(pid);
+      const httpOptions = {
+        headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+      };
+      return this.http.get<Task[]>(hosturl10,httpOptions)
         .pipe(
           catchError(this.handleError('findNotPassTasks', []))
         );
