@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Index1Service } from '../index1.service';
 import { SharedService } from '../shared.service';
+import { Router } from '@angular/router';
 import { PublishService } from '../functions/publish.service';
+import { LoginService } from '../Login/login.service';
 import { CookieService } from 'ngx-cookie-service'; 
 import { YyhloginService } from './yyhlogin.service';
 import { Hero } from '../hero';
@@ -37,10 +39,21 @@ export class Index1Component implements OnInit {
       if(res.result){
         this.hide=true;
         this.invitationAction="已接受";
+        this.refreshMessegeNum();
       }
     });
-    this.refreshMessegeNum();
+   
   }
+  logout(){
+    this.user.id=parseInt(this.cookieService.get("loginuid"));
+this.loginService.logout(this.user).subscribe(res=>{
+  if(res.result){
+    this.cookieService.deleteAll("/");
+    this.router.navigateByUrl("index1");
+  }
+});
+  }
+
   refuseInvitation(fid:number){
     this.user.id=parseInt(this.cookieService.get("loginuid"));
     this.user.fid=fid;
@@ -49,9 +62,9 @@ export class Index1Component implements OnInit {
       if(res.result){
         this.hide=true;
         this.invitationAction="已拒绝";
+        this.refreshMessegeNum();
       }
     });
-    this.refreshMessegeNum();
   }
   refreshMessegeNum(){
     if(this.cookieService.get("loginuid")!=null){
@@ -71,7 +84,8 @@ export class Index1Component implements OnInit {
   path:String;
   path2:String="首页";
   constructor(private index1Service:Index1Service,private sharedService:SharedService,
-    private publishService:PublishService,private cookieService:CookieService, private yyhloginService:YyhloginService
+    private publishService:PublishService,private cookieService:CookieService, private yyhloginService:YyhloginService,
+    private loginService:LoginService,private router:Router
     ) { }
 
   ngOnInit() {

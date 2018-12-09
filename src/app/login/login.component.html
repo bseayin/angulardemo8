@@ -1,7 +1,7 @@
+<div class="container-fluid" style="width:100%;height:100%;padding:0;margin:0;background-repeat: no-repeat;background-size: cover;background-image:url(assets/image/img.jpg)">
+        <h1 style="text-align:center;color:honeydew">登录</h1>
 
-        <h1 style="text-align:center">登录</h1>
-
-    <form nz-form [formGroup]="loginvalidateForm" class="login-form"  >
+    <form nz-form [formGroup]="loginvalidateForm"  class="login-form"  >
       <nz-form-item>
         <nz-form-control>
           <nz-input-group [nzPrefix]="prefixUser">
@@ -32,7 +32,7 @@
       <nz-form-item>
         <nz-form-control>
           <label nz-checkbox formControlName="rememberMe" [(ngModel)]="user.rememberMe">
-            <span>记住我</span>
+            <span style="color:honeydew">记住我</span>
           </label>
           <a class="login-form-forgot" class="login-form-forgot">忘记密码</a>
           <button nz-button class="login-form-button" [nzType]="'primary'" (click)="submitForm()">登录</button>
@@ -125,3 +125,4 @@
       (nzOnClose)="afterClose()">
     </nz-alert>
     </div>  
+  </div>

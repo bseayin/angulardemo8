@@ -19,7 +19,20 @@
         <i style="margin-left: 85%" (click)="displayMail()" ><a  nz-popover nzTitle="信息" [nzContent]="contentTemplate" nzTrigger="click" >
           <nz-badge [nzCount]="messegesNum" [nzStyle]="{ backgroundColor: '#52c41a' }"><span nz-icon type="mail"></span></nz-badge>
         </a></i>
-        <i style="margin-left: 3%" ><span nz-icon type="user" ></span></i> 
+        <i style="margin-left: 3%" >
+            <nz-dropdown [nzPlacement]="'bottomCenter'">
+                <a nz-dropdown >
+                    <span nz-icon type="user" ></span> <i nz-icon type="down"></i>
+                </a>
+                <ul nz-menu nzSelectable>
+                  <li nz-menu-item>
+                    <a (click)="logout()">注销<i nz-icon type="arrow-right" theme="outline"></i></a>
+                  </li>
+                </ul>
+              </nz-dropdown>
+          
+        
+        </i> 
       </nz-header>
       <nz-content style="margin:0 16px;">
         <nz-breadcrumb style="margin:16px 0;">
