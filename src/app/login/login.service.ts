@@ -38,15 +38,15 @@ registerAction (user: User): Observable<User> {
       catchError(this.handleError<Project>('getProject'))
     );
   }
-//退出登录
-logout(user:User): Observable<any>{
-  const httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-  };
-  return this.http.post<any>(this.useresUrl+"logout",user, httpOptions).pipe(
-    catchError(this.handleError<Project>('logout'))
-  );
-}
+// //退出登录
+// logout(user:User): Observable<any>{
+//   const httpOptions = {
+//     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+//   };
+//   return this.http.post<any>(this.useresUrl+"logout",user, httpOptions).pipe(
+//     catchError(this.handleError<Project>('logout'))
+//   );
+// }
 
 /**
  * Handle Http operation that failed.

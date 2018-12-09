@@ -3,7 +3,6 @@ import { Index1Service } from '../index1.service';
 import { SharedService } from '../shared.service';
 import { Router } from '@angular/router';
 import { PublishService } from '../functions/publish.service';
-import { LoginService } from '../Login/login.service';
 import { CookieService } from 'ngx-cookie-service'; 
 import { YyhloginService } from './yyhlogin.service';
 import { Hero } from '../hero';
@@ -46,7 +45,7 @@ export class Index1Component implements OnInit {
   }
   logout(){
     this.user.id=parseInt(this.cookieService.get("loginuid"));
-this.loginService.logout(this.user).subscribe(res=>{
+this.yyhloginService.logout(this.user).subscribe(res=>{
   if(res.result){
     this.cookieService.deleteAll("/");
     this.router.navigateByUrl("index1");
@@ -85,7 +84,7 @@ this.loginService.logout(this.user).subscribe(res=>{
   path2:String="首页";
   constructor(private index1Service:Index1Service,private sharedService:SharedService,
     private publishService:PublishService,private cookieService:CookieService, private yyhloginService:YyhloginService,
-    private loginService:LoginService,private router:Router
+    private router:Router
     ) { }
 
   ngOnInit() {
